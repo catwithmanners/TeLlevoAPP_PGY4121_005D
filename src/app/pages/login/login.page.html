@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img src="assets/icon/img/logo.png"/>
+    <ion-card-header>
+      <ion-card-subtitle>¿Buscas un viaje?</ion-card-subtitle>
+      <ion-card-title>¡Ingresa a tu cuenta!</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input placeholder="Ingrese usuario" type="text" [(ngModel)]="user"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input placeholder="Ingrese contraseña" type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+      <ion-button slot="start" expand="block" (click)="login()">Iniciar sesión</ion-button>
+  
+      <ion-card-footer>
+        <ion-card-subtitle>¿Eres usuario nuevo?</ion-card-subtitle>
+        <p>Ingresa tu cuenta de DuocUC y únete a la plataforma de viajes exclusiva de la institución.</p>
+        <ion-button expand="block" (click)="login()">Registrar</ion-button>
+      </ion-card-footer>
+      
+    </ion-card-content>
+    <!-- MODAL TÉRMINOS DE USO -->
+    <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancel()">Cancel</ion-button>
+            </ion-buttons>
+            <ion-title>Welcome</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <ion-item>
+            <ion-label position="stacked">Enter your name</ion-label>
+            <ion-input type="text" placeholder="Your name" [(ngModel)]="name"></ion-input>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </ion-card>
+  
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-button id="open-modal" expand="block">Términos de uso</ion-button>
+  </ion-toolbar>
+</ion-footer>
