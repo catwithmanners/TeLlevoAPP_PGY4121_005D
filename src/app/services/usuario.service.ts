@@ -8,11 +8,11 @@ export class UsuarioService {
   //VARIABLES A UTILIZAR, admin
   usuarios: any[] = [
     {
-      rut: '6.666.666-6',
+      rut: '6',
       nom_completo: 'Ghotless',
       fecha_nac: '1998-06-09',
       semestre: 3,
-      password: 'ghotsito',
+      password: '1',
       tipo_usuario: 'administrador'
     }
   ];
