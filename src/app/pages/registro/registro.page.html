@@ -5,5 +5,47 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Registro</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="usuario" (ngSubmit)="registrar()">
+        <ion-item>
+          <ion-label position="floating">Rut:</ion-label>
+          <ion-input type="text" placeholder="Ingresa tu rut - Ej: 11.111.111-1" formControlName="rut"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre completo:</ion-label>
+          <ion-input type="text" placeholder="Ingresa tu nombre completo" formControlName="nom_completo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha de nacimiento:</ion-label>
+          <ion-input type="date" placeholder="Ingresa tu fecha de nacimiento" formControlName="fecha_nac"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Sede:</ion-label>
+          <ion-input type="text" placeholder="Ingresa la sede en la que estudias" formControlName="sede"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Carrera:</ion-label>
+          <ion-input type="text" placeholder="Ingresa tu carrera en curso" formControlName="carrera"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Correo:</ion-label>
+          <ion-input type="text" placeholder="Ingresa tu correo institucional" formControlName="correo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password:</ion-label>
+          <ion-input type="password" placeholder="Ingresa tu contraseña" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Ingrese password nuevamente:</ion-label>
+          <ion-input type="password" placeholder="Ingresa tu contraseña nuevamente" [(ngModel)]="verificar_pw" [ngModelOptions]="{standalone: 'true'}"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button expand="block" fill="outline"color="success" type="submit" [disabled]="!usuario.valid">REGISTRAR</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
