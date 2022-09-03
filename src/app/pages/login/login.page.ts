@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit  {
+  @ViewChild(IonModal) modal: IonModal;
 
   //VARIABLES A UTILIZAR
   user: string;
@@ -38,4 +41,8 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+  
+    volver() {
+      this.modal.dismiss(null, 'volver');
+    }
 }

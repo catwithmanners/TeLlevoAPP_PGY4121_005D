@@ -1,0 +1,74 @@
+@use '../../../global.scss';
+
+.fondo {
+    height: 100vh;
+    background-image: url("../../..//assets/icon/img/pnglogo.png");
+    background-size: cover;
+    text-align: center;
+}
+/* CUERPO  */
+ion-card {
+    --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
+    margin: 0 auto;
+    top: 5vh;
+    height: 90vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .img_login {
+        text-align: center;
+        width: 80%;
+    }
+
+    ion-card-header {
+        ion-card-subtitle {
+            font-size: small;
+            color: #f8b31c;
+        }
+
+        ion-card-title {
+            font-size: x-large;
+            color: #fdad01;
+        }
+    }
+
+    ion-item {
+        --background: none;
+
+        ion-label {
+            font-size: large;
+            font-weight: bold;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        font-style: unset;
+        font-size: large;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+
+    p {
+        text-decoration: none;
+        font-size: large;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bold;
+    }
+}
+/* COLOR MODAL */
+ion-modal {
+    --ion-background-color: linear-gradient(rgb(38, 137, 186), #3643cd);
+  }
+
+
+@media (max-width: 400px) {
+    .fondo {
+        ion-card {
+            width: 80vw;
+        }
+    }
+}
