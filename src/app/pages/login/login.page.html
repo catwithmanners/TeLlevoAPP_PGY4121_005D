@@ -1,9 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title><ion-icon name="person-circle-outline"></ion-icon></ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <div class="fondo">
     <ion-content>
       <ion-card>
@@ -27,9 +21,9 @@
         <br>
         <!-- FOOTER CARD -->
         <ion-card-footer>
-          <ion-card-subtitle style="color: #000000;">¿Eres usuario nuevo?</ion-card-subtitle>
-          <p style="color:#000000">Ingresa tu cuenta de DuocUC y únete a la plataforma de viajes exclusiva de la institución.</p>
-          <ion-button expand="block" (click)="login()">Registrar</ion-button>
+          <ion-card-subtitle>¿Eres usuario nuevo?</ion-card-subtitle>
+          <p>Ingresa tu cuenta de DuocUC y únete a la plataforma de viajes exclusiva de la institución.</p>
+          <ion-button expand="block" routerLink="/registro">Registrar</ion-button>
         </ion-card-footer>
       </ion-card-content>
     </ion-card>
