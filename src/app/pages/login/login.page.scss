@@ -7,65 +7,98 @@
     text-align: center;
 }
 /* CUERPO  */
-ion-card {
+ion-content{
     --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
-    margin: 0 auto;
-    top: 5vh;
-    height: 90vh;
-    width: 50vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-
-    .img_login {
-        text-align: center;
-        width: 80%;
-    }
-
-    ion-card-header {
-        ion-card-subtitle {
-            font-size: small;
-            color: #f8b31c;
+    /* Este background incluye al MODAL en la alteración de color */
+    ion-card {
+        border-style: ridge;
+        --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
+        margin: 0 auto;
+        top: 5vh;
+        height: 90vh;
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        .img_login {
+            text-align: center;
+            width: 80%;
         }
+    
+        ion-card-header {
+            ion-card-subtitle {
+                font-size: small;
+                font-weight: bold;
+                color: #f5c868;
+            }
 
-        ion-card-title {
-            font-size: x-large;
-            color: #fdad01;
+            ion-card-title {
+                font-size: large;
+                font-weight: bold;
+                color: #fdad01;
+            }
         }
-    }
-
-    ion-item {
-        --background: none;
-
-        ion-label {
+    
+        ion-item {
+            --background: none;
+    
+            ion-label {
+                font-size: large;
+                font-weight: bold;
+            }
+        }
+    
+        /* FOOTER CARD */
+        ion-card-footer{
+            ion-card-subtitle {
+                font-size: small;
+                color: #000000;
+                font-weight: bold;
+            }
+    
+            p {
+                font-size: small;
+                color: #000000;
+                font-weight: normal;
+            }
+        }
+    
+        p {
+            text-decoration: none;
             font-size: large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-weight: bold;
         }
     }
+}
+/* MODAL */
+ion-modal {
+    /* color header modal */
+    --ion-background-color: rgb(63, 141, 180);
 
-    a {
-        text-decoration: none;
-        font-style: unset;
-        font-size: large;
-        font-family: 'Courier New', Courier, monospace;
-        font-weight: bold;
+    ion-title {
+        font-weight: bolder;
+        color: #ffffff;
     }
 
     p {
         text-decoration: none;
         font-size: large;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-weight: bold;
+        font-weight: bolder;
     }
-}
-/* COLOR MODAL */
-ion-modal {
-    --ion-background-color: linear-gradient(rgb(38, 137, 186), #3643cd);
   }
 
 
 @media (max-width: 400px) {
+    .fondo {
+        ion-card {
+            width: 80vw;
+        }
+    }
+}
+@media (max-width: 720px) {
     .fondo {
         ion-card {
             width: 80vw;
