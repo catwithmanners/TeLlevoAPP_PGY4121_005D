@@ -12,19 +12,7 @@ export class HomePage {
 
   constructor(private menu: MenuController) { }
   
-    openFirst() {
-      this.menu.enable(true, 'first');
-      this.menu.open('first');
-    }
-  
-    openEnd() {
-      this.menu.open('end');
-    }
-  
-    openCustom() {
-      this.menu.enable(true, 'custom');
-      this.menu.open('custom');
-    }
+
 
     volver() {
       this.modal.dismiss(null, 'volver');

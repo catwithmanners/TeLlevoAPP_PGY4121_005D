@@ -150,6 +150,11 @@ export class RegistroPage implements OnInit {
   volver() {
     this.modal.dismiss(null, 'volver');
   }
-
+  volverLogin(){
+    this.usuario.reset();
+    this.verificar_pw = '';
+    this.verificar_checkbox = false;
+    this.router.navigate(['/login']);
+  }
 
 }

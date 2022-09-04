@@ -16,15 +16,18 @@
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input placeholder="Ingrese contraseña" type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox color="warning" slot="start" [(ngModel)]="recordar_login" [ngModelOptions]="{standalone: 'true'}"></ion-checkbox>
+          <ion-label style="font-weight: bold; font-size: small;">Recordar datos</ion-label>
+        </ion-item>
         <br>
         <ion-button slot="start" expand="block" (click)="login()">Iniciar sesión</ion-button>
         <br>
-        <!-- FOOTER CARD -->
-        <ion-card-footer>
+        <div id="cardFooter">
           <ion-card-subtitle>¿Eres usuario nuevo?</ion-card-subtitle>
           <p>Ingresa tu cuenta de DuocUC y únete a la plataforma de viajes exclusiva de la institución.</p>
           <ion-button expand="block" routerLink="/registro">Registrar</ion-button>
-        </ion-card-footer>
+        </div>
       </ion-card-content>
     </ion-card>
   </ion-content>

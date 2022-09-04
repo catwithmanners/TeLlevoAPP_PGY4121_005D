@@ -42,11 +42,11 @@
           <ion-input clearInput type="text" placeholder="Ingresa tu correo institucional" formControlName="correo"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Password:</ion-label>
-          <ion-input clearInput type="password" placeholder="Ingresa tu contraseña" formControlName="password"></ion-input>
+          <ion-label position="floating">Contraseña:</ion-label>
+          <ion-input clearInput type="password" placeholder="Debe contener al menos 6 caracteres" formControlName="password"></ion-input>
         </ion-item>
         <ion-item style="border-radius: 0px 0px 15px 15px;">
-          <ion-label clearInput position="floating">Ingrese password nuevamente:</ion-label>
+          <ion-label clearInput position="floating">Ingresa tu contraseña nuevamente:</ion-label>
           <ion-input type="password" placeholder="Ingresa tu contraseña nuevamente" [(ngModel)]="verificar_pw" [ngModelOptions]="{standalone: 'true'}"></ion-input>
         </ion-item>
         <br>
@@ -80,7 +80,7 @@
         <br>
         <br>
         <ion-button expand="block" style="border-color: #ffe95a;--background: #03153e; color: white;box-shadow: 0 0 30px #ffe95a;"type="submit" [disabled]="!usuario.valid">REGISTRAR</ion-button>
-        <ion-button expand="block" style="border-color: red;--background: #03153e; color: white;" type="button" routerLink="/login">Volver al login</ion-button>
+        <ion-button expand="block" style="border-color: red;--background: #03153e; color: white;" type="button" (click)="volverLogin()">Volver al login</ion-button>
       </form>
     </ion-card-content>
   </ion-card>
