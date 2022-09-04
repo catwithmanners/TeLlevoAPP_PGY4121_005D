@@ -2,14 +2,41 @@
 
 ion-content{
   --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
-  ion-card{
-    --ion-background-color: ;
-  ion-card-content{
-    text-align: center;
-    
-    ion-button{
-      
-    }
+  text-align: center;
+
+  ion-card {
+    --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
+    margin: 0 auto;
+    top: 5vh;
+    height: auto;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.img_logo {
+  text-align: center;
+  width: 60%;
+}
+.img_perfil {
+  text-align: center;
+  width: 60%;
+}
+}
+
+
+@media (max-width: 400px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+      }
   }
 }
+@media (max-width: 720px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+      }
+  }
 }
