@@ -1,0 +1,93 @@
+@use '../../../global.scss';
+
+ion-content{
+    --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
+    padding-bottom: 50px;
+    ion-card{
+        --background: white;
+        border-style: ridge;
+        height: auto;
+        width: 80vw;
+        margin: auto;
+        margin-bottom: 50px;
+        top: 5vh;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        ion-card-header{
+            ion-label{
+                font-size: large;
+                color: #2196f3;
+                text-transform: uppercase;
+                letter-spacing: 4px;
+                text-decoration: none;
+                font-size: 24px;
+                overflow: hidden;
+                transition: 0.2s;
+                font-family: consolas;
+            }
+        }
+        ion-button{
+            color: black;
+            box-shadow: 0 0 10px rgb(75, 10, 10);
+            margin: 10px;
+            border-style: ridge;
+            border-radius: 8px;
+            border-width: 2px;
+            
+        }
+        ion-item{
+            --background: rgba(0,0,0,0.0);
+            text-align: center;
+        }
+        ion-item-sliding{
+            --border-radius: 10px;
+            --padding-right: 120%;
+            
+            ion-item{
+                --background: #03153e;
+                color: #ffffff;
+            }
+            ion-icon{
+                color: #ffe95a;
+            }
+        }
+        ion-item-options{
+            ion-item-option{
+                --background: #ffe95a;
+                color: black;
+            }
+        }
+    }
+}
+/* MODAL */
+ion-modal {
+    /* color header modal */
+    --ion-background-color: rgb(63, 141, 180);
+
+    ion-title {
+        font-weight: bolder;
+        color: #ffffff;
+    }
+
+    p {
+        text-decoration: none;
+        font-size: large;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bolder;
+    }
+}
+
+@media (max-width: 400px){
+    ion-content{
+        ion-card{
+            ion-item-sliding{
+                ion-item{
+                    ion-label{
+                        font-size: small;
+                    }
+                }
+            }
+        }
+    }
+}
