@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IonGrid } from '@ionic/core/components';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,13 @@ export class UsuarioService {
   //VARIABLES A UTILIZAR, admin
   usuarios: any[] = [
     {
-      rut: '6',
-      nom_completo: 'Ghotless',
-      fecha_nac: '1998-06-09',
-      semestre: 3,
-      password: '1',
+      rut: '0.000.000-0',
+      nom_completo: 'admin',
+      fecha_nac: '1111-11-11',
+      sede: 'Puente Alto',
+      carrera: 'Ing. en informatica',
+      correo: 'admin@duocuc.cl',
+      password: 'admin',
       tipo_usuario: 'administrador'
     }
   ];
@@ -20,28 +23,28 @@ export class UsuarioService {
   constructor() { }
   //MÉTODOS DEL CRUD:
   agregarUsuario(usuario): boolean{
-    if ( this.obtenerUsuario(usuario.rut) == undefined ) {
+    if ( this.obtenerUsuario(usuario.correo) == undefined ) {
       this.usuarios.push(usuario);
       return true;
     }
     return false;
   }
 
-  eliminarUsuarios(rut: string){
+  eliminarUsuarios(correo: string){
     this.usuarios.forEach((usu, index) => {
-      if (usu.rut == rut) {
+      if (usu.correo == correo) {
         this.usuarios.splice(index, 1);
       }
     })
   }
 
   actualizarUsuario(usuario){
-    var index = this.usuarios.findIndex(usu => usu.rut == usuario.rut);
+    var index = this.usuarios.findIndex(usu => usu.correo == usuario.correo);
     this.usuarios[index] = usuario;
   }
 
-  obtenerUsuario(rut: string){
-    return this.usuarios.find(usu => usu.rut == rut);
+  obtenerUsuario(correo: string){
+    return this.usuarios.find(usu => usu.correo == correo);
   }
 
   obtenerUsuarios(){
@@ -49,7 +52,7 @@ export class UsuarioService {
   }
 
   //POSIBLE CUSTOMER
-  validarLogin(rut, password){
-    return this.usuarios.find(usu => usu.rut == rut && usu.password == password)
+  validarLogin(correo, password){
+    return this.usuarios.find(usu => usu.correo == correo && usu.password == password)
   }
 }
