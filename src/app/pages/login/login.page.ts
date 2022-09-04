@@ -16,6 +16,7 @@ export class LoginPage implements OnInit  {
   //VARIABLES A UTILIZAR
   user: string;
   password: string;
+  recordar_login: boolean = false;
 
   constructor(private toastController: ToastController, private router: Router,
     private usuarioService: UsuarioService) { }
@@ -28,7 +29,13 @@ export class LoginPage implements OnInit  {
     var usuarioLogin = this.usuarioService.validarLogin(this.user, this.password);
 
     if ( usuarioLogin != undefined ) {
+      if (this.recordar_login != true){
+        this.user='';
+        this.password='';
+        this.router.navigate(['/home'])
+      }else{
       this.router.navigate(['/home'])
+      }
     } else {
       this.toastError();
     }
@@ -37,7 +44,9 @@ export class LoginPage implements OnInit  {
   async toastError() {
     const toast = await this.toastController.create({
       message: 'Una de las credenciales es incorrecta. Intente nuevamente.',
-      duration: 3000
+      duration: 3000,
+      icon: 'alert-circle-outline',
+      color: 'dark'
     });
     toast.present();
   }
