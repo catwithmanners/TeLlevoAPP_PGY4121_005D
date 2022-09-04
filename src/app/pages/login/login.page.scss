@@ -72,6 +72,12 @@ ion-content{
         }
     }
 }
+ion-loading.custom-loading {
+    --background: #e3edff;
+    --spinner-color: #1c6dff;
+  
+    color: #1c6dff;
+  }
 /* MODAL */
 ion-modal {
     /* color header modal */
