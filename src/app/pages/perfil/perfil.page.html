@@ -1,25 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title slot="start">
       <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
-      <ion-grid>
-        <ion-row>
-          <ion-col></ion-col>
-          <ion-col></ion-col>
-          <ion-col></ion-col>
-        </ion-row>
-      </ion-grid>
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <h1>PERFIL DE USUARIO</h1>
+  <p>NOMBRE</p>
+  <a routerLink='/perfil'><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
   <h2>Información de la cuenta</h2>
-  <h1>LISTA DE USUARIOS</h1>
-  <br>
-
-  <h1>Información del Usuario</h1>
-  <ion-list *ngFor="let usuario of usuarios" style="text-align: center;">
+  <ion-list *ngFor="let usuario of usuarios">
     <p>Rut: {{usuario.rut}}</p>
     <p>Nombre: {{usuario.nom_completo}}</p>
     <p>Fecha de nacimiento: {{usuario.fecha_nac}}</p>

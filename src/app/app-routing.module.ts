@@ -26,6 +26,18 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'viaje',
+    loadChildren: () => import('./pages/viaje/viaje.module').then( m => m.ViajePageModule)
+  },
+  {
+    path: 'carrera',
+    loadChildren: () => import('./pages/carrera/carrera.module').then( m => m.CarreraPageModule)
+  },
+  {
+    path: 'mensajes',
+    loadChildren: () => import('./pages/mensajes/mensajes.module').then( m => m.MensajesPageModule)
+  },
 
 ];
 

@@ -2,36 +2,54 @@
   <ion-menu side="start" menuId="main" contentId="menuMain">
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Start Menu</ion-title>
+        <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item routerLink="/login">
-            <ion-icon name="home" slot="start"></ion-icon>
+          <ion-item routerLink="/perfil">
+            <ion-icon name="person" slot="start"></ion-icon>
             <ion-label>Perfil</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <ion-item>
-          <ion-icon name="paper-plane" slot="start"></ion-icon>
-          <ion-label>Outbox</ion-label>
+        <ion-item routerLink="">
+          <ion-icon name="reader" slot="start"></ion-icon>
+          <ion-label>Historial de viajes</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-icon name="heart" slot="start"></ion-icon>
-          <ion-label>Favorites</ion-label>
+        <ion-item routerLink="/mensajes">
+          <ion-icon name="chatbubbles" slot="start"></ion-icon>
+          <ion-label>Mensajes</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-icon name="archive" slot="start"></ion-icon>
-          <ion-label>Archived</ion-label>
+        <ion-item routerLink="">
+          <img src="assets/icon/img/mediopago.png" slot="start" style="width: 25px;">
+          <ion-label>Medio de pago</ion-label>
         </ion-item>
-        <ion-item>
-          <ion-icon name="trash" slot="start"></ion-icon>
-          <ion-label>Trash</ion-label>
+        <ion-item routerLink="">
+          <img src="assets/icon/img/conf.png" slot="start" style="width: 25px;">
+          <ion-label>Configuración</ion-label>
         </ion-item>
-        <ion-item>
+        <ion-item routerLink="">
           <ion-icon name="warning" slot="start"></ion-icon>
-          <ion-label>Spam</ion-label>
+          <ion-label>¿Tienes problemas?</ion-label>
+        </ion-item>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <ion-item routerLink="">
+          <ion-icon name="code" slot="start"></ion-icon>
+          <ion-label>Desarrolladores</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
