@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,7 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  @ViewChild(IonModal) modal: IonModal;
 
   constructor(private menu: MenuController) { }
   
@@ -22,5 +24,9 @@ export class HomePage {
     openCustom() {
       this.menu.enable(true, 'custom');
       this.menu.open('custom');
+    }
+
+    volver() {
+      this.modal.dismiss(null, 'volver');
     }
   }
