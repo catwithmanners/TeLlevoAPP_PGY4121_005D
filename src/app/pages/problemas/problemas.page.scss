@@ -1,16 +1,18 @@
+@use '../../../global.scss';
+
 ion-content{
     --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
     text-align: center;
-
     p{
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-weight: bold;
-        color: rgb(0, 0, 0);
-    }
-    #p2{
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-weight: normal;
-        color: aliceblue;
+        font-size: large;
+        color: #f5c868;
+    }
+    h3{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bold;
+        color: #f5c868;
     }
 }
 

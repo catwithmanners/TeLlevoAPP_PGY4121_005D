@@ -38,6 +38,14 @@ const routes: Routes = [
     path: 'mensajes',
     loadChildren: () => import('./pages/mensajes/mensajes.module').then( m => m.MensajesPageModule)
   },
+  {
+    path: 'problemas',
+    loadChildren: () => import('./pages/problemas/problemas.module').then( m => m.ProblemasPageModule)
+  },
+  {
+    path: 'desarrolladores',
+    loadChildren: () => import('./pages/desarrolladores/desarrolladores.module').then( m => m.DesarrolladoresPageModule)
+  },
 
 ];
 

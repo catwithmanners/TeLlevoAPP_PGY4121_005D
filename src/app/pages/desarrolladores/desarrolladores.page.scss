@@ -1,0 +1,17 @@
+ion-content{
+    --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
+    text-align: center;
+
+    .img_logo{
+        margin-top: 50%;
+        width: 80%;
+    }
+    p{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bold;
+        font-size: large;
+        color: #000000;
+        margin-left: 3;
+        margin-right: 3;
+    }
+}

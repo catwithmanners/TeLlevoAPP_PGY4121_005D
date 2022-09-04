@@ -18,4 +18,21 @@ ion-content{
       color: #e1c723;
     }
   }
+}
+
+@media (max-width: 400px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+      }
   }
+}
+@media (max-width: 720px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+      }
+  }
+}
+
+  
