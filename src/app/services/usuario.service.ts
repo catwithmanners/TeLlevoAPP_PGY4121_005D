@@ -19,7 +19,7 @@ export class UsuarioService {
       tipo_usuario: 'administrador'
     }
   ];
-
+  userLogeado: string;
   constructor() { }
   //MÉTODOS DEL CRUD:
   agregarUsuario(usuario): boolean{

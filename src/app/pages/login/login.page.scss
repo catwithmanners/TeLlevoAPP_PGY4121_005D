@@ -32,7 +32,6 @@ ion-content{
                 font-weight: bold;
                 color: #f5c868;
             }
-
             ion-card-title {
                 font-size: large;
                 font-weight: bold;
@@ -72,6 +71,12 @@ ion-content{
         }
     }
 }
+ion-loading.custom-loading {
+    --background: #e3edff;
+    --spinner-color: #1c6dff;
+  
+    color: #1c6dff;
+  }
 /* MODAL */
 ion-modal {
     /* color header modal */
