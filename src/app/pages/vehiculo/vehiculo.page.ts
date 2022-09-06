@@ -65,7 +65,7 @@ export class VehiculoPage implements OnInit {
   });
   usuarios: any[] = [];
   vehiculos: any[] = [];
-  user: string;
+  user: string =this.usuarioService.userLogeado;
   verificar_checkbox: boolean = false;
   constructor(private usuarioService: UsuarioService, 
               private router: Router, 
@@ -75,7 +75,6 @@ export class VehiculoPage implements OnInit {
   ngOnInit() {
     this.usuarios = this.usuarioService.obtenerUsuarios();
     this.vehiculos = this.vehiculoService.obtenerVehiculos();
-    this.user=this.usuarioService.userLogeado;
   }
   async presentAlert() {
     const alert = await this.alertController.create({

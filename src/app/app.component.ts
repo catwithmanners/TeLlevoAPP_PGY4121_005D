@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
@@ -8,7 +9,16 @@ import { PickerController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private pickerCtrl: PickerController) {}
+  constructor(private pickerCtrl: PickerController, private alertController: AlertController) {}
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      message: '¡Medio de pago seleccionado!',
+      buttons: ['Ok']
+    });
+
+    await alert.present();
+
+  }
   async openPicker() {
     const picker = await this.pickerCtrl.create({
       columns: [
@@ -37,8 +47,8 @@ export class AppComponent {
         },
         {
           text: 'Confirmar',
-          handler: (value) => {
-            window.alert(`Medio de pago seleccionado: ${value.medio.value}`);
+          handler: () => {
+            this.presentAlert();
           },
         },
       ],
