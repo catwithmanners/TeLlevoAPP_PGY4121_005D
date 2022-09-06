@@ -1,0 +1,34 @@
+ion-content{
+    --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
+    text-align: center;
+    .img_logo {
+        text-align: center;
+        width: 50%;
+    }
+    p{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+    }
+    #p2{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: normal;
+        color: aliceblue;
+    }
+}
+
+@media (max-width: 400px) {
+    .fondo {
+        ion-card {
+            width: 80vw;
+        }
+    }
+  }
+  @media (max-width: 720px) {
+    .fondo {
+        ion-card {
+            width: 80vw;
+        }
+    }
+  }
+  

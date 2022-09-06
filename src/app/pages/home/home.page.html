@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title slot="end">
-      
+    <ion-title slot="start">
+      <a routerLink='/login'><ion-icon name="log-out-outline"></ion-icon></a>
     </ion-title>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-button menu="main"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
@@ -12,12 +12,15 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-content>
+      <p>Bienvenido de nuevo NOMBRE</p>
       <a routerLink='/perfil'><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       <br>
-      <ion-button slot="start" expand="" routerLink="/vehiculo">Quiero realizar un viaje</ion-button>
+      <p id="ulike">¿Qué te gustaría hoy?</p>
+      <br>
+      <ion-button slot="start" expand="block" routerLink="/carrera">Quiero realizar un viaje</ion-button>
       <br>
       <br>
-      <ion-button slot="end" expand="" (click)="login()">Quiero viajar</ion-button>
+      <ion-button slot="end" expand="block" routerLink="/viaje">Quiero tomar un viaje</ion-button>
     </ion-card-content>
     <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
   </ion-card>

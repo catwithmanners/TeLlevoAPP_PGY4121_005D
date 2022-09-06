@@ -89,3 +89,16 @@ ion-modal {
         }
     }
 }
+@media (max-width: 720px){
+    ion-content{
+        ion-card{
+            ion-item-sliding{
+                ion-item{
+                    ion-label{
+                        font-size: small;
+                    }
+                }
+            }
+        }
+    }
+}

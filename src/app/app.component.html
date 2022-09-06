@@ -2,37 +2,81 @@
   <ion-menu side="start" menuId="main" contentId="menuMain">
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Start Menu</ion-title>
+        <ion-title>Menú</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item routerLink="/login">
-            <ion-icon name="home" slot="start"></ion-icon>
+          <ion-item routerLink="/perfil">
+            <img src="assets/icon/img/menu/user.png" slot="start" style="width: 25px;">
             <ion-label>Perfil</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <ion-item>
-          <ion-icon name="paper-plane" slot="start"></ion-icon>
-          <ion-label>Outbox</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="heart" slot="start"></ion-icon>
-          <ion-label>Favorites</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="archive" slot="start"></ion-icon>
-          <ion-label>Archived</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="trash" slot="start"></ion-icon>
-          <ion-label>Trash</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="warning" slot="start"></ion-icon>
-          <ion-label>Spam</ion-label>
-        </ion-item>
+        <ion-menu-toggle>
+          <ion-item routerLink="/vehiculo">
+            <img src="assets/icon/img/menu/carBlack.png" slot="start" style="width: 25px;">
+            <ion-label>Vehículo</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/home">
+            <img src="assets/icon/img/menu/home.png" slot="start" style="width: 25px;">
+            <ion-label>Home</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/historial">
+            <img src="assets/icon/img/menu/hist.png" slot="start" style="width: 25px;">
+            <ion-label>Historial de viajes</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/mensajes">
+            <img src="assets/icon/img/menu/bubble.png" slot="start" style="width: 30px;">
+            <ion-label>Mensajes</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>
+            <img src="assets/icon/img/menu/mediopago.png" slot="start" style="width: 25px;">
+            <ion-label (click)="openPicker()">Medio de pago</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/config">
+            <img src="assets/icon/img/menu/conf.png" slot="start" style="width: 25px;">
+            <ion-label>Configuración</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/problemas">
+            <img src="assets/icon/img/menu/prob.png" slot="start" style="width: 25px;">
+            <ion-label>¿Problemas?</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/login">
+            <img src="assets/icon/img/menu/logout.png" slot="start" style="width: 25px;">
+            <ion-label>Cerrar Sesión</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <ion-menu-toggle>
+          <ion-item routerLink="/desarrolladores">
+            <img src="assets/icon/img/menu/dev.png" slot="start" style="width: 25px;">
+            <ion-label>Desarrolladores</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
   </ion-menu>

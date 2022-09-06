@@ -26,6 +26,46 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'viaje',
+    loadChildren: () => import('./pages/viaje/viaje.module').then( m => m.ViajePageModule)
+  },
+  {
+    path: 'carrera',
+    loadChildren: () => import('./pages/carrera/carrera.module').then( m => m.CarreraPageModule)
+  },
+  {
+    path: 'mensajes',
+    loadChildren: () => import('./pages/mensajes/mensajes.module').then( m => m.MensajesPageModule)
+  },
+  {
+    path: 'problemas',
+    loadChildren: () => import('./pages/problemas/problemas.module').then( m => m.ProblemasPageModule)
+  },
+  {
+    path: 'desarrolladores',
+    loadChildren: () => import('./pages/desarrolladores/desarrolladores.module').then( m => m.DesarrolladoresPageModule)
+  },
+  {
+    path: 'historial',
+    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
+  },
+  {
+    path: 'config',
+    loadChildren: () => import('./pages/config/config.module').then( m => m.ConfigPageModule)
+  },
+  {
+    path: 'medio-pago',
+    loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
+  },
+  {
+    path: 'medio-pago',
+    loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
+  },
+  {
+    path: 'medio-pago',
+    loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
+  },
 
 ];
 
