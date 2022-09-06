@@ -1,16 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { AlertController, IonModal } from '@ionic/angular';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
+  selector: 'app-admin',
+  templateUrl: './admin.page.html',
+  styleUrls: ['./admin.page.scss'],
 })
-
-export class PerfilPage implements OnInit {
+export class AdminPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   sedes: any[] = [
     {
@@ -132,9 +131,6 @@ export class PerfilPage implements OnInit {
     if (this.usuario.controls.password.value != this.verificar_pw){
       this.presentAlert3();
       return;
-    }else if(this.verificar_checkbox != true){
-      this.presentAlert4();
-      return;
     }
     var respuesta: boolean = this.usuarioService.agregarUsuario(this.usuario.value);
     if(respuesta){
@@ -146,13 +142,28 @@ export class PerfilPage implements OnInit {
     }else{
       this.presentAlert2();
     }
-
+  }
+  buscar(correoBuscar){
+    var usuarioEncontrado: any = this.usuarioService.obtenerUsuario(correoBuscar);
+    this.usuario.setValue(usuarioEncontrado);
+    this.verificar_pw = usuarioEncontrado.password;
+  }
+  eliminar(correoEliminar){
+    this.usuarioService.eliminarUsuario(correoEliminar);
+  }
+  actualizar(){
+    //console.log(this.alumno.value);
+    this.usuarioService.actualizarUsuario(this.usuario.value);
+    this.usuario.reset();
+    this.verificar_pw = '';
   }
   volver() {
     this.modal.dismiss(null, 'volver');
   }
-
-  eliminar(correoEliminar){
-    this.usuarioService.eliminarUsuario(correoEliminar);
+  volverLogin(){
+    this.usuario.reset();
+    this.verificar_pw = '';
+    this.verificar_checkbox = false;
+    this.router.navigate(['/home']);
   }
 }

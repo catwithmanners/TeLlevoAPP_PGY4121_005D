@@ -30,7 +30,7 @@ export class UsuarioService {
     return false;
   }
 
-  eliminarUsuarios(correo: string){
+  eliminarUsuario(correo: string){
     this.usuarios.forEach((usu, index) => {
       if (usu.correo == correo) {
         this.usuarios.splice(index, 1);

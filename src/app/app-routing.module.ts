@@ -66,6 +66,10 @@ const routes: Routes = [
     path: 'medio-pago',
     loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
+  },
 
 ];
 
