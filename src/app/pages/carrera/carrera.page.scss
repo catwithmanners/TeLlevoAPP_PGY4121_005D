@@ -6,6 +6,11 @@ ion-content{
     p{
         color:#ffffff;
     }
+    ion-button{
+        color: black;
+        margin: 4px;
+        --background: #ffe95a;
+    }
     ion-card{
         border-style: none ;
         --ion-background-color: #fdbb02;

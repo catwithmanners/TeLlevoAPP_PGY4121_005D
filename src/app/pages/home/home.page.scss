@@ -14,7 +14,11 @@ ion-content{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-
+    ion-button{
+      color: black;
+      margin: 10px;
+      --background: #ffe95a;
+    }
     p{
       font-size: x-large;
       color: #ffffff;
