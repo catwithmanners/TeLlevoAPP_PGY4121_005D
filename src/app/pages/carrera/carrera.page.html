@@ -1,9 +1,23 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>carrera</ion-title>
+    <ion-title slot="start">
+      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <div>
+    <p>Bienvenido sr/a Conductor!</p>
+    <ion-button expand="small">Configurar horario de actividad</ion-button>
+    <ion-card>
+      <ion-card-content>
+        <img src=img src="assets/icon/img/map.png" alt="img_map" class="img_map" alt="">
+      </ion-card-content>
+    </ion-card>
+    <ion-button expand="block">BUSCAR PASAJEROS</ion-button>
+    <img src="assets/icon/img/pnglogoCond.png" alt="img_logo" class="img_logo"/>
+  </div> 
 </ion-content>

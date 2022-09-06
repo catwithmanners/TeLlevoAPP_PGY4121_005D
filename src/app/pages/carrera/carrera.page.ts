@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-carrera',
   templateUrl: './carrera.page.html',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CarreraPage implements OnInit {
 
   constructor() { }
+
 
   ngOnInit() {
   }
