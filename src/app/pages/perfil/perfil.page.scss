@@ -1,8 +1,26 @@
 @use '../../../global.scss';
 
 ion-content{
+  ion-card{
+    border-style: ridge;
+    border-color: black;
+    margin: auto;
+    ion-card-content{
+        .img_check {
+            margin-top: 3%;
+            text-align: center;
+            width: 50%;
+        }
+        p{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+        }
+    }
+}
     --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
     text-align: center;
+    align-items: center;
     p{
       font-size: x-large;
       color: #ffffff;

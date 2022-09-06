@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title slot="start">
+      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="fondo">
+    <br>
+    <img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/>
+    <h2>ADMINISTRACIÓN</h2>
+  </div>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <form [formGroup]="usuario" (ngSubmit)="registrar()">
+          <ion-item style="border-radius: 15px 15px 0px 0px;">
+            <ion-label position="floating">Rut:</ion-label>
+            <ion-input clearInput type="text" placeholder="Ingresa tu rut - Ej: 11.111.111-1" formControlName="rut"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nombre completo:</ion-label>
+            <ion-input clearInput type="text" placeholder="Ingresa tu nombre completo" formControlName="nom_completo"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Fecha de nacimiento:</ion-label>
+            <ion-input clearInput type="date" placeholder="Ingresa tu fecha de nacimiento" formControlName="fecha_nac"></ion-input>
+          </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-label style="font-weight: bold;" position="floating">Sede:</ion-label>
+              
+              <ion-select formControlName="sede" placeholder="Selecciona tu sede">
+                
+                <ion-select-option *ngFor="let aux of sedes"value="{{aux.value}}" >{{aux.nombre}}</ion-select-option>
+                
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-label style="font-weight: bold;" position="floating">Carrera:</ion-label>
+              <ion-select formControlName="carrera" placeholder="Selecciona tu carrera">
+                <ion-select-option *ngFor="let aux2 of carreras">{{aux2.nombre}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <ion-item>
+            <ion-label position="floating">Correo:</ion-label>
+            <ion-input clearInput type="text" placeholder="Ingresa tu correo institucional" formControlName="correo"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contraseña:</ion-label>
+            <ion-input clearInput type="password" placeholder="Debe contener al menos 6 caracteres" formControlName="password"></ion-input>
+          </ion-item>
+          <ion-item style="border-radius: 0px 0px 15px 15px;">
+            <ion-label clearInput position="floating">Ingresa tu contraseña nuevamente:</ion-label>
+            <ion-input type="password" placeholder="Ingresa tu contraseña nuevamente" [(ngModel)]="verificar_pw" [ngModelOptions]="{standalone: 'true'}"></ion-input>
+          </ion-item>
+          <br>
+          <br>
+          <br>
+          <ion-button type="submit" [disabled]="!usuario.valid">REGISTRAR</ion-button>
+          <ion-button color="secondary" (click)="actualizar()" [disabled]="!usuario.valid">ACTUALIZAR</ion-button>
+        </form>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <h1>LISTA DE USUARIOS</h1>
+  <ion-card>
+    <ion-card-content>
+      <ion-list *ngFor="let u of usuarios">
+        <p>{{u.rut}} - {{u.nom_completo}} - {{u.fecha_nac}} - {{u.semestre}} - {{u.password}}</p>
+        <ion-button slot="end" color="warning" (click)="buscar(u.correo)">BUSCAR</ion-button>
+        <ion-button slot="end" color="danger" (click)="eliminar(u.correo)">ELIMINAR</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

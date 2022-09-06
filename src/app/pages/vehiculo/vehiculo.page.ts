@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController,IonModal } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { VehiculoService } from 'src/app/services/vehiculo.service';
 
@@ -11,6 +11,7 @@ import { VehiculoService } from 'src/app/services/vehiculo.service';
   styleUrls: ['./vehiculo.page.scss'],
 })
 export class VehiculoPage implements OnInit {
+  @ViewChild(IonModal) modal: IonModal;
   colores: any[] = [
     {
       nombre: 'Azul',
@@ -124,7 +125,9 @@ export class VehiculoPage implements OnInit {
       this.presentAlert2();
     }
   }
-
+  volver() {
+    this.modal.dismiss(null, 'volver');
+  }
   volverAtras(){
     this.vehiculo.reset();
     this.router.navigate(['/home']);

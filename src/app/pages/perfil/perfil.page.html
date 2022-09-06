@@ -13,15 +13,19 @@
     <br>
     <img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/>
     <h2>Perfil de usuario</h2>
-    <ion-list *ngFor="let usuario of usuarios">
-      <p>Rut: {{usuario.rut}}</p>
-      <p>Nombre: {{usuario.nom_completo}}</p>
-      <p>Fecha de nacimiento: {{usuario.fecha_nac}}</p>
-      <p>Sede: {{usuario.sede}}</p>
-      <p>Carrera: {{usuario.carrera}}</p>
-      <p>Correo: {{usuario.correo}}</p>
-      <ion-button color="warning" (click)="obtenerUsuario(usuario.correo)">Buscar</ion-button>
-      <ion-button color="danger" (click)="eliminar(usuario.correo)">Eliminar</ion-button>
-    </ion-list>
   </div>
+  <ion-card>
+    <ion-card-content>
+      <ion-list *ngFor="let usuario of usuarios">
+        <p>Rut: {{usuario.rut}}</p>
+        <p>Nombre: {{usuario.nom_completo}}</p>
+        <p>Fecha de nacimiento: {{usuario.fecha_nac}}</p>
+        <p>Sede: {{usuario.sede}}</p>
+        <p>Carrera: {{usuario.carrera}}</p>
+        <p>Correo: {{usuario.correo}}</p>
+        <ion-button color="warning" (click)="obtenerUsuario(usuario.correo)">Buscar</ion-button>
+        <ion-button color="danger" (click)="eliminar(usuario.correo)">Eliminar</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
