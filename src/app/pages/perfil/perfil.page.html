@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+      <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <h1>PERFIL DE USUARIO</h1>
+  <h2>Información de la cuenta</h2>
+  <h1>LISTA DE USUARIOS</h1>
+  <br>
+
+  <h1>Información del Usuario</h1>
+  <ion-list *ngFor="let usuario of usuarios" style="text-align: center;">
+    <p>Rut: {{usuario.rut}}</p>
+    <p>Nombre: {{usuario.nom_completo}}</p>
+    <p>Fecha de nacimiento: {{usuario.fecha_nac}}</p>
+    <p>Sede: {{usuario.sede}}</p>
+    <p>Carrera: {{usuario.carrera}}</p>
+    <p>Correo: {{usuario.correo}}</p>
+    <ion-button color="warning" (click)="obtenerUsuario(usuario.correo)">Buscar</ion-button>
+    <ion-button color="danger" (click)="eliminar(usuario.correo)">Eliminar</ion-button>
+  </ion-list>
+</ion-content>

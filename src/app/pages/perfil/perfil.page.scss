@@ -1,0 +1,15 @@
+@use '../../../global.scss';
+
+ion-content{
+    --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
+    ion-card{
+      --ion-background-color: ;
+    ion-card-content{
+      text-align: center;
+      
+      ion-button{
+        
+      }
+    }
+  }
+  }

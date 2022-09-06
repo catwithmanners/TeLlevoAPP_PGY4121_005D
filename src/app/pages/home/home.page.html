@@ -12,39 +12,13 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-content>
-      <h1>Bienvenido NOMBRE</h1>
+      <a routerLink='/perfil'><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       <br>
-      <ion-button slot="start" expand="" (click)="login()">Quiero realizar un viaje</ion-button>
+      <ion-button slot="start" expand="" routerLink="/vehiculo">Quiero realizar un viaje</ion-button>
       <br>
       <br>
       <ion-button slot="end" expand="" (click)="login()">Quiero viajar</ion-button>
     </ion-card-content>
+    <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
   </ion-card>
 </ion-content>
-
-<!-- FOOTER -->
-<div class="footer">
-  <ion-footer class="ion-no-border">
-    <ion-toolbar color="primary">
-      <ion-button id="open-modal" expand="block">Términos de uso</ion-button>
-    </ion-toolbar>
-    <!-- MODAL TÉRMINOS DE USO -->
-    <ion-modal trigger="open-modal">
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button (click)="volver()"><ion-icon name="arrow-back-circle-outline"></ion-icon></ion-button>
-            </ion-buttons>
-            <ion-title>Términos</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">
-          <p>Bienvenido a las Condiciones y términos de Uso de "Te llevo?" App.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, necessitatibus corrupti dolorum porro quasi eveniet accusamus natus inventore minus ipsa nemo fugit asperiores. Aperiam natus, necessitatibus non dicta atque omnis, adipisci eveniet commodi explicabo nemo sapiente odio recusandae rerum molestias quas. Velit ut, provident praesentium inventore nostrum explicabo officiis eveniet nisi quis veritatis eaque aspernatur tenetur nobis odit impedit aliquid alias, minus sed aperiam culpa necessitatibus. Velit, suscipit obcaecati sint a quaerat harum? Accusantium, eligendi impedit corrupti maiores nemo eos sed natus quo. Assumenda sequi id dolores error quaerat. Dolor deserunt corrupti tempore aliquam ipsam neque sed blanditiis animi nobis!</p>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
-  </ion-footer>
-</div>
-  

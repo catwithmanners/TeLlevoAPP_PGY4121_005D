@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
@@ -19,26 +19,37 @@ export class LoginPage implements OnInit  {
   recordar_login: boolean = false;
 
   constructor(private toastController: ToastController, private router: Router,
-    private usuarioService: UsuarioService) { }
+    private usuarioService: UsuarioService,private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+
   }
 
   //MÉTODOS
   login(){
     var usuarioLogin = this.usuarioService.validarLogin(this.user, this.password);
-
     if ( usuarioLogin != undefined ) {
+      this.usuarioService.userLogeado = this.user;
       if (this.recordar_login != true){
         this.user='';
         this.password='';
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home']);
       }else{
-      this.router.navigate(['/home'])
+        this.router.navigate(['/home'])
       }
     } else {
       this.toastError();
     }
+  }
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      duration: 500,
+      cssClass: 'custom-loading',
+      
+    });
+
+    loading.present();
   }
 
   async toastError() {

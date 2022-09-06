@@ -1,9 +1,83 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>vehiculo</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-card>
+    <ion-card-header>
+      <ion-label>Registro vehiculo</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="vehiculo" (ngSubmit)="registrarVeh()">
+        <ion-item style="border-radius: 15px 15px 0px 0px;">
+          <ion-label position="floating">Patente:</ion-label>
+          <ion-input clearInput type="text" placeholder="Ingresa la patente del vehiculo - Debe tener 6 caracteres" formControlName="patente"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Marca:</ion-label>
+          <ion-input clearInput type="text" placeholder="Ingresa la marca del vehiculo" formControlName="marca"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Modelo:</ion-label>
+          <ion-input clearInput type="text" placeholder="Ingresa el modelo del vehiculo" formControlName="modelo"></ion-input>
+        </ion-item>
+        <ion-list>
+          <ion-item>
+            <ion-label style="font-weight: bold;" position="floating">Tipo de vehiculo:</ion-label>
+            <ion-select formControlName="tipo_vehiculo" placeholder="Selecciona el tipo de vehiculo">
+              <ion-select-option *ngFor="let aux of tipo_vehiculo">{{aux.nombre}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-item>
+            <ion-label style="font-weight: bold;" position="floating">Color:</ion-label>
+            <ion-select formControlName="color" placeholder="Selecciona el color del vehiculo">
+              <ion-select-option *ngFor="let aux2 of colores">{{aux2.nombre}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <ion-item>
+          <ion-label position="floating">Capacidad de pasajeros:</ion-label>
+          <ion-input clearInput type="number" placeholder="Ingresa la cantidad de pasajeros del vehiculo" formControlName="cap_pasajeros"></ion-input>
+        </ion-item>
+        <ion-list>
+          <ion-item style="border-radius: 0px 0px 15px 15px;">
+            <ion-label style="font-weight: bold;" position="floating">Licencia:</ion-label>
+            <ion-select formControlName="tipo_licencia" placeholder="Selecciona el tipo de licencia que tienes">
+              <ion-select-option *ngFor="let aux3 of licencias">{{aux3.nombre}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-item-sliding>
+          <ion-item style="border-radius: 60px 0px 0px 60px;">
+            <ion-checkbox color="dark" slot="start" [(ngModel)]="verificar_checkbox" [ngModelOptions]="{standalone: 'true'}"></ion-checkbox>
+            <ion-label class="ion-text-wrap">Acepto los terminos y condiciones</ion-label>
+            <ion-icon name="caret-back-sharp"></ion-icon>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option id="open-modal2"type="button">Terminos y condiciones</ion-item-option>
+            <!-- MODAL TÉRMINOS DE USO -->
+            <ion-modal trigger="open-modal2">
+              <ng-template>
+                <ion-header>
+                  <ion-toolbar>
+                    <ion-buttons slot="start">
+                      <ion-button (click)="volver()"><ion-icon name="arrow-back-circle-outline"></ion-icon></ion-button>
+                    </ion-buttons>
+                    <ion-title>Términos</ion-title>
+                  </ion-toolbar>
+                </ion-header>
+                <ion-content class="ion-padding">
+                  <p>Bienvenido a las Condiciones y términos de Uso de "Te llevo?" App.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, necessitatibus corrupti dolorum porro quasi eveniet accusamus natus inventore minus ipsa nemo fugit asperiores. Aperiam natus, necessitatibus non dicta atque omnis, adipisci eveniet commodi explicabo nemo sapiente odio recusandae rerum molestias quas. Velit ut, provident praesentium inventore nostrum explicabo officiis eveniet nisi quis veritatis eaque aspernatur tenetur nobis odit impedit aliquid alias, minus sed aperiam culpa necessitatibus. Velit, suscipit obcaecati sint a quaerat harum? Accusantium, eligendi impedit corrupti maiores nemo eos sed natus quo. Assumenda sequi id dolores error quaerat. Dolor deserunt corrupti tempore aliquam ipsam neque sed blanditiis animi nobis!</p>
+                </ion-content>
+              </ng-template>
+            </ion-modal>
+          </ion-item-options>
+        </ion-item-sliding>
+        <br>
+        <br>
+        <ion-button expand="block" type="submit" [disabled]="!vehiculo.valid">REGISTRAR VEHICULO</ion-button>
+        <ion-button expand="block" style="border-style: none;"type="button" routerLink="/home">Volver al home</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

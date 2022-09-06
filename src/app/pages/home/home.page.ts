@@ -12,8 +12,6 @@ export class HomePage {
 
   constructor(private menu: MenuController) { }
   
-
-
     volver() {
       this.modal.dismiss(null, 'volver');
     }
