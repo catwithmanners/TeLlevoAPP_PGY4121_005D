@@ -14,7 +14,7 @@ export class UsuarioService {
       fecha_nac: '1111-11-11',
       sede: 'Puente Alto',
       carrera: 'Ing. en informatica',
-      correo: 'admin@duocuc.cl',
+      correo: 'admin',
       password: 'admin',
       tipo_usuario: 'administrador'
     }
