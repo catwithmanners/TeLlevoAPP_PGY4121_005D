@@ -13,9 +13,8 @@
   <ion-card>
     <ion-card-content>
       <a routerLink='/perfil'><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
-      <h1>Bienvenido {{ usuario.nom_completo }}</h1>
       <br>
-      <ion-button slot="start" expand="" (click)="login()">Quiero realizar un viaje</ion-button>
+      <ion-button slot="start" expand="" routerLink="/vehiculo">Quiero realizar un viaje</ion-button>
       <br>
       <br>
       <ion-button slot="end" expand="" (click)="login()">Quiero viajar</ion-button>

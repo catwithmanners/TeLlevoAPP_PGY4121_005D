@@ -22,21 +22,20 @@ export class LoginPage implements OnInit  {
     private usuarioService: UsuarioService,private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+
   }
 
   //MÉTODOS
   login(){
     var usuarioLogin = this.usuarioService.validarLogin(this.user, this.password);
-    this.showLoading();
     if ( usuarioLogin != undefined ) {
+      this.usuarioService.userLogeado = this.user;
       if (this.recordar_login != true){
         this.user='';
         this.password='';
-        
-        
-        this.router.navigate(['/home'])
+        this.router.navigate(['/home']);
       }else{
-      this.router.navigate(['/home'])
+        this.router.navigate(['/home'])
       }
     } else {
       this.toastError();
