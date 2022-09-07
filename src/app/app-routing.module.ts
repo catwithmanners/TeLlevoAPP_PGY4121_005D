@@ -50,6 +50,22 @@ const routes: Routes = [
     path: 'historial',
     loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
   },
+  {
+    path: 'config',
+    loadChildren: () => import('./pages/config/config.module').then( m => m.ConfigPageModule)
+  },
+  {
+    path: 'medio-pago',
+    loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
+  },
+  {
+    path: 'medio-pago',
+    loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
+  },
+  {
+    path: 'medio-pago',
+    loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
+  },
 
 ];
 
