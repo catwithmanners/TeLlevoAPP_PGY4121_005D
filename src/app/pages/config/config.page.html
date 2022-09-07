@@ -1,10 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>config</ion-title>
+    <ion-title slot="start">
+      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <p>Configuración de ubicación</p>
+  <h1><img src="assets/icon/img/menu/conf.png" style="width: 50px;"></h1>
   <p>Rango de ubicación</p>
-  <p>Método de pago</p>
+  <ion-range [ticks]="true" [snaps]="true" [min]="0" [max]="10"></ion-range>
+  <ion-button (click)="openPicker()" expand="block">Cambiar método de pago</ion-button>
+  <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
 </ion-content>

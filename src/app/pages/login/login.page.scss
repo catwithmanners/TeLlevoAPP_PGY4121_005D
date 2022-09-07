@@ -25,7 +25,12 @@ ion-content{
             text-align: center;
             width: 80%;
         }
-    
+        ion-button{
+            color: black;
+            margin: 10px;
+            --background: #ffe95a;
+            
+        }
         ion-card-header {
             ion-card-subtitle {
                 font-size: small;
