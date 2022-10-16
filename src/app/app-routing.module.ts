@@ -63,11 +63,21 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
   },
+  {
+    path: 'geo',
+    loadChildren: () => import('./pages/geo/geo.module').then( m => m.GeoPageModule)
+  },
+  {
+    path: 'qrcode',
+    loadChildren: () => import('./pages/qrcode/qrcode.module').then( m => m.QrcodePageModule)
+  },
   /* SIEMPRE AL FINAL */
   {
     path: '**',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
+
+
 
 ];
 

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -14,12 +15,15 @@ export class LoginPage implements OnInit  {
   @ViewChild(IonModal) modal: IonModal;
 
   //VARIABLES A UTILIZAR
-  user: string;
-  password: string;
+  user = new FormGroup({
+    correo: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@(duoc|duocuc|profesor.duoc).(cl)')]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(18)])
+  });
   recordar_login: boolean = false;
 
-  constructor(private toastController: ToastController, private router: Router,
-    private usuarioService: UsuarioService,private loadingCtrl: LoadingController) { }
+  constructor(private toastController: ToastController, 
+    private router: Router,
+    private usuarioService: UsuarioService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
 
@@ -27,6 +31,7 @@ export class LoginPage implements OnInit  {
 
   //MÉTODOS
   login(){
+<<<<<<< HEAD
     var usuarioLogin = this.usuarioService.validarLogin(this.user, this.password);
     if ( usuarioLogin != undefined ) {
       this.usuarioService.userLogeado = this.user;
@@ -34,12 +39,32 @@ export class LoginPage implements OnInit  {
         this.usuarioService.adminLog = true;
       }
       if (this.recordar_login != true){
+=======
+    //rescatamos las variables del formulario por separado:
+    var correoValid = this.user.controls.correo.value;
+    var passValid = this.user.controls.password.value;
+
+    //rescatamos el usuario con el método login usuario:
+    var usuarioLogin = this.usuarioService.logearUser(correoValid, passValid);
+    //validamos si existe el usuario
+    if (usuarioLogin != undefined) {
+      //AQUI, ANTES DE REDIRECCIONAR HACIA OTRA PÁGINA, PREPARAREMOS LOS DATOS QUE QUEREMOS ENVIAR:
+      var navigationExtras: NavigationExtras = {
+        state: {
+          usuario: usuarioLogin
+        }
+      };
+      //redirigimos dependiente del tipo de usuario
+      this.router.navigate(['/home'], navigationExtras);
+      this.user.reset();
+/*       if (this.recordar_login != true){
+>>>>>>> 0ad36da93efb9de477d72f7209c7496df8d75c3e
         this.user='';
         this.password='';
         this.router.navigate(['/home']);
       }else{
         this.router.navigate(['/home'])
-      }
+      } */
     } else {
       this.toastError();
     }

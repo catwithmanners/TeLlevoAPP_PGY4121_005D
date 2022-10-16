@@ -12,7 +12,7 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-content>
-      <p>Bienvenido de nuevo {{ user|uppercase }} </p>
+      <p>Bienvenido de nuevo {{ user.nombre + ' ' + user.apellidos }} </p>
       <br>
       <a routerLink='/perfil'><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       <br>
@@ -22,6 +22,7 @@
       <br>
       <br>
       <ion-button slot="end" expand="block" routerLink="/viaje">Quiero tomar un viaje</ion-button>
+      <ion-button slot="end" routerLink="/login">Cerrar sesión</ion-button>
     </ion-card-content>
     <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
   </ion-card>
