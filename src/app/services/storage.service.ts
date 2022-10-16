@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
