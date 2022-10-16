@@ -30,6 +30,9 @@ export class LoginPage implements OnInit  {
     var usuarioLogin = this.usuarioService.validarLogin(this.user, this.password);
     if ( usuarioLogin != undefined ) {
       this.usuarioService.userLogeado = this.user;
+      if(this.user == 'admin'){
+        this.usuarioService.adminLog = true;
+      }
       if (this.recordar_login != true){
         this.user='';
         this.password='';

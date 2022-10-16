@@ -20,6 +20,7 @@ export class UsuarioService {
     }
   ];
   userLogeado: string;
+  public adminLog: boolean = false;
   constructor() { }
   //MÉTODOS DEL CRUD:
   agregarUsuario(usuario): boolean{
