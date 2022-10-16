@@ -16,7 +16,7 @@ export class HomePage implements OnInit{
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.user = this.router.getCurrentNavigation().extras.state.usuario;
+    this.user = this.router.getCurrentNavigation().extras.state.usuarios;
   }
     volver() {
       this.modal.dismiss(null, 'volver');
