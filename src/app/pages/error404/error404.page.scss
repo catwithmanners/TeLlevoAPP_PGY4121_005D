@@ -1,0 +1,38 @@
+@use '../../../global.scss';
+
+ion-content{
+    --background: linear-gradient(#ff0026 ,#b64253, #e9849a);
+    text-align: center;
+    p{
+        color:#ffffff;
+    }
+    h1{
+        color:#ffffff;
+    }
+    ion-button{
+        color: black;
+        margin: 4px;
+        --background: #ffe95a;
+    }
+    .img_error{
+        width: 10%;
+    }
+    .img_logo {
+        width: 30%;
+      }
+}
+
+@media (max-width: 400px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+      }
+  }
+}
+@media (max-width: 720px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+      }
+  }
+}

@@ -22,7 +22,8 @@ const routes: Routes = [
   {
     path: 'vehiculo',
     loadChildren: () => import('./pages/vehiculo/vehiculo.module').then( m => m.VehiculoPageModule)
-  },  {
+  },
+  {
     path: 'perfil',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
@@ -59,16 +60,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
   },
   {
-    path: 'medio-pago',
-    loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
-  },
-  {
-    path: 'medio-pago',
-    loadChildren: () => import('./pages/medio-pago/medio-pago.module').then( m => m.MedioPagoPageModule)
-  },
-  {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule)
+  },
+  /* SIEMPRE AL FINAL */
+  {
+    path: '**',
+    loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
 
 ];

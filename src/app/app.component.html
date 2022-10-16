@@ -72,7 +72,7 @@
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item routerLink="/desarrolladores">
+          <ion-item routerLink="/desarrolladores" [disabled]="!admin.valid">
             <img src="assets/icon/img/menu/dev.png" slot="start" style="width: 25px;">
             <ion-label>Desarrolladores</ion-label>
           </ion-item>
