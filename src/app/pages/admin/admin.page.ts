@@ -65,14 +65,16 @@ export class AdminPage implements OnInit {
     },
   ];
   usuario = new FormGroup({
-    rut: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]{1}')]),
-    nom_completo: new FormControl('', [Validators.required, Validators.maxLength(60)]),
+    rut: new FormControl('', [Validators.required, Validators.pattern('[0-9]{1,2}.[0-9]{3}.[0-9]{3}-[0-9kK]')]),
+    nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    apellidos: new FormControl('', [Validators.required, Validators.minLength(3)]),
     fecha_nac: new FormControl('', [Validators.required]),
     sede: new FormControl('', [Validators.required, Validators.maxLength(80)]),
     carrera: new FormControl('', [Validators.required, Validators.maxLength(80)]),
     correo: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@duocuc+\\.cl$')]),
-    password: new FormControl('',[Validators.required, Validators.minLength(6), Validators.maxLength(9)]),
-    tipo_usuario: new FormControl('alumno')
+    password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(18)]),
+    //tipo de usuario al registrar
+    tipo_usuario: new FormControl('alumno', [Validators.required]),
   });
   //Variable para verificar la contraseña:
   verificar_pw: string;
