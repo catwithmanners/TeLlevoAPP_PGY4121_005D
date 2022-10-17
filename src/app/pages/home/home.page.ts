@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+ import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonModal } from '@ionic/angular';
-import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +9,14 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class HomePage implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
-  user: string = this.usuarioService.userLogeado;
-  constructor(private menu: MenuController, private usuarioService: UsuarioService) { }
+
+  //Variable para recibir datos desde el login
+  usuario: any;
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
   }
     volver() {
       this.modal.dismiss(null, 'volver');

@@ -7,15 +7,17 @@
           <ion-card-title>¡Ingresa a tu cuenta!</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <!-- INTERIOR DEL CARD -->
-          <ion-item>
-          <ion-label position="floating">Correo</ion-label>
-          <ion-input placeholder="Ingrese correo" type="text" [(ngModel)]="user"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input placeholder="Ingrese contraseña" type="password" [(ngModel)]="password"></ion-input>
-        </ion-item>
+          <form [formGroup]="user" (ngSubmit)="login()">
+            <!-- INTERIOR DEL CARD -->
+            <ion-item>
+              <ion-label position="floating">Correo</ion-label>
+              <ion-input formControlName="correo" placeholder="Ingrese correo" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input formControlName="password" placeholder="Ingrese contraseña" type="password"></ion-input>
+            </ion-item>
+          </form>
         <ion-item lines="none">
           <ion-checkbox color="warning" slot="start" [(ngModel)]="recordar_login" [ngModelOptions]="{standalone: 'true'}"></ion-checkbox>
           <ion-label style="font-weight: bold; font-size: small;">Recordar datos</ion-label>
