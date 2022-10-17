@@ -26,20 +26,7 @@ export class VehiculoPage implements OnInit {
       nombre: 'Amarillo'
     }
   ]
-  licencias: any[] = [
-    {
-      nombre: 'A1',
-    },
-    {
-      nombre: 'A2',
-    },
-    {
-      nombre: 'A3',
-    },
-    {
-      nombre: 'A4'
-    }
-  ]
+
   tipo_vehiculo: any[] = [
     {
       nombre: 'Auto',

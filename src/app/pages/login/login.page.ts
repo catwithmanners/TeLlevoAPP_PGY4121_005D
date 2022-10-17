@@ -31,15 +31,6 @@ export class LoginPage implements OnInit  {
 
   //MÉTODOS
   login(){
-<<<<<<< HEAD
-    var usuarioLogin = this.usuarioService.validarLogin(this.user, this.password);
-    if ( usuarioLogin != undefined ) {
-      this.usuarioService.userLogeado = this.user;
-      if(this.user == 'admin'){
-        this.usuarioService.adminLog = true;
-      }
-      if (this.recordar_login != true){
-=======
     //rescatamos las variables del formulario por separado:
     var correoValid = this.user.controls.correo.value;
     var passValid = this.user.controls.password.value;
@@ -58,7 +49,6 @@ export class LoginPage implements OnInit  {
       this.router.navigate(['/home'], navigationExtras);
       this.user.reset();
 /*       if (this.recordar_login != true){
->>>>>>> 0ad36da93efb9de477d72f7209c7496df8d75c3e
         this.user='';
         this.password='';
         this.router.navigate(['/home']);

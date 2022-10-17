@@ -17,14 +17,22 @@ export class StorageService {
 
   async agregar(key, dato){
     this.datos = await this.storage.get(key) || [];
-    //VERIFICAR SI EL DATO ENTRANTE TIENE ID
-    //Si tiene id, buscamos si existe, si no existe, se debe crear uno
-    if (dato.id == ''){
-      var id = this.datos.length + 1 || 1;
-      dato.id = id;
-      this.datos.push(dato);
-      await this.storage.set(key, this.datos);
-      return true;
+    if (key == 'usuarios') {
+      var rut = await this.getUsuario(key, dato.rut);
+      var correo = await this.getCorreo(key, dato.correo);
+      if (rut == undefined && correo == undefined) {
+        this.datos.push(dato);
+        await this.storage.set(key, this.datos);
+        return true;
+      }
+    }
+    if (key == 'vehiculos') {
+      var patente = await this.getVehiculo(key, dato.patente);
+      if (patente == undefined) {
+        this.datos.push(dato);
+        await this.storage.set(key, this.datos);
+        return true;
+      }
     }
     return false;
   }
@@ -32,6 +40,18 @@ export class StorageService {
   async getDato(key, identificador){
     this.datos = await this.storage.get(key) || [];
     return this.datos.find(dato => dato.id == identificador);
+  }
+  async getUsuario(key, rut){
+    this.datos = await this.storage.get(key) || [];
+    return this.datos.find(dato => dato.rut == rut);
+  }
+  async getCorreo(key, correo){
+    this.datos = await this.storage.get(key) || [];
+    return this.datos.find(dato => dato.correo == correo);
+  }
+  async getVehiculo(key, patente){
+    this.datos = await this.storage.get(key) || [];
+    return this.datos.find(dato => dato.patente == patente);
   }
 
   async getDatos(key){
@@ -57,4 +77,6 @@ export class StorageService {
 
     await this.storage.set(key, this.datos);
   }
+
+
 }
