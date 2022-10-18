@@ -11,12 +11,12 @@ export class HomePage implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
 
   //Variable para recibir datos desde el login
-  user: any;
+  usuario: any;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.user = this.router.getCurrentNavigation().extras.state.usuario;
+    this.usuario = this.router.getCurrentNavigation().extras.state.usuario;
   }
     volver() {
       this.modal.dismiss(null, 'volver');

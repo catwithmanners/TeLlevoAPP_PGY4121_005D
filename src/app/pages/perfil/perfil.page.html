@@ -14,11 +14,14 @@
     <img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/>
     <h2>Perfil de usuario</h2>
   </div>
-  <ion-card>
+  <ion-card *ngFor="let usuario of usuarios">
     <ion-card-content>
-      <ion-list *ngFor="let usuario of usuarios">
+      <ion-list>
+        <h1>Foto de perfil</h1>
+        <h3>información del {{ usuario.tipo_usuario }}</h3>
         <p>Rut: {{usuario.rut}}</p>
-        <p>Nombre: {{usuario.nom_completo}}</p>
+        <p>Nombre: {{usuario.nombre}}</p>
+        <p>Apellidos: {{usuario.apellidos}}</p>
         <p>Fecha de nacimiento: {{usuario.fecha_nac}}</p>
         <p>Sede: {{usuario.sede}}</p>
         <p>Carrera: {{usuario.carrera}}</p>

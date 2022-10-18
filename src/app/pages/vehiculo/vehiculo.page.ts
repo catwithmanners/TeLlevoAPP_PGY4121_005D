@@ -53,7 +53,7 @@ export class VehiculoPage implements OnInit {
   });
   usuarios: any[] = [];
   vehiculos: any[] = [];
-  user: string =this.usuarioService.userLogeado;
+  user: any;
   verificar_checkbox: boolean = false;
   constructor(private usuarioService: UsuarioService, 
               private router: Router, 

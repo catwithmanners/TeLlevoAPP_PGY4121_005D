@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -10,8 +12,8 @@ export class UsuarioService {
   usuarios: any[] = [
     {
       rut: '0.000.000-0',
-      nombre: 'admin',
-      apellidos: 'administrador',
+      nombre: 'Admin',
+      apellidos: 'Administrador',
       fecha_nac: '1111-11-11',
       sede: 'Puente Alto',
       carrera: 'Ing. en informatica',
@@ -30,9 +32,11 @@ export class UsuarioService {
       tipo_usuario: 'alumno'
     }
   ];
-  userLogeado: string;
-  public adminLog: boolean = false;
-  constructor() { }
+
+  isAuthenticated = new BehaviorSubject(false);
+
+  constructor(private router: Router) { }
+
   //MÉTODOS DEL CRUD:
   agregarUsuario(usuario): boolean{
     if ( this.obtenerUsuario(usuario.correo) == undefined ) {
@@ -67,13 +71,13 @@ export class UsuarioService {
   logearUser(correo, password){
     var usuarioLogin = this.usuarios.find(usu => usu.correo == correo && usu.password == password);
     if (usuarioLogin != undefined) {
-      //this.isAuthenticated.next(true);
+      this.isAuthenticated.next(true);
       return usuarioLogin;
     }
     //return this.usuarios.find(usu => usu.correo == correo && usu.password == password)
   }
   
-/*   getAuth(){
+  getAuth(){
     return this.isAuthenticated.value;
   }
   logout(){
@@ -81,9 +85,7 @@ export class UsuarioService {
     this.router.navigate(['/login']);
   }
 
-
-
   validarCorreo(correo){
     return this.usuarios.find(usu => usu.correo == correo);
-  } */
+  }
 }

@@ -10,9 +10,12 @@
 </ion-header>
 <!-- CONTENIDO -->
 <ion-content [fullscreen]="true">
+  <div id="administrador" *ngIf="">
+    <h1>administración</h1>
+  </div>
   <ion-card>
     <ion-card-content>
-      <p>Bienvenido de nuevo {{ user.nombre + ' ' + user.apellidos }} </p>
+      <p>Bienvenido de nuevo {{usuario.nombre}}</p>
       <br>
       <a routerLink='/perfil'><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       <br>
