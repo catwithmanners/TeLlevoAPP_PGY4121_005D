@@ -65,10 +65,8 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
         <ion-menu-toggle>
-          <ion-item routerLink="/admin">
+          <ion-item *ngIf="adminLog"  routerLink="/admin">
             <img src="assets/icon/img/menu/admin.png" slot="start" style="width: 25px;">
             <ion-label>Administración</ion-label>
           </ion-item>

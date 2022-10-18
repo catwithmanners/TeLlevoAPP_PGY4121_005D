@@ -36,6 +36,7 @@ export class UsuarioService {
   isAuthenticated = new BehaviorSubject(false);
 
   constructor(private router: Router) { }
+
   //MÉTODOS DEL CRUD:
   agregarUsuario(usuario): boolean{
     if ( this.obtenerUsuario(usuario.correo) == undefined ) {
