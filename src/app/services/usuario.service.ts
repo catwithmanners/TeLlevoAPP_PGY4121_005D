@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -30,8 +31,11 @@ export class UsuarioService {
       tipo_usuario: 'alumno'
     }
   ];
-  userLogeado: string;
+
+  
   public adminLog: boolean = false;
+  isAuthenticated= new BehaviorSubject(false);
+
   constructor() { }
   //MÉTODOS DEL CRUD:
   agregarUsuario(usuario): boolean{
@@ -67,7 +71,7 @@ export class UsuarioService {
   logearUser(correo, password){
     var usuarioLogin = this.usuarios.find(usu => usu.correo == correo && usu.password == password);
     if (usuarioLogin != undefined) {
-      //this.isAuthenticated.next(true);
+      this.isAuthenticated.next(true);
       return usuarioLogin;
     }
     //return this.usuarios.find(usu => usu.correo == correo && usu.password == password)

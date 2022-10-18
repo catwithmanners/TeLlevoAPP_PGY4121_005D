@@ -25,11 +25,8 @@
         <ion-list>
           <ion-item>
             <ion-label style="font-weight: bold;" position="floating">Sede:</ion-label>
-            
             <ion-select formControlName="sede" placeholder="Selecciona tu sede">
-              
               <ion-select-option *ngFor="let aux of sedes"value="{{aux.value}}" >{{aux.nombre}}</ion-select-option>
-              
             </ion-select>
           </ion-item>
         </ion-list>

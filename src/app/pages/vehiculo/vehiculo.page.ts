@@ -24,6 +24,12 @@ export class VehiculoPage implements OnInit {
     },
     {
       nombre: 'Amarillo'
+    },
+    {
+      nombre: 'Verde'
+    },
+    {
+      nombre: 'Gris'
     }
   ]
 
@@ -36,24 +42,20 @@ export class VehiculoPage implements OnInit {
     },
     {
       nombre: 'Furgoneta',
-    },
-    {
-      nombre: 'Bicicleta'
     }
   ]
   vehiculo = new FormGroup({
     patente: new FormControl('',[Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
     tipo_vehiculo: new FormControl('',[Validators.required]),
-    tipo_licencia: new FormControl('',[Validators.required]),
     cap_pasajeros: new FormControl('',[Validators.required, Validators.min(1), Validators.max(6)]),
     color: new FormControl('',[Validators.required]),
     marca: new FormControl('', [Validators.required,Validators.minLength(4)]),
     modelo: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    correo: new FormControl('')
+    rut: new FormControl('', [Validators.required])
   });
   usuarios: any[] = [];
   vehiculos: any[] = [];
-  user: string =this.usuarioService.userLogeado;
+  user: any;
   verificar_checkbox: boolean = false;
   constructor(private usuarioService: UsuarioService, 
               private router: Router, 
@@ -104,7 +106,7 @@ export class VehiculoPage implements OnInit {
     }
     var respuesta: boolean = this.vehiculoService.agregarVehiculo(this.vehiculo.value);
     if(respuesta){
-      this.vehiculo.controls.correo.setValue(this.user);
+      this.vehiculo.controls.rut.setValue(this.user);
       this.vehiculoService.agregarVehiculo(this.vehiculo.value);
       this.vehiculo.reset();
       this.presentAlert();
