@@ -5,12 +5,15 @@ ion-content{
     padding-bottom: 50px;
     align-items: center;
     text-align: center;
+    h1{
+        color: rgb(255, 255, 255);
+    }
     ion-card{
         --background: white;
         height: auto;
         width: 80vw;
         margin: auto;
-        margin-bottom: 50px;
+        margin-bottom: 10px;
         top: 5vh;
         align-items: center;
         text-align: center;

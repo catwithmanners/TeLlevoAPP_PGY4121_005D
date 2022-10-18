@@ -1,3 +1,18 @@
+ion-content{
+    --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
+    text-align: center;
+    p{
+        color:#ffffff;
+    }
+    ion-button{
+        color: black;
+        margin: 4px;
+        --background: #ffe95a;
+    }
+    .img_logo {
+        width: 30%;
+      }
+      /* MAPA */
 #map{
     width: 100%;
     height: 60%;
@@ -10,3 +25,20 @@
     overflow-y: auto;
     display: block;
 }
+
+}
+
+@media (max-width: 400px) {
+    .fondo {
+        ion-card {
+            width: 80vw;
+        }
+    }
+  }
+  @media (max-width: 720px) {
+    .fondo {
+        ion-card {
+            width: 80vw;
+        }
+    }
+  }
