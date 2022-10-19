@@ -1,7 +1,7 @@
-import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
+import { UsuarioService } from './services/usuario.service';
 
 
 @Component({
@@ -10,7 +10,8 @@ import { PickerController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private pickerCtrl: PickerController, private alertController: AlertController) {}
+
+  constructor(private pickerCtrl: PickerController, private alertController: AlertController, private usuarioService: UsuarioService) {}
   async presentAlert() {
     const alert = await this.alertController.create({
       message: '¡Medio de pago seleccionado!',
