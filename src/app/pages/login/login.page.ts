@@ -22,6 +22,7 @@ export class LoginPage implements OnInit  {
   });
   KEY_USUARIOS = 'usuarios';
   recordar_login: boolean = false;
+  usuarios: any[] = [];
 
   constructor(private toastController: ToastController, 
     private router: Router,
@@ -29,11 +30,16 @@ export class LoginPage implements OnInit  {
     private loadingCtrl: LoadingController,
     private storage: StorageService) { }
 
-  ngOnInit() {
-
+  async ngOnInit() {
+    await this.cargarDatos();
   }
 
   //MÉTODOS
+
+  async cargarDatos(){
+    this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
+  }
+
   async login(){
     //rescatamos las variables del formulario por separado:
     var correoValid = this.user.controls.correo.value;
@@ -49,18 +55,14 @@ export class LoginPage implements OnInit  {
           usuario: usuarioLogin
         }
       };
+      if (this.recordar_login != true) {
+        this.router.navigate(['/home'], navigationExtras);
+        this.user.reset();
+      }
       //redirigimos dependiente del tipo de usuario
       this.router.navigate(['/home'], navigationExtras);
-      this.user.reset();
-/*       if (this.recordar_login != true){
-        this.user='';
-        this.password='';
-        this.router.navigate(['/home']);
-      }else{
-        this.router.navigate(['/home'])
-      } */
     } else {
-      this.toastError();
+      await this.toastError();
     }
   }
   async showLoading() {

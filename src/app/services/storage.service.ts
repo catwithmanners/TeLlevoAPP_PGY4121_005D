@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { BehaviorSubject } from 'rxjs';
 
@@ -19,7 +20,8 @@ export class StorageService {
     }];
 
 
-  constructor(private storage: Storage) { 
+  constructor(private storage: Storage,
+              private router: Router) { 
     storage.create()
   }
 
@@ -38,6 +40,7 @@ export class StorageService {
     }
     if (key == 'vehiculos') {
       var patente = await this.getVehiculo(key, dato.patente);
+      var correo = await this.getCorreo(key, dato.correo);
       if (patente == undefined) {
         this.datos.push(dato);
         await this.storage.set(key, this.datos);
@@ -86,22 +89,48 @@ export class StorageService {
 
     await this.storage.set(key, this.datos);
   }
+  async cambiarPassword(key, correo, img){
+    this.datos = await this.storage.get(key) || [];
+
+  }
   //Método para logear
   async logearUser(key, correo, password){
     this.datos = await this.storage.get(key) || [];
     if (correo == 'admin@duocuc.cl') {
-      var usuarioLogin = this.admin.find(usu => usu.correo == correo && usu.password == password);
-      if (usuarioLogin != undefined) {
+      var userLogin = this.admin.find(usu => usu.correo == correo && usu.password == password);
+      if (userLogin != undefined) {
         this.isAuthenticated.next(true);
-        return usuarioLogin;
+        return userLogin;
       }
     }else{
-    var usuarioLogin = this.datos.find(usu => usu.correo == correo && usu.password == password);
-    if (usuarioLogin != undefined) {
+    var userLogin = this.datos.find(usu => usu.correo == correo && usu.password == password);
+    if (userLogin != undefined) {
       this.isAuthenticated.next(true);
-      return usuarioLogin;
+      return userLogin;
     }
     //return this.usuarios.find(usu => usu.correo == correo && usu.password == password)
   }}
+  getAuth(){
+    return this.isAuthenticated.value;
+  }
+  logout(){
+    this.isAuthenticated.next(false);
+    this.router.navigate(['/login']);
+  }
+  async verificarVehiculo(key1, key2, correo){
+    var datosUsuarios = await this.storage.get(key1);
+    var datosVehiculos = await this.storage.get(key2);
+    if (datosUsuarios != undefined && datosVehiculos != undefined) {
+      var dato1 = datosUsuarios.find(usu => usu.correo == correo);
+      var dato2 = datosVehiculos.find(veh => veh.correo == correo);
+      if (dato1.correo == dato2.correo) {
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
 
+  }
 }

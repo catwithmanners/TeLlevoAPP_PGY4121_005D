@@ -93,11 +93,13 @@ export class RegistroPage implements OnInit {
     //tipo de usuario al registrar
     tipo_usuario: new FormControl('alumno', [Validators.required]),
     licencia: new FormControl('', [Validators.required]),
+    img: new FormControl('default'),
   });
   //Variable para verificar la contraseña:
   verificar_pw: string;
   usuarios: any[] = [];
   KEY_USUARIOS = 'usuarios';
+
 
   verificar_checkbox: boolean = false;
   constructor(private usuarioService: UsuarioService, private router: Router,private alertController: AlertController, private storage: StorageService, private validaciones: ValidacionesService) { }

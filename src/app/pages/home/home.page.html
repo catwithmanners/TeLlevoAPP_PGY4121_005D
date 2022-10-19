@@ -15,14 +15,14 @@
   </div>
   <ion-card>
     <ion-card-content>
-      <p *ngIf="usuario.tipo_usuario == 'alumno'">Bienvenido de nuevo {{ user.nombre + ' ' + user.apellidos }} </p>
-      <p *ngIf="usuario.tipo_usuario == 'administrador'">Bienvenido de nuevo {{ user.nombre }} </p>
+      <p *ngIf="user.tipo_usuario == 'alumno'">Bienvenido de nuevo {{ user.nombre + ' ' + user.apellidos }} </p>
+      <p *ngIf="user.tipo_usuario == 'administrador'">Bienvenido de nuevo {{ user.nombre }} </p>
       <br>
-      <a routerLink='/perfil'><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
+      <a (click)="irPerfil()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       <br>
       <p id="ulike">¿Qué te gustaría hoy?</p>
       <br>
-      <ion-button slot="start" expand="block" routerLink="/carrera">Quiero realizar un viaje</ion-button>
+      <ion-button slot="start" expand="block" (click)="validarVehiculo()">Quiero realizar un viaje</ion-button>
       <br>
       <br>
       <ion-button slot="end" expand="block" routerLink="/viaje">Quiero tomar un viaje</ion-button>
