@@ -131,6 +131,10 @@ export class StorageService {
     }else{
       return false;
     }
-
+  }
+  /* RECUPERAR */
+  async validarCorreo(correo){
+    this.datos = await this.storage.get('usuarios') || [];
+    return this.datos.find(usu => usu.correo == correo);
   }
 }
