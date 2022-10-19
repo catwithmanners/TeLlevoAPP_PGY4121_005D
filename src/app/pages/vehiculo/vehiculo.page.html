@@ -37,14 +37,6 @@
           <ion-label position="floating">Capacidad de pasajeros:</ion-label>
           <ion-input clearInput type="number" placeholder="Ingresa la cantidad de pasajeros del vehiculo" formControlName="cap_pasajeros"></ion-input>
         </ion-item>
-        <ion-list>
-          <ion-item style="border-radius: 0px 0px 15px 15px;">
-            <ion-label style="font-weight: bold;" position="floating">Licencia:</ion-label>
-            <ion-select formControlName="tipo_licencia" placeholder="Selecciona el tipo de licencia que tienes">
-              <ion-select-option *ngFor="let aux3 of licencias">{{aux3.nombre}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
         <br>
         <ion-item-sliding>
           <ion-item style="border-radius: 60px 0px 0px 60px;">

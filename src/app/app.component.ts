@@ -10,7 +10,7 @@ import { UsuarioService } from './services/usuario.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  adminLog: boolean = this.usuarioService.adminLog;
+
   constructor(private pickerCtrl: PickerController, private alertController: AlertController, private usuarioService: UsuarioService) {}
   async presentAlert() {
     const alert = await this.alertController.create({

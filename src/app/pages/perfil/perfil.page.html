@@ -11,24 +11,33 @@
 <ion-content>
   <div class="fondo">
     <br>
-    <img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/>
-    <h2>Perfil de usuario</h2>
+    <h2>PeERFIL DE USUARIO</h2>
   </div>
-  <ion-card *ngFor="let usuario of usuarios">
+  <ion-card *ngIf="user.correo == usuario.correo">
     <ion-card-content>
       <ion-list>
-        <h1>Foto de perfil</h1>
-        <h3>información del {{ usuario.tipo_usuario }}</h3>
-        <p>Rut: {{usuario.rut}}</p>
-        <p>Nombre: {{usuario.nombre}}</p>
-        <p>Apellidos: {{usuario.apellidos}}</p>
-        <p>Fecha de nacimiento: {{usuario.fecha_nac}}</p>
-        <p>Sede: {{usuario.sede}}</p>
-        <p>Carrera: {{usuario.carrera}}</p>
-        <p>Correo: {{usuario.correo}}</p>
-        <ion-button color="warning" (click)="obtenerUsuario(usuario.correo)">Buscar</ion-button>
-        <ion-button color="danger" (click)="eliminar(usuario.correo)">Eliminar</ion-button>
+        <img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/>
+        <h2>CODIGO QR DEL ALUMNO</h2>
       </ion-list>
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <h3>INFORMACIÓN DEL ALUMNO</h3>
+            <p>Rut: {{usuario.rut}}</p>
+            <p>Nombre: {{usuario.nombre}}</p>
+            <p>Apellidos: {{usuario.apellidos}}</p>
+            <p>Fecha de nacimiento: {{usuario.fecha_nac}}</p>
+            <p>Sede: {{usuario.sede}}</p>
+            <p>Carrera: {{usuario.carrera}}</p>
+            <p>Correo: {{usuario.correo}}</p>
+            <p>Licencia: {{usuario.licencia}}</p>
+          </ion-list>
+          <ion-list *ngIf="user.correo == vehiculo.correo">
+            <h3>INFORMACIÓN DEL VEHICULO</h3>
+            <p>Patente: {{ vehiculo.patente }}</p>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
     </ion-card-content>
   </ion-card>
 </ion-content>

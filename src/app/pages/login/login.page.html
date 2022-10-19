@@ -17,13 +17,16 @@
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input formControlName="password" placeholder="Ingrese contraseña" type="password"></ion-input>
             </ion-item>
+            <ion-item lines="none">
+              <ion-checkbox color="warning" slot="start" [(ngModel)]="recordar_login" [ngModelOptions]="{standalone: 'true'}"></ion-checkbox>
+              <ion-label style="font-weight: bold; font-size: small;">Recordar datos</ion-label>
+            </ion-item>
+            <br>
+            <ion-button slot="start" type="submit" expand="block">Iniciar sesión</ion-button>
           </form>
-        <ion-item lines="none">
-          <ion-checkbox color="warning" slot="start" [(ngModel)]="recordar_login" [ngModelOptions]="{standalone: 'true'}"></ion-checkbox>
-          <ion-label style="font-weight: bold; font-size: small;">Recordar datos</ion-label>
-        </ion-item>
+
         <br>
-        <ion-button slot="start" expand="block" (click)="login()">Iniciar sesión</ion-button>
+
         <br>
         <div id="cardFooter">
           <ion-card-subtitle>¿Eres usuario nuevo?</ion-card-subtitle>
