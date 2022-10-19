@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">
+      <a routerLink='/login'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-label position="stacked">Correo</ion-label>
+      <ion-input placeholder="Ingrese correo" type="email" [(ngModel)]="correo"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="recuperar()" [disabled]="!correo.includes('@duocuc.cl')">Recuperar</ion-button>
+  </ion-card>
+</ion-content>
