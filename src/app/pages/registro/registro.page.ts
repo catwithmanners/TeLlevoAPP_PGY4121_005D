@@ -99,6 +99,7 @@ export class RegistroPage implements OnInit {
   verificar_pw: string;
   usuarios: any[] = [];
   KEY_USUARIOS = 'usuarios';
+  mensaje: string;
 
 
   verificar_checkbox: boolean = false;
@@ -168,12 +169,27 @@ export class RegistroPage implements OnInit {
 
     await alert.present();
   }
+  async presentAlert7() {
+    const alert = await this.alertController.create({
+      header: '¡Atención!',
+      message: this.mensaje,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 
   async cargarDatos(){
     this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
   }
 
   async registrar(){
+    //Validacion de ESPACIOS BLANCOS
+    var respuesta2: boolean = this.validarEspacios();
+    if (!respuesta2) {
+      this.presentAlert7();
+      return;
+    }
     //Validación del RUT
     if (!this.validaciones.validarRut(this.usuario.controls.rut.value)) {
       this.presentAlert5();
@@ -205,6 +221,46 @@ export class RegistroPage implements OnInit {
       this.presentAlert2();
     }
 
+  }
+
+  validarEspacios(){
+    var nombre1 = this.usuario.controls.nombre.value.trim();
+    this.usuario.controls.nombre.setValue(nombre1);
+    var apellidos1 = this.usuario.controls.apellidos.value.trim();
+    this.usuario.controls.apellidos.setValue(apellidos1);
+    var password1 = this.usuario.controls.password.value.trim();
+    this.usuario.controls.password.setValue(password1);
+    var respuesta: boolean = false;
+    if (nombre1 == '') {
+      this.mensaje = 'El nombre no tiene caracteres válidos';
+      return respuesta;
+    }
+    if (nombre1.length < 3) {
+      this.mensaje = 'El nombre es muy corto, los espacios no son caracteres validos';
+      return respuesta; 
+    }
+    if (apellidos1 == '') {
+      this.mensaje = 'El apellido no tiene caracteres válidos';
+      return respuesta;
+    }
+    if (apellidos1.length < 3) {
+      this.mensaje = 'El apellido es muy corto, los espacios no son caracteres validos';
+      return respuesta;
+    }
+    if (password1 == '') {
+      this.mensaje = 'La contraseña no tiene caracteres válidos';
+      return respuesta;
+    }
+    if (password1.length < 6) {
+      this.mensaje = 'La contraseña es muy corta, no puede tener espacios al inicio o al final';
+      return respuesta;
+    }
+    if (password1.length > 18) {
+      this.mensaje = 'La contraseña es muy larga';
+      return respuesta;
+    }
+    respuesta = true;
+    return respuesta;
   }
   volver() {
     this.modal.dismiss(null, 'volver');
