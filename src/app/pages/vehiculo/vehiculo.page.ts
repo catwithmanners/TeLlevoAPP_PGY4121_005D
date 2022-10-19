@@ -56,7 +56,10 @@ export class VehiculoPage implements OnInit {
   });
   usuarios: any[] = [];
   vehiculos: any[] = [];
+  //Variable para verificar que el usuario posee una licencia de conducir, falta cargar los datos
+  usuario: any[] = [];
   user: any;
+  mensaje: string;
   KEY_USUARIOS = 'usuarios';
   KEY_VEHICULOS = 'vehiculos';
   verificar_checkbox: boolean = false;
@@ -69,9 +72,7 @@ export class VehiculoPage implements OnInit {
               }
 
   async ngOnInit() {
-    await this.cargarDatosUsuarios();
-    await this.cargarDatosVehiculos();
-
+    await this.cargarDatos();
     console.log(this.user);
   }
   async presentAlert() {
@@ -98,6 +99,7 @@ export class VehiculoPage implements OnInit {
 
     await alert.present();
   }
+
   async presentAlert4() {
     const alert = await this.alertController.create({
       header: '¡Atención!',
@@ -106,14 +108,27 @@ export class VehiculoPage implements OnInit {
     });
     await alert.present();
   }
-  async cargarDatosUsuarios(){
-    this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
+  async presentAlert3() {
+    const alert = await this.alertController.create({
+      header: '¡Atención!',
+      message: this.mensaje,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
-  async cargarDatosVehiculos(){
+
+  async cargarDatos(){
+    this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
     this.vehiculos = await this.storage.getDatos(this.KEY_VEHICULOS);
   }
 
   async registrarVeh(){
+    var respuesta2: boolean = this.validarEspacios();
+    if (!respuesta2) {
+      this.presentAlert3();
+      return;
+    }
     if(this.verificar_checkbox != true){
       this.presentAlert4();
       return;
@@ -127,6 +142,41 @@ export class VehiculoPage implements OnInit {
     }else{
       this.presentAlert2();
     }
+  }
+  validarEspacios(){
+    var patente1 = this.vehiculo.controls.patente.value.trim();
+    this.vehiculo.controls.patente.setValue(patente1);
+    var marca1 = this.vehiculo.controls.marca.value.trim();
+    this.vehiculo.controls.marca.setValue(marca1);
+    var modelo1 = this.vehiculo.controls.modelo.value.trim();
+    this.vehiculo.controls.modelo.setValue(modelo1);
+    var respuesta: boolean = false;
+    if (patente1 == '') {
+      this.mensaje = 'La patente no tiene caracteres válidos';
+      return respuesta;
+    }
+    if (patente1.length != 6) {
+      this.mensaje = 'La patente debe contener 6 caracteres, no puede tener espacios al inicio o al final.';
+      return respuesta; 
+    }
+    if (marca1 == '') {
+      this.mensaje = 'La marca no tiene caracteres válidos';
+      return respuesta;
+    }
+    if (marca1.length < 4) {
+      this.mensaje = 'La marca es muy corta, no puede tener espacios al inicio o al final.';
+      return respuesta;
+    }
+    if (modelo1 == '') {
+      this.mensaje = 'El modelo no tiene caracteres válidos';
+      return respuesta;
+    }
+    if (modelo1.length < 4) {
+      this.mensaje = 'El modelo es muy corta, no puede tener espacios al inicio o al final.';
+      return respuesta;
+    }
+    respuesta = true;
+    return respuesta;
   }
   volver() {
     this.modal.dismiss(null, 'volver');
