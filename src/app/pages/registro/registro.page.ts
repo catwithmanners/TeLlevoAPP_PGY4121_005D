@@ -168,12 +168,27 @@ export class RegistroPage implements OnInit {
 
     await alert.present();
   }
+  async presentAlert7() {
+    const alert = await this.alertController.create({
+      header: '¡Atención!',
+      message: '¡Debes ingresar algo en los campos, no se permiten solo espacios!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
 
   async cargarDatos(){
     this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
   }
 
   async registrar(){
+    //Validacion de ESPACIOS BLANCOS
+    var respuesta2: boolean = this.validarEspacios();
+    if (!respuesta2) {
+      this.presentAlert7();
+      return;
+    }
     //Validación del RUT
     if (!this.validaciones.validarRut(this.usuario.controls.rut.value)) {
       this.presentAlert5();
@@ -205,6 +220,32 @@ export class RegistroPage implements OnInit {
       this.presentAlert2();
     }
 
+  }
+
+  validarEspacios(){
+    var nombre1 = this.usuario.controls.nombre.value.trim();
+    this.usuario.controls.nombre.setValue(nombre1);
+    var apellidos1 = this.usuario.controls.apellidos.value.trim();
+    this.usuario.controls.apellidos.setValue(apellidos1);
+    var correo1 = this.usuario.controls.correo.value.trim();
+    this.usuario.controls.correo.setValue(correo1);
+    var password1 = this.usuario.controls.password.value.trim();
+    this.usuario.controls.password.setValue(password1);
+    var respuesta: boolean = false;
+    if (nombre1 == '') {
+      return respuesta;
+    }
+    if (apellidos1 == '') {
+      return respuesta;
+    }
+    if (correo1 == '@duocuc.cl') {
+      return respuesta;
+    }
+    if (password1 == '') {
+      return respuesta;
+    }
+    respuesta = true;
+    return respuesta;
   }
   volver() {
     this.modal.dismiss(null, 'volver');
