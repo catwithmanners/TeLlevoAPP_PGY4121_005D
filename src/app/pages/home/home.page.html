@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title slot="start">
-      <a routerLink='/login'><ion-icon name="log-out-outline"></ion-icon></a>
+      <a (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></a>
     </ion-title>
     <ion-buttons slot="end">
       <ion-menu-button menu="main"></ion-menu-button>
@@ -18,7 +18,8 @@
       <p *ngIf="user.tipo_usuario == 'alumno'">Bienvenido de nuevo {{ user.nombre + ' ' + user.apellidos }} </p>
       <p *ngIf="user.tipo_usuario == 'administrador'">Bienvenido de nuevo {{ user.nombre }} </p>
       <br>
-      <a (click)="irPerfil()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
+      <a *ngIf="user.tipo_usuario == 'alumno'" (click)="irPerfil()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
+      <a *ngIf="user.tipo_usuario == 'administrador'" (click)="irAdmin()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       <br>
       <p id="ulike">¿Qué te gustaría hoy?</p>
       <br>
@@ -26,7 +27,7 @@
       <br>
       <br>
       <ion-button slot="end" expand="block" routerLink="/viaje">Quiero tomar un viaje</ion-button>
-      <ion-button slot="end" routerLink="/login">Cerrar sesión</ion-button>
+      <ion-button slot="end" (click)="logout()">Cerrar sesión</ion-button>
     </ion-card-content>
     <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
   </ion-card>
