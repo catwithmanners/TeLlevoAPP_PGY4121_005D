@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { AlertController, IonModal } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'app-perfil',
@@ -13,9 +14,13 @@ import { StorageService } from 'src/app/services/storage.service';
 
 export class PerfilPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
-
+  
   //Variable para verificar la contraseña:
   verificar_pw: string;
+  //VARIABLES PARA CREAR NUESTRO CÓDIGO QR:
+  elementType = 'canvas';
+  value = '';
+
 
   user: any;
   usuario: any[] = [];
@@ -82,6 +87,12 @@ export class PerfilPage implements OnInit {
   }
   cambiarPassword(){
     
+  }
+  generarQR(){
+    if (this.value == '') {
+      this.value = this.user.correo;
+    }
+
   }
 
   volver() {
