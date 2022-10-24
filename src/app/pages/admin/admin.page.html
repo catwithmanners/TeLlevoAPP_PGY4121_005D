@@ -50,6 +50,14 @@
               </ion-select>
             </ion-item>
           </ion-list>
+          <ion-list>
+            <ion-item>
+              <ion-label style="font-weight: bold;" position="floating">Licencia de conducir:</ion-label>
+              <ion-select formControlName="licencia" placeholder="Selecciona el tipo de licencia que posees">
+                <ion-select-option *ngFor="let aux3 of licencias">{{aux3.nombre}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
           <ion-item>
             <ion-label position="floating">Correo</ion-label>
             <ion-input clearInput type="text" placeholder="Ingresa tu correo institucional" formControlName="correo"></ion-input>
