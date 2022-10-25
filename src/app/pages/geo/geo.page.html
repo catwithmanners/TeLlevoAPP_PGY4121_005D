@@ -6,29 +6,41 @@
 
 <ion-content>
   <h1>GEO TESTING - pasajero</h1>
-  <p>Bienvenido sr/a Pasajero!</p>
-  <form [formGroup]="viajar" (ngSubmit)="iniciarViaje()">
-    <ion-button expand="small">Agendar horario de búsqueda</ion-button>
-
-    <ion-item>
-      <ion-label position="floating">Ingresa punto de partida</ion-label> <!-- DIRECCIÓN ORIGEN -->
-      <ion-input placeholder="Ingrese dirección" id="origen"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">¿A dónde vas?</ion-label> <!-- DIRECCIÓN SALIDA -->
-      <ion-input placeholder="Ingrese dirección" id="autocomplete"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Total viaje</ion-label> <!-- VALOR DEL VIAJE -->
-      <ion-input placeholder="Ingrese precio, ej: $5.000"></ion-input>
-    </ion-item>
-    <ion-button expand="block" type="submit">BUSCAR CONDUCTORES</ion-button>
-  </form>
+  <p>Bienvenido {{ user.nombre }}</p>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="viajar" (ngSubmit)="calcularRuta()">
+        <!--<ion-button expand="small">Agendar horario de búsqueda</ion-button>-->
+        <!--<ion-item>
+          <ion-checkbox slot="start" (click)="cambiarInicial()" [(ngModel)]="verificar_checkbox" [ngModelOptions]="{standalone: 'true'}"></ion-checkbox>
+          <ion-label class="ion-text-wrap">Punto inicial en DUOC UC</ion-label>
+        </ion-item>-->
+        <ion-item >
+          <ion-label>Punto inicial: Duoc UC Puente Alto</ion-label> <!-- DIRECCIÓN ORIGEN -->
+        </ion-item>
+        <ion-item>
+          <ion-label slot="start" >¿A dónde vas?</ion-label> <!-- DIRECCIÓN SALIDA -->
+          <br>
+          <input slot="end" placeholder="Ingrese dirección" id="autocomplete" formControlName="destino">
+        </ion-item>
+        <ion-item>
+          <ion-label slot="start">Total viaje</ion-label> <!-- VALOR DEL VIAJE -->
+          <ion-input placeholder="Ingrese un valor, minimo 1000" formControlName="valViaje">$</ion-input>
+        </ion-item>
+        <ion-button expand="block" type="submit"[disabled]="!viajar.valid">CALCULAR RUTA</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  <div id="map"></div>
+  <ion-card *ngIf="verificar_checkbox == true">
+    <ion-card-content>
+      <ion-button (click)="crearViaje()">CREAR VIAJE</ion-button>
+      <ion-button>CANCELAR</ion-button>
+    </ion-card-content>
+  </ion-card>
   <br>
   <h1>TESTING DIRECCIONES GUARDADAS</h1>
   <br>
-
-  <div id="map"></div>
   <div id="indicaciones"></div>
   <img src="assets/icon/img/pnglogoCond.png" alt="img_logo" class="img_logo"/>
 

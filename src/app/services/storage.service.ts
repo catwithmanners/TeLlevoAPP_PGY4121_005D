@@ -47,6 +47,14 @@ export class StorageService {
         return true;
       }
     }
+    if (key == 'viajes') {
+      var correo = await this.getCorreo(key, dato.correo);
+      if (correo == undefined) {
+        this.datos.push(dato);
+        await this.storage.set(key, this.datos);
+        return true;
+      }
+    }
     return false;
   }
   //Métodos para obtener datos
