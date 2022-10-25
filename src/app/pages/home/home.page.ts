@@ -42,6 +42,7 @@ export class HomePage implements OnInit{
     };
     this.router.navigate(['/perfil'], navigationExtras3);
   }
+
   irAdmin(){
     var navigationExtras3: NavigationExtras = {
       state: {

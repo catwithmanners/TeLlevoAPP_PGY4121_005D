@@ -18,7 +18,7 @@
       <p *ngIf="user.tipo_usuario == 'alumno'">Bienvenido de nuevo {{ user.nombre + ' ' + user.apellidos }} </p>
       <p *ngIf="user.tipo_usuario == 'administrador'">Bienvenido de nuevo {{ user.nombre }} </p>
       <br>
-      <a *ngIf="user.tipo_usuario == 'alumno'" (click)="irPerfil()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
+      <a *ngIf="user.tipo_usuario == 'alumno'"(click)="irPerfil()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       <a *ngIf="user.tipo_usuario == 'administrador'" (click)="irAdmin()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       <br>
       <p id="ulike">¿Qué te gustaría hoy?</p>
