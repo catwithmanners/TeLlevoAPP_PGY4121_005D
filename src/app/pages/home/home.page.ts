@@ -29,10 +29,18 @@ export class HomePage implements OnInit{
   async validarVehiculo(){
     var respuesta: boolean = await this.storage.verificarVehiculo(this.KEY_USUARIOS,this.KEY_VEHICULOS,this.user.correo);
     if (respuesta) {
-      this.router.navigate(['/carrera'])
+      this.goToGeo();
     }else{
       this.presentAlert();
     }
+  }
+  goToGeo(){
+    var navigationExtras4: NavigationExtras = {
+      state: {
+        usuario4: this.user
+      }
+    };
+    this.router.navigate(['/geo'], navigationExtras4)
   }
   irPerfil(){
     var navigationExtras3: NavigationExtras = {

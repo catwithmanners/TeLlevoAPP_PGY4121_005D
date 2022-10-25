@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NavigationExtras,Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 /* 1- VARIABLE GOOGLE PARA USAR LA API */
 declare var google;
@@ -13,8 +15,14 @@ export class GeoPage implements OnInit {
 
   viajar = new FormGroup({
     origen: new FormControl(''),
-    autocomplete: new FormControl(''),
-    valViaje: new FormControl(''),
+    destino: new FormControl(''),
+    valViaje: new FormControl('', [Validators.required, Validators.min(1000)]),
+    correo: new FormControl(''),
+    pasajeros: new FormGroup({
+      rut: new FormControl(''),
+      nombre: new FormControl(''),
+      correo: new FormControl('')
+    })
   });
   //2. VAMOS A CREAR LAS VARIABLES NECESARIAS PARA EL MAPA:
   mapa: any;
@@ -24,22 +32,35 @@ export class GeoPage implements OnInit {
   directionsService = new google.maps.DirectionsService();
   directionsRenderer = new google.maps.DirectionsRenderer();
 
+  KEY_VIAJES = 'viajes';
+  user: any;
 
-  ubicacionDuoc = { lat: 0, lng: 0 };
-  ubicacionDestino = { lat: 0, lng: 0 };
+  usuario: any;
+  vehiculo: any;
+
+  ubicacionInicial: any;
+  ubicacionDuoc =  { lat: 0, lng: 0};
+  ubicacionDestino: any;
   ubicacionMcDonald = { lat: -33.600379048832046, lng: -70.57719180496413 };
 
-  constructor() { }
+  verificar_checkbox: boolean = false;
+  constructor(private router: Router, private storage: StorageService) { 
+    this.user = this.router.getCurrentNavigation().extras.state.usuario4;
+  }
 
   async ngOnInit() {
+    console.log(this.ubicacionDuoc); // Esto muestra los valores por defecto (lat: 0 y lng: 0)
     var geo = await this.getUbicacionActual();
     this.ubicacionDuoc.lat = geo.coords.latitude;
     this.ubicacionDuoc.lng = geo.coords.longitude;
-
+    console.log(this.ubicacionDuoc); // Esto muestra los valores cambiados por la ubicaciòn actual
     this.dibujarMapa();
     //this.agregarMarcador();
-    this.ubiInicial(this.mapa, this.marker);
-    this.ubiDestino(this.mapa, this.marker);
+    //await this.ubiInicial(this.mapa, this.marker);
+    await this.ubiDestino(this.mapa, this.marker);
+    console.log(this.ubicacionDuoc); // Esto muestra los valores cambiados por el método ubiInicial
+    
+    console.log(this.user);
   }
 
   //3. VAMOS A CREAR LOS MÉTODOS NECESARIOS PARA EL MAPA:
@@ -68,6 +89,14 @@ export class GeoPage implements OnInit {
     this.marker.setPosition(this.ubicacionMcDonald);
     this.marker.setMap(this.mapa);
   }
+  cambiarInicial(){
+    if (this.verificar_checkbox) {
+      this.viajar.controls.origen.disable();
+    }
+    if (!this.verificar_checkbox) {
+      this.viajar.controls.origen.enable();
+    }
+  }
 
   //método para que el input me muestre sugerencias de busqueda de dirección:
   /* Dirección 1 - place */
@@ -75,22 +104,23 @@ export class GeoPage implements OnInit {
     var autocomplete: HTMLElement = document.getElementById('origen');
     const search = new google.maps.places.Autocomplete(autocomplete);
     this.search = search;
+    
 
     search.addListener('place_changed', function(){
       var place = search.getPlace().geometry.location; /* El formato de "location" es un JSON */
 
-      console.log(place)
+      console.log(place);
       console.log('Origen: ' + typeof place);
 
       var origen = JSON.stringify(place); /* Obtengo la dirección y la transformo de formato */
-      var ubicacion = JSON.parse(origen) /* Se vuelve a transformar */
+      var ubicacion = JSON.parse(origen); /* Se vuelve a transformar */
 
 
       mapaLocal.setCenter(place);
       mapaLocal.setZoom(15);
       marcadorLocal.setPosition(place);
-      this.ubicacionDuoc = ubicacion;
-      console.log(this.ubicacionDuoc)
+      this.ubicacionInicial = ubicacion;
+      console.log('Ubi Inicial: '+this.ubicacionInicial);
     });
   }
 
@@ -122,10 +152,18 @@ export class GeoPage implements OnInit {
 
   //MÉTODO PARA ENCONTRAR LA RUTA ENTRE 2 DIRECCIONES:
   calcularRuta(){
-    var place = this.search.getPlace().geometry.location; /* dirección 1 */
-    var places = this.search.getPlace().geometry.location; /* dirección 2 */
+    var place = this.ubicacionDuoc;//this.search.getPlace().geometry.location; /* dirección 1 */
+    /*if (this.verificar_checkbox) {
+      place = this.search.getPlace().geometry.location;
+    }*/
+    console.log(place);
+    var places = this.search2.getPlace().geometry.location; /* dirección 2 */
+    if (place == places) {
+      console.log("ERROR PORQUE SON IGUALES")
+      return;
+    }
     var request = {
-      origen: place,
+      origin: place,
       destination: places,
       travelMode: google.maps.TravelMode.DRIVING /* se traza el viaje */
     };
@@ -136,8 +174,23 @@ export class GeoPage implements OnInit {
 
     this.marker.setPosition(null);
 
-    this.ubicacionDuoc = JSON.parse(JSON.stringify(place))
-    /* this.ubicacionDestino= JSON.parse(JSON.stringify(places)) */
+    this.ubicacionInicial = JSON.parse(JSON.stringify(place));
+    this.viajar.controls.origen.setValue(this.ubicacionInicial);
+
+    this.ubicacionDestino= JSON.parse(JSON.stringify(places));
+    this.viajar.controls.destino.setValue(this.ubicacionDestino);
+    this.viajar.controls.destino.disable();
+    this.viajar.controls.valViaje.disable();
+
+    this.viajar.controls.correo.setValue(this.user.correo);
+
+    //this.verificar_checkbox = true;
+  }
+  async crearViaje(){
+    var respuesta: boolean = await this.storage.agregar(this.KEY_VIAJES,this.viajar.value);
+    if (respuesta) {
+      this.viajar.reset()
+    }
   }
 
   //mi ubicacion actual:
