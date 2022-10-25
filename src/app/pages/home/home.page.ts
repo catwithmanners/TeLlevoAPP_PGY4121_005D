@@ -42,6 +42,14 @@ export class HomePage implements OnInit{
     };
     this.router.navigate(['/perfil'], navigationExtras3);
   }
+  irAdmin(){
+    var navigationExtras3: NavigationExtras = {
+      state: {
+        usuario3: this.user
+      }
+    };
+    this.router.navigate(['/admin'], navigationExtras3);
+  }
 
   irAdmin(){
     var navigationExtras3: NavigationExtras = {
@@ -74,6 +82,9 @@ export class HomePage implements OnInit{
 
     await alert.present();
 
+  }
+  async logout(){
+    await this.storage.logout();
   }
 
 }

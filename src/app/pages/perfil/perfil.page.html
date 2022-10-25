@@ -10,15 +10,15 @@
 </ion-header>
 <ion-content>
   <div class="fondo">
+    <ion-card color="light">
+      <ion-card-content>
+        <h1>PERFIL DE USUARIO</h1>
+      </ion-card-content>
+    </ion-card>
     <br>
-    <h2>PeERFIL DE USUARIO</h2>
   </div>
-  <ion-card *ngIf="user.correo == usuario.correo">
+  <ion-card *ngIf="user.correo == usuario.correo" color="warning">
     <ion-card-content>
-      <ion-list>
-        <img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/>
-        <h2>CODIGO QR DEL ALUMNO</h2>
-      </ion-list>
       <ion-card>
         <ion-card-content>
           <ion-list>
@@ -32,12 +32,33 @@
             <p>Correo: {{usuario.correo}}</p>
             <p>Licencia: {{usuario.licencia}}</p>
           </ion-list>
+        </ion-card-content>
+      </ion-card>
+      <br>
+      <br>
+      <ion-card>
+          <ion-card-content>
           <ion-list *ngIf="user.correo == vehiculo.correo">
             <h3>INFORMACIÓN DEL VEHICULO</h3>
             <p>Patente: {{ vehiculo.patente }}</p>
+            <p>Modelo: {{ vehiculo.modelo }}</p>
+            <p>Marca: {{ vehiculo.marca }}</p>
+            <p>Tipo de vehiculo: {{ vehiculo.tipo_vehiculo }}</p>
+            <p>Color: {{ vehiculo.color }}</p>
+            <p>Capacidad de pasajeros: {{ vehiculo.cap_pasajeros }}</p>
           </ion-list>
         </ion-card-content>
       </ion-card>
+      <ion-list>
+        <ion-card *ngIf="value != ''" color="light">
+          <ion-card-content>
+            <h2>CODIGO QR DEL ALUMNO</h2>
+            <ngx-qrcode [elementType]="elementType" [value]="value"></ngx-qrcode>
+          </ion-card-content>
+        </ion-card>
+        <br>
+        <ion-button color="success" style="color: black;" (click)="generarQR()">GENERAR QR</ion-button>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
