@@ -43,6 +43,15 @@ export class HomePage implements OnInit{
     this.router.navigate(['/perfil'], navigationExtras3);
   }
 
+  irAdmin(){
+    var navigationExtras3: NavigationExtras = {
+      state: {
+        usuario3: this.user
+      }
+    };
+    this.router.navigate(['/admin'], navigationExtras3);
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: '¡Atención!',

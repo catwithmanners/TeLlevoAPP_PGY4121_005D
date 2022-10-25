@@ -7,24 +7,27 @@
 <ion-content>
   <h1>GEO TESTING - pasajero</h1>
   <p>Bienvenido sr/a Pasajero!</p>
-  <ion-button expand="small">Agendar horario de búsqueda</ion-button>
-  <ion-item>
-    <ion-label position="floating">Ingresa tu dirección actual</ion-label>
-    <ion-input placeholder="Ingrese dirección"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="floating">¿A dónde vas?</ion-label>
-    <ion-input placeholder="Ingrese dirección"></ion-input>
-  </ion-item>
-  <ion-button expand="block">BUSCAR CONDUCTORES</ion-button>
-  <br>
-  <h1>GEO TESTING - conductor</h1>
-  <p>Bienvenido sr/a Conductor!</p>
-  <ion-button expand="small">Configurar horario de actividad</ion-button>
-  <ion-button expand="block">BUSCAR PASAJEROS</ion-button>
+  <form [formGroup]="viajar" (ngSubmit)="iniciarViaje()">
+    <ion-button expand="small">Agendar horario de búsqueda</ion-button>
+
+    <ion-item>
+      <ion-label position="floating">Ingresa punto de partida</ion-label> <!-- DIRECCIÓN ORIGEN -->
+      <ion-input placeholder="Ingrese dirección" id="origen"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">¿A dónde vas?</ion-label> <!-- DIRECCIÓN SALIDA -->
+      <ion-input placeholder="Ingrese dirección" id="autocomplete"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Total viaje</ion-label> <!-- VALOR DEL VIAJE -->
+      <ion-input placeholder="Ingrese precio, ej: $5.000"></ion-input>
+    </ion-item>
+    <ion-button expand="block" type="submit">BUSCAR CONDUCTORES</ion-button>
+  </form>
   <br>
   <h1>TESTING DIRECCIONES GUARDADAS</h1>
   <br>
+
   <div id="map"></div>
   <div id="indicaciones"></div>
   <img src="assets/icon/img/pnglogoCond.png" alt="img_logo" class="img_logo"/>
