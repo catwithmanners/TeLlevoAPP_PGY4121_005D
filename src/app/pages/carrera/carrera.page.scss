@@ -6,23 +6,35 @@ ion-content{
     p{
         color:#ffffff;
     }
+    #map{
+        width: 100%;
+        height: 80%;
+        display: block;
+    }
+  
     ion-button{
         color: black;
         margin: 4px;
-        --background: #ffe95a;
+        --background: #fdbb02;
     }
     ion-card{
         border-style: none ;
-        --ion-background-color: #fdbb02;
+        --ion-background-color: white;
+        --color: black;
         ion-card-content{
-            .img_map{
-                width: 90%;
-            }
+            #indicaciones{
+                width: 100%;
+                height: 40%;
+                padding: 10px;
+                overflow-y: auto;
+                display: block;
+                color: black!important;
+            }  
         }
     }
     .img_logo {
         width: 30%;
-      }
+    }
     /* CONFIGURACIÓN PARA CLIENTES */
     ion-item{
         --ion-background-color: ;

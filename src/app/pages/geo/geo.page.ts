@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras,Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 
 /* 1- VARIABLE GOOGLE PARA USAR LA API */
@@ -18,6 +19,7 @@ export class GeoPage implements OnInit {
     destino: new FormControl(''),
     valViaje: new FormControl('', [Validators.required, Validators.min(1000)]),
     correo: new FormControl(''),
+    estado: new FormControl(false),
     pasajeros: new FormGroup({
       rut: new FormControl(''),
       nombre: new FormControl(''),
@@ -44,7 +46,9 @@ export class GeoPage implements OnInit {
   ubicacionMcDonald = { lat: -33.600379048832046, lng: -70.57719180496413 };
 
   verificar_checkbox: boolean = false;
-  constructor(private router: Router, private storage: StorageService) { 
+  constructor(private router: Router, 
+              private storage: StorageService,
+              private alertController: AlertController) { 
     this.user = this.router.getCurrentNavigation().extras.state.usuario4;
   }
 
@@ -139,8 +143,8 @@ export class GeoPage implements OnInit {
       var formato = JSON.stringify(places); /* Obtengo la dirección y la transformo de formato */
       
       console.log("Formato tipo: ", formato);
-
-      this.ubicacionDestino = formato;
+      var formato2 = JSON.parse(formato);
+      this.ubicacionDestino = formato2;
       console.log("Destino: ", this.ubicacionDestino);
 
       mapaLocal.setCenter(places);
@@ -158,10 +162,6 @@ export class GeoPage implements OnInit {
     }*/
     console.log(place);
     var places = this.search2.getPlace().geometry.location; /* dirección 2 */
-    if (place == places) {
-      console.log("ERROR PORQUE SON IGUALES")
-      return;
-    }
     var request = {
       origin: place,
       destination: places,
@@ -174,25 +174,63 @@ export class GeoPage implements OnInit {
 
     this.marker.setPosition(null);
 
-    this.ubicacionInicial = JSON.parse(JSON.stringify(place));
+  }
+  async crearViaje(){
+    var places = this.search2.getPlace().geometry.location;
+    this.ubicacionInicial = this.ubicacionDuoc;
     this.viajar.controls.origen.setValue(this.ubicacionInicial);
-
-    this.ubicacionDestino= JSON.parse(JSON.stringify(places));
+    this.ubicacionDestino = JSON.parse(JSON.stringify(places));
     this.viajar.controls.destino.setValue(this.ubicacionDestino);
-    this.viajar.controls.destino.disable();
-    this.viajar.controls.valViaje.disable();
+    this.viajar.controls.estado.setValue(true);
+    console.log(this.ubicacionDestino);
+    //this.viajar.controls.destino.disable();
+    //this.viajar.controls.valViaje.disable();
 
     this.viajar.controls.correo.setValue(this.user.correo);
 
     //this.verificar_checkbox = true;
-  }
-  async crearViaje(){
     var respuesta: boolean = await this.storage.agregar(this.KEY_VIAJES,this.viajar.value);
     if (respuesta) {
       this.viajar.reset()
+      this.presentAlert();
+      return;
     }
+    this.presentAlert2();
   }
 
+  cancelarViaje(){
+    this.viajar.reset()
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '¡Atención!',
+      message: '¡El viaje ha sido creado correctamente!',
+      buttons: [{
+        text: 'Ok',
+        handler: () => {
+          this.router.navigate(['/home']);
+        } 
+      }],
+
+    });
+
+    await alert.present();
+
+  }
+  async presentAlert2() {
+    const alert = await this.alertController.create({
+      header: '¡Error!',
+      message: '¡El viaje no se ha podido crear!',
+      buttons: [{
+        text: 'Ok'
+      }],
+
+    });
+
+    await alert.present();
+
+  }
   //mi ubicacion actual:
   async getUbicacionActual(): Promise<any>{
     return await new Promise(
