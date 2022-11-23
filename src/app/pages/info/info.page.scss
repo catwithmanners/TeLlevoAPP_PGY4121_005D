@@ -1,0 +1,46 @@
+@use '../../../global.scss';
+
+ion-content{
+    --background: linear-gradient(#c0c0c0 ,#939393, #373737);
+    text-align: center;
+    h1{
+        color: #ffffff;
+    }
+    .card{
+        background-color: #3a3a3a;
+
+    }
+    .cont{
+        background-color: #7e7e7e;
+    }
+    .text{
+        color: antiquewhite;
+    }
+    .text1{
+        color: rgb(235, 133, 0);
+    }
+    .img_p{
+        width: 100%;
+    }
+    .img_t{
+        width: 50%;
+    }
+    .img_logo {
+        width: 30%;
+      }
+
+@media (max-width: 400px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+      }
+  }
+}
+@media (max-width: 720px) {
+  .fondo {
+      ion-card {
+          width: 80vw;
+      }
+  }
+}
+}

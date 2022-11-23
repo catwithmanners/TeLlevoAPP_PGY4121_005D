@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">
+      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor = "let t of titanes; let i = index" [routerLink]="['/info/' + t.id]">
+      <ion-avatar slot="start">
+      <img src="{{t.picture_url}}" alt="" class="img_t">
+      </ion-avatar>
+      <!-- <ion-label>{{i+1}}</ion-label> -->
+      <ion-label>Titán: {{t.name | titlecase}}</ion-label>
+      <ion-label>Portador: {{t.shifter.name}}</ion-label>
+      <ion-label>Altura: {{t.height_m}}mt</ion-label>
+      <ion-label>ID Personaje: {{t.id}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <p>Titanes: {{cantidad}}</p>
+  <img src="assets/icon/img/snk.png" alt="img_logo" class="img_logo"/>
+
+</ion-content>
