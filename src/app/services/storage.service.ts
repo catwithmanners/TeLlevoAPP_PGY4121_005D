@@ -48,11 +48,15 @@ export class StorageService {
       }
     }
     if (key == 'viajes') {
-      var correo = await this.getCorreo(key, dato.correo);
-      if (correo == undefined) {
-        this.datos.push(dato);
-        await this.storage.set(key, this.datos);
-        return true;
+      //var correo = await this.getCorreo(key, dato.correo);
+      var precio = dato.valViaje;
+      if (precio > 1000) {
+        if (precio < 99999) {
+          this.datos.push(dato);
+          await this.storage.set(key, this.datos);
+          return true;
+        }
+        return false;
       }
     }
     return false;
@@ -74,10 +78,28 @@ export class StorageService {
     this.datos = await this.storage.get(key) || [];
     return this.datos.find(dato => dato.patente == patente);
   }
+  async getViaje(key, correo){
+    this.datos = await this.storage.get(key) || [];
+    this.datos = this.datos.find(dato => dato.correo == correo && dato.estado == true);
+    console.log(this.datos);
+    return this.datos;
+  }
+  async getViajesActivos(key){
+    this.datos = await this.storage.get(key) || [];
+    this.datos = this.datos.find(dato => dato.estado == true);
+    console.log(this.datos);
+    return this.datos;
+  }
   async getDatos(key){
     this.datos = await this.storage.get(key) || [];
     return this.datos;
   }
+
+  async getViajes(key){
+    this.datos = await this.storage.get(key) || [];
+    return this.datos;
+  }
+
   //Método para eliminar
   async eliminar(key, identificador){
     this.datos = await this.storage.get(key) || [];
@@ -96,6 +118,10 @@ export class StorageService {
     this.datos[index] = dato;
 
     await this.storage.set(key, this.datos);
+  }
+  async cambiarEstadoViaje(key, correo){
+    this.datos = await this.storage.get(key) || [];
+    this.datos = this.datos.find(dato => dato.correo == correo && dato.estado == true);
   }
   async cambiarPassword(key, correo, img){
     this.datos = await this.storage.get(key) || [];
