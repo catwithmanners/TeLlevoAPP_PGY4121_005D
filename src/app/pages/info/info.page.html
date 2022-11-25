@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">
+      <a routerLink='/api'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf = "titans">
+    <ion-card class="card">
+      <h1>Información del Titán</h1>
+      <img src="{{titans.picture_url}}" alt="" class="img_t">
+      <ion-card-content class="cont">
+        <h2 class="text">Nombre: {{titans.name | titlecase}}</h2>
+        <h5 class="text">Altura: {{titans.height_m}} metros</h5>
+        <h3 class="text">"{{titans.description}}"</h3>
+        <p class="text1">Creado el: {{titans.created_at}}</p>
+        <p class="text1">Creado el: {{titans.updated_at}}</p>
+        <p class="text1">Id titán: {{titans.id}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="card">
+      <h1>Portador</h1>
+      <img src="{{titans.shifter.picture_url}}" alt="" class="img_t">
+      <ion-card-content class="cont"> 
+        <h2 class="text">Nombre: {{titans.shifter.name}}</h2>
+        <h5 class="text">Género: {{titans.shifter.gender}}</h5>
+        <p class="text1">Creado el: {{titans.shifter.created_at}}</p>
+        <p class="text1">Creado el: {{titans.shifter.updated_at}}</p>
+        <p class="text1">Id personaje: {{titans.shifter.id}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <img src="assets/icon/img/snk.png" alt="img_logo" class="img_logo"/>
+</ion-content>

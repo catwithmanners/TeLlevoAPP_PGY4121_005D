@@ -61,6 +61,14 @@ export class HomePage implements OnInit{
       this.presentAlert();
     }
   }
+  goApi(){
+    var navigationExtras5: NavigationExtras = {
+      state: {
+        usuario5: this.user
+      }
+    };
+    this.router.navigate(['/api'], navigationExtras5)
+  }
   goToGeo(){
     var navigationExtras4: NavigationExtras = {
       state: {
