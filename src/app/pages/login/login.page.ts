@@ -5,6 +5,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { IonModal } from '@ionic/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from 'src/app/services/storage.service';
+import { FireService } from 'src/app/services/fire.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class LoginPage implements OnInit  {
     private router: Router,
     private usuarioService: UsuarioService, 
     private loadingCtrl: LoadingController,
-    private storage: StorageService) { }
+    private storage: StorageService,
+    private fireService: FireService) { }
 
   async ngOnInit() {
     await this.cargarDatos();
@@ -40,13 +42,13 @@ export class LoginPage implements OnInit  {
     this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
   }
 
-  async login(){
+  login(){
     //rescatamos las variables del formulario por separado:
     var correoValid = this.user.controls.correo.value;
     var passValid = this.user.controls.password.value;
 
     //rescatamos el usuario con el método login usuario:
-    var usuarioLogin = await this.storage.logearUser(this.KEY_USUARIOS,correoValid, passValid);
+    var usuarioLogin = this.fireService.loginUser(correoValid, passValid);
     //validamos si existe el usuario
     if (usuarioLogin != undefined) {
       //AQUI, ANTES DE REDIRECCIONAR HACIA OTRA PÁGINA, PREPARAREMOS LOS DATOS QUE QUEREMOS ENVIAR:
@@ -62,7 +64,7 @@ export class LoginPage implements OnInit  {
       //redirigimos dependiente del tipo de usuario
       this.router.navigate(['/home'], navigationExtras);
     } else {
-      await this.toastError();
+      //await this.toastError();
     }
   }
   async showLoading() {
