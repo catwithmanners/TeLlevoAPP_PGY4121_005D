@@ -9,15 +9,21 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div>
-    <p>Bienvenido sr/a Conductor!</p>
-    <ion-button expand="small">Configurar horario de actividad</ion-button>
+    <p>Bienvenido {{ user.nombre +' '+ user.apellidos}}</p>
     <ion-card>
       <ion-card-content>
-        <img src=img src="assets/icon/img/map.png" alt="img_map" class="img_map" alt="">
+        <h3>MAPA DE RUTA</h3>
       </ion-card-content>
     </ion-card>
+    <div id="map"></div>
+    <ion-card>
+      <ion-card-content>
+        <h3>INDICACIONES</h3>
+        <div id="indicaciones"></div>
+      </ion-card-content>
+    </ion-card>
+    
+
     <ion-button expand="block">BUSCAR PASAJEROS</ion-button>
     <img src="assets/icon/img/pnglogoCond.png" alt="img_logo" class="img_logo"/>
-  </div> 
 </ion-content>

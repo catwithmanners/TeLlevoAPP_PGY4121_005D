@@ -77,11 +77,21 @@ const routes: Routes = [
     path: 'recuperar',
     loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
+  {
+    path: 'api',
+    loadChildren: () => import('./pages/api/api.module').then( m => m.ApiPageModule)
+  },
+  {
+    path: 'info/:id',
+    loadChildren: () => import('./pages/info/info.module').then( m => m.InfoPageModule)
+  },
   /* SIEMPRE AL FINAL */
   {
     path: '**',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
+
+
 
 ];
 

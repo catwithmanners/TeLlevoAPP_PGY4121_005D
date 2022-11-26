@@ -5,8 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <h1>GEO TESTING - pasajero</h1>
-  <p>Bienvenido {{ user.nombre }}</p>
+  <h3>Bienvenido {{ user.nombre + ' '+ user.apellidos }}</h3>
   <ion-card>
     <ion-card-content>
       <form [formGroup]="viajar" (ngSubmit)="calcularRuta()">
@@ -21,7 +20,7 @@
         <ion-item>
           <ion-label slot="start" >¿A dónde vas?</ion-label> <!-- DIRECCIÓN SALIDA -->
           <br>
-          <input slot="end" placeholder="Ingrese dirección" id="autocomplete" formControlName="destino">
+          <input slot="end" placeholder="Ingrese dirección" id="autocomplete" >
         </ion-item>
         <ion-item>
           <ion-label slot="start">Total viaje</ion-label> <!-- VALOR DEL VIAJE -->
@@ -32,10 +31,10 @@
     </ion-card-content>
   </ion-card>
   <div id="map"></div>
-  <ion-card *ngIf="verificar_checkbox == true">
+  <ion-card *ngIf="ubicacionDestino != ''">
     <ion-card-content>
       <ion-button (click)="crearViaje()">CREAR VIAJE</ion-button>
-      <ion-button>CANCELAR</ion-button>
+      <ion-button (click)="cancelarViaje()">CANCELAR</ion-button>
     </ion-card-content>
   </ion-card>
   <br>

@@ -5,6 +5,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { AlertController, IonModal } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { ValidacionesService } from 'src/app/services/validaciones.service';
+import { FireService } from 'src/app/services/fire.service';
 
 
 @Component({
@@ -72,13 +73,13 @@ export class RegistroPage implements OnInit {
       nombre: 'Ninguna',
     },
     {
-      nombre: 'Licencia 1',
+      nombre: 'A1',
     },
     {
-      nombre: 'Licencia 2',
+      nombre: 'A2',
     },
     {
-      nombre: 'Licencia 3'
+      nombre: 'A3'
     }
   ]
   usuario = new FormGroup({
@@ -103,10 +104,15 @@ export class RegistroPage implements OnInit {
 
 
   verificar_checkbox: boolean = false;
-  constructor(private usuarioService: UsuarioService, private router: Router,private alertController: AlertController, private storage: StorageService, private validaciones: ValidacionesService) { }
+  constructor(private usuarioService: UsuarioService, 
+              private router: Router,
+              private alertController: AlertController, 
+              private storage: StorageService, 
+              private validaciones: ValidacionesService,
+              private fireService: FireService) { }
 
-  async ngOnInit() {
-    await this.cargarDatos();
+  ngOnInit() {
+    this.cargarDatos();
   }
 
   async presentAlert() {
@@ -179,11 +185,19 @@ export class RegistroPage implements OnInit {
     await alert.present();
   }
 
-  async cargarDatos(){
-    this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
+  cargarDatos(){
+    //this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
+    this.fireService.getDatos('usuarios').subscribe(
+      response => {
+        this.usuarios = [];
+        for (let usuario of response){
+          this.usuarios.push(usuario.payload.doc.data());
+        }
+      }
+    );
   }
 
-  async registrar(){
+  registrar(){
     //Validacion de ESPACIOS BLANCOS
     var respuesta2: boolean = this.validarEspacios();
     if (!respuesta2) {
@@ -210,13 +224,13 @@ export class RegistroPage implements OnInit {
       this.presentAlert4();
       return;
     }
-    var respuesta: boolean = await this.storage.agregar(this.KEY_USUARIOS,this.usuario.value);
+    var respuesta: boolean = this.fireService.agregar(this.KEY_USUARIOS,this.usuario.value, this.usuario.controls.rut.value);
     if(respuesta){
       this.usuario.reset();
       this.verificar_pw = '';
       this.verificar_checkbox = false;
       this.presentAlert();
-      await this.cargarDatos();
+      this.cargarDatos();
     }else{
       this.presentAlert2();
     }
