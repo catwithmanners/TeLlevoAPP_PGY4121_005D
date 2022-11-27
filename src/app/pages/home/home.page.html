@@ -3,23 +3,28 @@
     <ion-title slot="start">
       <a (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></a>
     </ion-title>
+    <ion-title slot="middle">
+      <p>Home</p>
+    </ion-title>
     <ion-buttons slot="end">
       <ion-menu-button menu="main"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <!-- CONTENIDO -->
-<ion-content [fullscreen]="true">
-  <div id="administrador" *ngIf="">
-    <h1>administración</h1>
-  </div>
+<ion-content>
   <ion-card>
     <ion-card-content>
-      <p *ngIf="user.tipo_usuario == 'alumno'">Bienvenido de nuevo {{ user.nombre + ' ' + user.apellidos }} </p>
-      <p *ngIf="user.tipo_usuario == 'administrador'">Bienvenido de nuevo {{ user.nombre }} </p>
-      <br>
-      <a *ngIf="user.tipo_usuario == 'alumno'"(click)="irPerfil()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
-      <a *ngIf="user.tipo_usuario == 'administrador'" (click)="irAdmin()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
+      <div *ngIf="user.tipo_usuario == 'alumno'">
+        <p>Bienvenido de nuevo</p>
+        <p>{{ user.nombre + ' ' + user.apellidos }}</p>
+        <a (click)="irPerfil()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
+      </div>
+      <div *ngIf="user.tipo_usuario == 'administrador'">
+        <p>Bienvenido de nuevo</p>
+        <p>{{ user.nombre + ' ' + user.apellidos }}</p>
+        <a (click)="irAdmin()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
+      </div>
       <br>
       <p id="ulike">¿Qué te gustaría hoy?</p>
       <br>

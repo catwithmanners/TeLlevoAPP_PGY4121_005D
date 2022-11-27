@@ -29,7 +29,7 @@ export class HomePage implements OnInit{
 
   async ngOnInit() {
     await this.cargarDatos();
-    console.log('Viaje.oninit: '+this.viaje.correo);
+/*     console.log('Viaje.oninit: '+this.viaje.correo); */
   }
 
   async cargarDatos(){

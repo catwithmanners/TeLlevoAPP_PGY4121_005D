@@ -101,13 +101,14 @@ export class RegistroPage implements OnInit {
   usuarios: any[] = [];
   KEY_USUARIOS = 'usuarios';
   mensaje: string;
+  
+  //variable de prueba
+  v_registrar: boolean = false;
 
 
   verificar_checkbox: boolean = false;
-  constructor(private usuarioService: UsuarioService, 
-              private router: Router,
+  constructor(private router: Router,
               private alertController: AlertController, 
-              private storage: StorageService, 
               private validaciones: ValidacionesService,
               private fireService: FireService) { }
 
@@ -231,6 +232,7 @@ export class RegistroPage implements OnInit {
       this.verificar_checkbox = false;
       this.presentAlert();
       this.cargarDatos();
+      this.v_registrar = true; /* PRUEBA UNITARIA */
     }else{
       this.presentAlert2();
     }

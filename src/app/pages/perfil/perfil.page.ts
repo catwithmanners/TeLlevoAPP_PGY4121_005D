@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { AlertController, IonModal } from '@ionic/angular';
+import { AlertController, IonModal, ToastController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { v4 } from 'uuid';
 
@@ -32,7 +32,8 @@ export class PerfilPage implements OnInit {
   verificar_checkbox: boolean = false;
   constructor(private storage: StorageService,
               private router: Router,
-              private alertController: AlertController) { 
+              private alertController: AlertController,
+              private toastController: ToastController) { 
                 this.user = this.router.getCurrentNavigation().extras.state.usuario3;
               }
 
@@ -91,10 +92,20 @@ export class PerfilPage implements OnInit {
   generarQR(){
     if (this.value == '') {
       this.value = this.user.correo;
+      this.qrGenerado();
     }
-
   }
 
+  async qrGenerado() {
+    const toast = await this.toastController.create({
+      message: '¡Se ha generado código QR!',
+      duration: 500,
+      icon: 'happy-outline',
+      color: 'dark'
+    });
+    toast.present();
+  }
+  
   volver() {
     this.modal.dismiss(null, 'volver');
   }
