@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { stringify } from '@firebase/util';
-import { AlertController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
-import { StorageService } from 'src/app/services/storage.service';
+
 
 declare var google;
 
@@ -32,11 +30,11 @@ export class CarreraPage implements OnInit {
   search2: any;
   directionsService = new google.maps.DirectionsService();
   directionsRenderer = new google.maps.DirectionsRenderer();
+  direccion1: string;
+  direccion2: string;
 
 
-  constructor(private storage: StorageService,
-              private router: Router,
-              private alertController: AlertController,
+  constructor(private router: Router,
               private fireService: FireService) 
                 {
                   this.user = this.router.getCurrentNavigation().extras.state.usuario;
@@ -113,7 +111,7 @@ export class CarreraPage implements OnInit {
     console.log('Viaje.origen: '+this.viaje.origen);
     console.log('Viaje.destino: '+this.viaje.destino);
     var request = {
-      origin: this.ubicacionInicio,
+      origin: this.ubicacionInicio ,
       destination: this.ubicacionFin,
       travelMode: google.maps.TravelMode.DRIVING /* se traza el viaje */
     };
