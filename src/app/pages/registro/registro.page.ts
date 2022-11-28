@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { AlertController, IonModal } from '@ionic/angular';
-import { StorageService } from 'src/app/services/storage.service';
 import { ValidacionesService } from 'src/app/services/validaciones.service';
 import { FireService } from 'src/app/services/fire.service';
 
