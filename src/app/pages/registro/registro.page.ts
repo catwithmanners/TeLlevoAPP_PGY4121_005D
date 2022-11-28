@@ -123,6 +123,7 @@ export class RegistroPage implements OnInit {
       buttons: [{
         text: 'OK',
         handler: () => {
+          this.cargarDatos();
           this.router.navigate(['/login']);
         } 
       }],
@@ -199,15 +200,33 @@ export class RegistroPage implements OnInit {
   }
 
   registrar(){
+    //Validación del RUT
+    if (!this.validaciones.validarRut(this.usuario.controls.rut.value)) {
+      this.presentAlert5();
+      return;
+    }
+    this.cargarDatos();
+    //Aquí se aplica un filtro para ver si el rut que se está ingresando está dentro de la bd
+    var rutUser = this.usuarios.find(usu => usu.rut == this.usuario.controls.rut.value);
+    //Luegp reviso si tengo algo guardado en la variable rutUser 
+    //después de aplicar el filtro de arriba, si no hay nada guardado quedará con valor "undefined"
+    if (rutUser != undefined) {
+      //Aquí imprimo en la consola los valores que tenga rutUser si es que NO ES "undefined"
+      console.log('Valor de rutUser.rut: '+rutUser.rut);
+      console.log('Valor de rutUser1: '+rutUser);
+    }
+    if (rutUser == undefined) {
+      //Aquí imprimo en la consola el valor de rutUser si es que ES "undefined"
+      console.log('Valor de rutUser2: '+rutUser);
+      //y esto debe entregar como valor "undefined", por lo que entraría dentro del if de abajo
+    }
+    //Aquí si no existe el rut dentro de FireBase, significa que se puede registrar si no
+    //saldrá un mensaje que dice "usuario registrado"
+    if (rutUser == undefined) {
     //Validacion de ESPACIOS BLANCOS
     var respuesta2: boolean = this.validarEspacios();
     if (!respuesta2) {
       this.presentAlert7();
-      return;
-    }
-    //Validación del RUT
-    if (!this.validaciones.validarRut(this.usuario.controls.rut.value)) {
-      this.presentAlert5();
       return;
     }
     //Validación de la EDAD
@@ -231,8 +250,9 @@ export class RegistroPage implements OnInit {
       this.usuario.reset();
       this.verificar_pw = '';
       this.verificar_checkbox = false;
-      this.presentAlert();
       this.cargarDatos();
+      this.presentAlert();
+    }
     }else{
       this.v_registrar = false; /* PRUEBA UNITARIA */
       this.presentAlert2();
@@ -286,6 +306,7 @@ export class RegistroPage implements OnInit {
     this.usuario.reset();
     this.verificar_pw = '';
     this.verificar_checkbox = false;
+    this.cargarDatos();
     this.router.navigate(['/login']);
   }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -7,17 +8,47 @@ import { BehaviorSubject } from 'rxjs';
 export class FireService {
 
   isAuthenticated= new BehaviorSubject(false);
-  constructor(private fire: AngularFirestore) { }
+  constructor(private fire: AngularFirestore, private router: Router) { }
 
   usuarios: any[] = [];
+  datos: any[] = [];
   //CRUD:
   agregar(coleccion, value, id){
     try {
-      this.fire.collection(coleccion).doc(id).set(value);
-      return true;
+      //this.cargarDatos(coleccion);
+      //this.datos.push(this.getDatos(coleccion));
+      //console.log('Valor this.datos' + this.datos)
+      //if (coleccion == 'usuarios') {
+        //console.log(this.datos);
+        //var rutUser = this.datos.find(usu => usu.rut == value.rut);
+        //console.log('datos del rutUser: '+rutUser);
+        //if (rutUser == undefined ) {
+      if (coleccion == 'viajes') {
+        this.fire.collection(coleccion).add(value);
+        return true;
+      } else {
+        this.fire.collection(coleccion).doc(id).set(value);
+        return true;
+      }
+        //}else{
+          return false;
+        //}
+      //}
     } catch (error) {
       console.log(error)
     }
+  }
+  cargarDatos(coleccion){
+    //this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
+    this.getDatos(coleccion).subscribe(
+      response => {
+        this.datos = [];
+        for (let usuario of response){
+          this.datos.push(usuario.payload.doc.data());
+          console.log('Cargar Datos: '+this.datos)
+        }
+      }
+    );
   }
 
   getDatos(coleccion){
@@ -42,6 +73,13 @@ export class FireService {
       this.isAuthenticated.next(true);
       return userLogin;
     }
+  }
+  admitir(){
+    this.isAuthenticated.next(true);
+  }
+  logout(){
+    this.isAuthenticated.next(false);
+    this.router.navigate(['/login']);
   }
 
   getAuth(){

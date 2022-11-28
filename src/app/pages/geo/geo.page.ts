@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras,Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 /* 1- VARIABLE GOOGLE PARA USAR LA API */
@@ -18,7 +19,7 @@ export class GeoPage implements OnInit {
     origen: new FormControl(''),
     destino: new FormControl(''),
     valViaje: new FormControl('', [Validators.required, Validators.min(1000)]),
-    correo: new FormControl(''),
+    rut: new FormControl(''),
     estado: new FormControl(false),
     pasajeros: new FormGroup({
       rut: new FormControl(''),
@@ -48,7 +49,8 @@ export class GeoPage implements OnInit {
   verificar_checkbox: boolean = false;
   constructor(private router: Router, 
               private storage: StorageService,
-              private alertController: AlertController) { 
+              private alertController: AlertController,
+              private fireService: FireService) { 
     this.user = this.router.getCurrentNavigation().extras.state.usuario4;
   }
 
@@ -186,10 +188,10 @@ export class GeoPage implements OnInit {
     //this.viajar.controls.destino.disable();
     //this.viajar.controls.valViaje.disable();
 
-    this.viajar.controls.correo.setValue(this.user.correo);
+    this.viajar.controls.rut.setValue(this.user.rut);
 
     //this.verificar_checkbox = true;
-    var respuesta: boolean = await this.storage.agregar(this.KEY_VIAJES,this.viajar.value);
+    var respuesta: boolean = await this.fireService.agregar(this.KEY_VIAJES,this.viajar.value, this.viajar.controls.rut.value);
     if (respuesta) {
       this.viajar.reset()
       this.presentAlert();
