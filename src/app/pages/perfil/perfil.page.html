@@ -38,7 +38,7 @@
             <ion-button color="tertiary" size="small">Cambiar foto de perfil</ion-button>
 
             <!-- INFO VEHÍCULO -->
-            <div *ngIf="user.correo == vehiculo.correo">
+            <div *ngIf="vehiculo != undefined">
               <ion-list>
                 <h3>INFORMACIÓN DEL VEHICULO</h3>
                 <p>Patente: {{ vehiculo.patente }}</p>
