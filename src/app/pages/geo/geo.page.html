@@ -1,12 +1,18 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>GEO TEST</ion-title>
+    <ion-title slot="start">
+      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h3>Bienvenido {{ user.nombre + ' '+ user.apellidos }}</h3>
+  <img src="assets/icon/img/pnglogoCond.png" alt="img_logo" class="img_logo"/>
   <ion-card>
+    <h3>¿A dónde vamos, {{ user.nombre + ' '+ user.apellidos }}?</h3>
     <ion-card-content>
       <form [formGroup]="viajar" (ngSubmit)="calcularRuta()">
         <!--<ion-button expand="small">Agendar horario de búsqueda</ion-button>-->
@@ -24,12 +30,13 @@
         </ion-item>
         <ion-item>
           <ion-label slot="start">Total viaje</ion-label> <!-- VALOR DEL VIAJE -->
-          <ion-input placeholder="Ingrese un valor, minimo 1000" formControlName="valViaje">$</ion-input>
+          <ion-input placeholder="Ingrese un valor, mínimo 1000" formControlName="valViaje">$</ion-input>
         </ion-item>
         <ion-button expand="block" type="submit"[disabled]="!viajar.valid">CALCULAR RUTA</ion-button>
       </form>
     </ion-card-content>
   </ion-card>
+  <!-- MAPA -->
   <div id="map"></div>
   <ion-card *ngIf="ubicacionDestino != ''">
     <ion-card-content>

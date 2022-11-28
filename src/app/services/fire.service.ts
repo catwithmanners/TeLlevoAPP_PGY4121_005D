@@ -58,6 +58,7 @@ export class FireService {
       console.log(error)
     }
   }
+
   loginUser(user, password){
     this.getDatos('usuarios').subscribe(
       response => {
@@ -85,4 +86,15 @@ export class FireService {
     return this.isAuthenticated.value;
   }
 
+    /* RECUPERAR */
+    async validarCorreo(correo){
+      this.getDatos('usuarios').subscribe(
+        response => {
+          this.usuarios = [];
+          for (let usuario of response){
+            this.usuarios.push(usuario.payload.doc.data(correo));
+          }
+        }
+      )
+    }
 }

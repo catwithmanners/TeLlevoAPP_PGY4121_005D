@@ -101,13 +101,14 @@ export class RegistroPage implements OnInit {
   usuarios: any[] = [];
   KEY_USUARIOS = 'usuarios';
   mensaje: string;
+  
+  //variable de prueba
+  v_registrar: boolean = false;
 
 
   verificar_checkbox: boolean = false;
-  constructor(private usuarioService: UsuarioService, 
-              private router: Router,
+  constructor(private router: Router,
               private alertController: AlertController, 
-              private storage: StorageService, 
               private validaciones: ValidacionesService,
               private fireService: FireService) { }
 
@@ -245,6 +246,7 @@ export class RegistroPage implements OnInit {
     }
     var respuesta: boolean = this.fireService.agregar(this.KEY_USUARIOS,this.usuario.value, this.usuario.controls.rut.value);
     if(respuesta){
+      this.v_registrar = true; /* PRUEBA UNITARIA */
       this.usuario.reset();
       this.verificar_pw = '';
       this.verificar_checkbox = false;
@@ -252,6 +254,7 @@ export class RegistroPage implements OnInit {
       this.presentAlert();
     }
     }else{
+      this.v_registrar = false; /* PRUEBA UNITARIA */
       this.presentAlert2();
     }
 
