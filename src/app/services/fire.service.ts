@@ -50,6 +50,18 @@ export class FireService {
       }
     );
   }
+  eliminar(coleccion, id){
+    try {
+      this.fire.collection(coleccion).doc(id).delete();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  actualizar(coleccion, id, value){
+    this.fire.collection(coleccion).doc(id).set(value);
+    return true;
+  }
 
   getDatos(coleccion){
     try{
@@ -58,6 +70,7 @@ export class FireService {
       console.log(error)
     }
   }
+
   loginUser(user, password){
     this.getDatos('usuarios').subscribe(
       response => {
@@ -85,4 +98,15 @@ export class FireService {
     return this.isAuthenticated.value;
   }
 
+    /* RECUPERAR */
+    async validarCorreo(correo){
+      this.getDatos('usuarios').subscribe(
+        response => {
+          this.usuarios = [];
+          for (let usuario of response){
+            this.usuarios.push(usuario.payload.doc.data(correo));
+          }
+        }
+      )
+    }
 }

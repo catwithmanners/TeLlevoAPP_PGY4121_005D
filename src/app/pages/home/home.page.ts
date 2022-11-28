@@ -89,6 +89,14 @@ export class HomePage implements OnInit{
       this.presentAlert();
     }
   }
+  goPasajero(){
+    var navigationExtras6: NavigationExtras = {
+      state: {
+        usuario6: this.user
+      }
+    };
+    this.router.navigate(['/viaje'], navigationExtras6)
+  }
   goApi(){
     var navigationExtras5: NavigationExtras = {
       state: {
@@ -97,6 +105,7 @@ export class HomePage implements OnInit{
     };
     this.router.navigate(['/api'], navigationExtras5)
   }
+  
   goToGeo(){
     var navigationExtras4: NavigationExtras = {
       state: {
@@ -105,10 +114,12 @@ export class HomePage implements OnInit{
     };
     this.router.navigate(['/geo'], navigationExtras4)
   }
+  
   irPerfil(){
     var navigationExtras3: NavigationExtras = {
       state: {
-        usuario3: this.user
+        usuario3: this.user,
+        vehiculo: this.vehiculos,
       }
     };
     this.router.navigate(['/perfil'], navigationExtras3);

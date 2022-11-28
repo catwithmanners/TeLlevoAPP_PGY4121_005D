@@ -8,7 +8,7 @@ ion-content{
     }
     #map{
         width: 100%;
-        height: 80%;
+        height: 40%;
         display: block;
     }
   
@@ -33,9 +33,9 @@ ion-content{
         }
     }
     .img_logo {
-        width: 30%;
+        width: 25%;
+        margin-top: 2px;
     }
-    /* CONFIGURACIÓN PARA CLIENTES */
     ion-item{
         --ion-background-color: ;
         color: aliceblue;

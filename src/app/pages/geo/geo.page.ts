@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras,Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
-import { StorageService } from 'src/app/services/storage.service';
+
 
 /* 1- VARIABLE GOOGLE PARA USAR LA API */
 declare var google;
@@ -48,7 +48,6 @@ export class GeoPage implements OnInit {
 
   verificar_checkbox: boolean = false;
   constructor(private router: Router, 
-              private storage: StorageService,
               private alertController: AlertController,
               private fireService: FireService) { 
     this.user = this.router.getCurrentNavigation().extras.state.usuario4;

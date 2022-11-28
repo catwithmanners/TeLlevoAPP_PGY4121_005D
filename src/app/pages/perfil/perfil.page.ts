@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { AlertController, IonModal } from '@ionic/angular';
+import { AlertController, IonModal, ToastController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { v4 } from 'uuid';
+import { FireService } from 'src/app/services/fire.service';
 
 @Component({
   selector: 'app-perfil',
@@ -24,7 +25,8 @@ export class PerfilPage implements OnInit {
 
   user: any;
   usuario: any[] = [];
-  vehiculo: any[] = [];
+  vehiculos: any[] = [];
+  vehiculo: any;
   KEY_USUARIOS = 'usuarios';
   KEY_VEHICULOS = 'vehiculos';
   codigo_qr: any;
@@ -32,12 +34,17 @@ export class PerfilPage implements OnInit {
   verificar_checkbox: boolean = false;
   constructor(private storage: StorageService,
               private router: Router,
-              private alertController: AlertController) { 
+              private alertController: AlertController,
+              private toastController: ToastController,
+              private fireService: FireService) { 
                 this.user = this.router.getCurrentNavigation().extras.state.usuario3;
+                this.vehiculos = this.router.getCurrentNavigation().extras.state.vehiculo;
               }
 
-  async ngOnInit() {
-    await this.cargarDatos();
+  ngOnInit() {
+    console.log('Valor this.vehiculos: '+this.vehiculos);
+    this.cargarDatos();
+    
   }
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -81,9 +88,22 @@ export class PerfilPage implements OnInit {
 
     await alert.present();
   }
-  async cargarDatos(){
-    this.usuario = await this.storage.getCorreo(this.KEY_USUARIOS, this.user.correo);
-    this.vehiculo = await this.storage.getCorreo(this.KEY_VEHICULOS, this.user.correo) || [];
+  cargarDatos(){
+    //this.usuario = await this.storage.getCorreo(this.KEY_USUARIOS, this.user.correo);
+    //this.vehiculo = await this.storage.getCorreo(this.KEY_VEHICULOS, this.user.correo) || [];
+    /*this.fireService.getDatos('vehiculos').subscribe(
+      response => {
+        this.vehiculos = [];
+        for (let vehiculo of response){
+          this.vehiculos.push(vehiculo.payload.doc.data());
+        }
+      }
+    );*/
+    this.vehiculo = this.vehiculos.find(dato => dato.rut == this.user.rut);
+    console.log('Valor this.vehiculos cargardatos: '+this.vehiculos);
+    if (this.vehiculo != undefined) {
+      console.log('Valor this.vehiculo.patente: '+this.vehiculo.patente);
+    }
   }
   cambiarPassword(){
     
@@ -91,10 +111,20 @@ export class PerfilPage implements OnInit {
   generarQR(){
     if (this.value == '') {
       this.value = this.user.correo;
+      this.qrGenerado();
     }
-
   }
 
+  async qrGenerado() {
+    const toast = await this.toastController.create({
+      message: '¡Se ha generado código QR!',
+      duration: 500,
+      icon: 'happy-outline',
+      color: 'dark'
+    });
+    toast.present();
+  }
+  
   volver() {
     this.modal.dismiss(null, 'volver');
   }

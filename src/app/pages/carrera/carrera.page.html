@@ -8,23 +8,15 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-    <p>Bienvenido {{ user.nombre +' '+ user.apellidos}}</p>
-    <ion-card>
-      <ion-card-content>
-        <h3>MAPA DE RUTA</h3>
-      </ion-card-content>
-    </ion-card>
+  <img src="assets/icon/img/pnglogoCond.png" alt="img_logo" class="img_logo"/>
     <div id="map"></div>
     <ion-card>
+      <br>
+      <ion-button (click)="terminarViaje()">TERMINAR VIAJE</ion-button>
       <ion-card-content>
-        <h3>INDICACIONES</h3>
         <div id="indicaciones"></div>
       </ion-card-content>
     </ion-card>
-    
-
-    <ion-button expand="block" (click)="terminarViaje()">BUSCAR PASAJEROS</ion-button>
-    <ion-button expand="block">TERMINAR VIAJE</ion-button>
-    <img src="assets/icon/img/pnglogoCond.png" alt="img_logo" class="img_logo"/>
 </ion-content>
