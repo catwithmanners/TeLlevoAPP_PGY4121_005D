@@ -15,7 +15,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
-<<<<<<< HEAD
   imports: [
   BrowserModule,
   IonicModule.forRoot(), 
@@ -23,9 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
   IonicStorageModule.forRoot(), 
   AngularFireModule.initializeApp(environment.firebaseConfig),
   HttpClientModule],
-=======
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), AngularFireModule.initializeApp(environment.firebaseConfig),HttpClientModule],
->>>>>>> fa7275d7b89ab13181754c6bc480f4527c3e83b3
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
