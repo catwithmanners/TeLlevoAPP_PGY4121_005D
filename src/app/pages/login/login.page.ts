@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { IonModal } from '@ionic/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -30,16 +30,24 @@ export class LoginPage implements OnInit  {
     private usuarioService: UsuarioService, 
     private loadingCtrl: LoadingController,
     private storage: StorageService,
-    private fireService: FireService) { }
+    private fireService: FireService,
+    private alertController: AlertController) { }
 
-  async ngOnInit() {
-    await this.cargarDatos();
+  ngOnInit() {
+    this.cargarDatos();
   }
 
   //MÉTODOS
 
-  async cargarDatos(){
-    this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
+  cargarDatos(){
+    this.fireService.getDatos('usuarios').subscribe(
+      response => {
+        this.usuarios = [];
+        for (let usuario of response){
+          this.usuarios.push(usuario.payload.doc.data());
+        }
+      }
+    );
   }
 
   login(){
@@ -48,7 +56,8 @@ export class LoginPage implements OnInit  {
     var passValid = this.user.controls.password.value;
 
     //rescatamos el usuario con el método login usuario:
-    var usuarioLogin = this.fireService.loginUser(correoValid, passValid);
+    //var usuarioLogin = this.fireService.loginUser(correoValid, passValid);
+    var usuarioLogin = this.usuarios.find(dato => dato.correo == correoValid && dato.password == passValid)
     //validamos si existe el usuario
     if (usuarioLogin != undefined) {
       //AQUI, ANTES DE REDIRECCIONAR HACIA OTRA PÁGINA, PREPARAREMOS LOS DATOS QUE QUEREMOS ENVIAR:
@@ -58,13 +67,16 @@ export class LoginPage implements OnInit  {
         }
       };
       if (this.recordar_login != true) {
-        this.router.navigate(['/home'], navigationExtras);
         this.user.reset();
+        this.fireService.admitir();
+        this.router.navigate(['/home'], navigationExtras);
       }
       //redirigimos dependiente del tipo de usuario
+      this.fireService.admitir();
       this.router.navigate(['/home'], navigationExtras);
     } else {
       //await this.toastError();
+      this.presentAlert1();
     }
   }
   async showLoading() {
@@ -76,6 +88,15 @@ export class LoginPage implements OnInit  {
     });
 
     loading.present();
+  }
+  async presentAlert1() {
+    const alert = await this.alertController.create({
+      header: '¡Atención!',
+      message: '¡Una de las credenciales es incorrecta! Intente nuevamente.',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
   async toastError() {
