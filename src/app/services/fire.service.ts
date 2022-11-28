@@ -50,6 +50,18 @@ export class FireService {
       }
     );
   }
+  eliminar(coleccion, id){
+    try {
+      this.fire.collection(coleccion).doc(id).delete();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  actualizar(coleccion, id, value){
+    this.fire.collection(coleccion).doc(id).set(value);
+    return true;
+  }
 
   getDatos(coleccion){
     try{
