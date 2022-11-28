@@ -3,6 +3,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { IonicStorageModule } from "@ionic/storage-angular";
+import { ArgumentOutOfRangeError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { LoginPage } from "./login.page";
 
@@ -32,7 +33,7 @@ describe('PRUEBAS UNITARIAS: login', ()=> {
     expect(app).toBeTruthy();
   });
 
-  it('2. Iniciar sesión con credenciales correctas', ()=>{
+  it('2. BOTÓN Iniciar sesión con credenciales correctas', ()=>{
     const fixture = TestBed.createComponent(LoginPage);
     const app = fixture.componentInstance;
 
@@ -41,6 +42,7 @@ describe('PRUEBAS UNITARIAS: login', ()=> {
     correo.setValue('a@duocuc.cl');
     password.setValue('asdasd123');
 
+    app.login();
     expect(app.user.valid).toBeTruthy();
   }); 
 

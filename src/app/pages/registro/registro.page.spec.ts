@@ -213,7 +213,7 @@ describe('PRUEBAS UNITARIAS: registro', ()=>{
         expect(app.usuario.valid).toBeFalse();
     });  
 
-/*        it('8. Registro de usuario botón registrar', ()=>{
+        it('8. Registro de usuario botón registrar', ()=>{
         const fixture = TestBed.createComponent(RegistroPage);
         const app = fixture.componentInstance;
 
@@ -242,8 +242,8 @@ describe('PRUEBAS UNITARIAS: registro', ()=>{
         img.setValue('default');
 
         app.registrar();
-        expect(app.v_registrar).toBeTruthy;
+        expect(app.v_registrar).toBeTrue;
     });  
- */
+ 
  
 });

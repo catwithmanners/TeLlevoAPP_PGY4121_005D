@@ -227,13 +227,14 @@ export class RegistroPage implements OnInit {
     }
     var respuesta: boolean = this.fireService.agregar(this.KEY_USUARIOS,this.usuario.value, this.usuario.controls.rut.value);
     if(respuesta){
+      this.v_registrar = true; /* PRUEBA UNITARIA */
       this.usuario.reset();
       this.verificar_pw = '';
       this.verificar_checkbox = false;
       this.presentAlert();
       this.cargarDatos();
-      this.v_registrar = true; /* PRUEBA UNITARIA */
     }else{
+      this.v_registrar = false; /* PRUEBA UNITARIA */
       this.presentAlert2();
     }
 

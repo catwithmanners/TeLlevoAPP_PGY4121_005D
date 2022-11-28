@@ -69,6 +69,7 @@ export class HomePage implements OnInit{
     };
     this.router.navigate(['/api'], navigationExtras5)
   }
+  
   goToGeo(){
     var navigationExtras4: NavigationExtras = {
       state: {
@@ -77,6 +78,7 @@ export class HomePage implements OnInit{
     };
     this.router.navigate(['/geo'], navigationExtras4)
   }
+  
   irPerfil(){
     var navigationExtras3: NavigationExtras = {
       state: {
