@@ -315,5 +315,4 @@ export class AdminPage implements OnInit {
     this.cargarDatos();
     this.router.navigate(['/login']);
   }
-
 }

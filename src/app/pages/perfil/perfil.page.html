@@ -20,44 +20,52 @@
     <br> -->
   </div>
   <ion-button color="success" style="color: black;" (click)="generarQR()" size="small">GENERAR QR</ion-button>
-  <ion-card *ngIf="user.tipo_usuario == 'alumno'" color="warning">
+  <ion-card *ngIf="user.tipo_usuario == 'alumno'">
+    <ion-card-header>
+      <ion-label>{{user.tipo_usuario}}</ion-label>
+    </ion-card-header>
     <ion-card-content>
-      <ion-card>
-        <ion-card-content>
+      <ion-list>
+        <!-- INFO USUARIO -->
+        <p>Rut: {{user.rut}}</p>
+        <p>Nombre: {{ user.nombre }}</p>
+        <p>Apellidos: {{user.apellidos}}</p>
+        <p>Fecha de nacimiento: {{user.fecha_nac}}</p>
+        <p>Sede: {{user.sede}}</p>
+        <p>Carrera: {{user.carrera}}</p>
+        <p>Correo: {{user.correo}}</p>
+        <p>Licencia: {{user.licencia}}</p>
+        <ion-button color="tertiary" size="small">Cambiar foto de perfil</ion-button>
+        <br>
+        <br>
+        <!-- INFO VEHÍCULO -->
+        <div *ngIf="vehiculo != undefined" style="border-style: ridge;">
+          <ion-card-header>
+            <ion-label>VEHÍCULO REGISTRADO</ion-label>
+          </ion-card-header>
           <ion-list>
-            <h3>INFORMACIÓN DEL ALUMNO</h3>
-            <!-- INFO USUARIO -->
-            <p>Rut: {{user.rut}}</p>
-            <p>Nombre: {{ user.nombre }}</p>
-            <p>Apellidos: {{user.apellidos}}</p>
-            <p>Fecha de nacimiento: {{user.fecha_nac}}</p>
-            <p>Sede: {{user.sede}}</p>
-            <p>Carrera: {{user.carrera}}</p>
-            <p>Correo: {{user.correo}}</p>
-            <p>Licencia: {{user.licencia}}</p>
-            <ion-button color="tertiary" size="small">Cambiar foto de perfil</ion-button>
-
-            <!-- INFO VEHÍCULO -->
-            <div *ngIf="vehiculo != undefined">
-              <ion-list>
-                <h3>INFORMACIÓN DEL VEHICULO</h3>
-                <p>Patente: {{ vehiculo.patente }}</p>
-                <p>Modelo: {{ vehiculo.modelo }}</p>
-                <p>Marca: {{ vehiculo.marca }}</p>
-                <p>Tipo de vehiculo: {{ vehiculo.tipo_vehiculo }}</p>
-                <p>Color: {{ vehiculo.color }}</p>
-                <p>Capacidad de pasajeros: {{ vehiculo.cap_pasajeros }}</p>
-              </ion-list>
-            </div>
-            <!-- GENERAR QR / MOSTRAR -->
-            <div *ngIf="value != ''" color="light">
-              <br>
-              <p>Código QR de usuario {{user.correo}} </p>
-              <ngx-qrcode [elementType]="elementType" [value]="value"></ngx-qrcode>
-            </div>
+            <p>Patente: {{ vehiculo.patente }}</p>
+            <p>Modelo: {{ vehiculo.modelo }}</p>
+            <p>Marca: {{ vehiculo.marca }}</p>
+            <p>Tipo de vehiculo: {{ vehiculo.tipo_vehiculo }}</p>
+            <p>Color: {{ vehiculo.color }}</p>
+            <p>Capacidad de pasajeros: {{ vehiculo.cap_pasajeros }}</p>
           </ion-list>
-        </ion-card-content>
-      </ion-card>
+        </div>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!-- GENERAR QR -->
+  <ion-card *ngIf="value != ''" color="light">
+    <ion-card-header>
+      <ion-label>
+        Código QR
+      </ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <br>
+      <ngx-qrcode [elementType]="elementType" [value]="value"></ngx-qrcode>
+      <p>{{user.correo}}</p>
     </ion-card-content>
   </ion-card>
   <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
