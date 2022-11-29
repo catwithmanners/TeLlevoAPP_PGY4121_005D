@@ -55,10 +55,13 @@ export class HomePage implements OnInit{
         }
       }
     );
-    this.viaje = this.viajes.find(dato => dato.rut == this.user.rut && dato.estado == true)
-    if (this.viaje != undefined) {
-      console.log('Valor this.viaje.destino: '+this.viaje.destino.lat);
-    }
+    this.viaje = [];
+    this.viaje.push(this.viajes.find(dato => dato.rut == this.user.rut && dato.estado == true));
+    console.log('this.viajes: '+JSON.stringify(this.viajes));
+    console.log('this.viaje: '+JSON.stringify(this.viaje));
+    //if (this.viaje != undefined) {
+    //  console.log('Valor this.viaje.destino: '+this.viaje[0].destino.lat);
+    //}
   }
   volver() {
     this.modal.dismiss(null, 'volver');
@@ -69,7 +72,7 @@ export class HomePage implements OnInit{
     //var respuesta: boolean = await this.storage.verificarVehiculo(this.KEY_USUARIOS,this.KEY_VEHICULOS,this.user.correo);
     if (userVehiculo != undefined) {
       this.cargarDatos();
-      if (this.viaje != undefined) {
+      if (this.user.carreraActiva) {
         //this.viaje = JSON.parse(JSON.stringify(this.viajes.find(dato => dato.correo == this.user.correo && dato.estado == true)));
         //this.viajes2 = this.viajes.find(dato => dato.correo == this.user.correo);
         console.log('Viaje: '+this.viaje);
@@ -90,12 +93,21 @@ export class HomePage implements OnInit{
     }
   }
   goPasajero(){
+    if (this.user.viajeActivo) {
+      var navigationExtras6: NavigationExtras = {
+        state: {
+          usuario6: this.user
+        }
+      };
+      this.router.navigate(['/detalle'], navigationExtras6)
+    }else{
     var navigationExtras6: NavigationExtras = {
       state: {
         usuario6: this.user
       }
     };
     this.router.navigate(['/viaje'], navigationExtras6)
+    }
   }
   goApi(){
     var navigationExtras5: NavigationExtras = {

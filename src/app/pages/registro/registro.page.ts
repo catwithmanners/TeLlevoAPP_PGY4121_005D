@@ -92,6 +92,8 @@ export class RegistroPage implements OnInit {
     //tipo de usuario al registrar
     tipo_usuario: new FormControl('alumno', [Validators.required]),
     licencia: new FormControl('', [Validators.required]),
+    viajeActivo: new FormControl(false),
+    carreraActiva: new FormControl(false),
     img: new FormControl('default'),
   });
   //Variable para verificar la contraseña:

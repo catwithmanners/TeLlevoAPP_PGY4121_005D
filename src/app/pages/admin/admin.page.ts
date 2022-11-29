@@ -313,6 +313,10 @@ export class AdminPage implements OnInit {
     this.verificar_pw = '';
     this.verificar_checkbox = false;
     this.cargarDatos();
-    this.router.navigate(['/login']);
+    this.fireService.logout();
+    //this.router.navigate(['/login']);
+  }
+  eliminar(rut){
+    this.fireService.eliminar('usuarios', rut);
   }
 }

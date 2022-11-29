@@ -112,8 +112,8 @@
           <p>Licencia de conducir: {{u.licencia}}</p>
           <p>Correo: {{u.correo}}</p>
         </ion-list>
-        <ion-button color="warning" (click)="buscar(u.id)">BUSCAR</ion-button>
-        <ion-button color="danger" (click)="eliminar(u.id)">ELIMINAR</ion-button>
+        <ion-button color="warning" (click)="buscar(u.rut)">BUSCAR</ion-button>
+        <ion-button color="danger" (click)="eliminar(u.rut)">ELIMINAR</ion-button>
       </ion-card-content>
       <ion-card-header>
         <ion-label>{{u.tipo_usuario}}</ion-label>
