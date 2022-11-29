@@ -10,12 +10,21 @@
 </ion-header>
 <ion-content>
   <div class="fondo">
-    <br>
-    <img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/>
-    <h1>ADMINISTRACIÓN</h1>
+    <ion-card id="card_logo">
+      <ion-card-header>
+        <ion-label>Módulo de administrador</ion-label>
+      </ion-card-header>
+      <ion-card-content class="card_logo_cont"  id="card_logo_cont">
+        <img src="assets/icon/img/menu/dev.png" alt="img_logo" class="img_logo">
+      </ion-card-content>
+    </ion-card>
   </div>
   <ion-card>
+    <ion-card-header>
+      <ion-label>Registro de usuarios</ion-label>
+    </ion-card-header>
     <ion-card-content>
+
       <ion-list>
         <form [formGroup]="usuario" (ngSubmit)="registrar()">
           <ion-item style="border-radius: 15px 15px 0px 0px;">
@@ -85,29 +94,35 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
-  <br><br>
-  <h1>LISTA DE USUARIOS</h1>
+  <ion-card>
+    <ion-card-header>
+      <ion-label>LISTA DE USUARIOS</ion-label>
+    </ion-card-header>
+  </ion-card>
   <div *ngIf="usuarios.length !=0; else elseBlock">
-    <ion-card *ngFor="let u of usuarios">
+    <ion-card *ngFor="let u of usuarios" style="border-style: outset;">
       <ion-card-content>
         <ion-list>
-          <p>usuario tipo - {{u.tipo_usuario||uppercase}}</p>
           <p>Rut: {{u.rut}}</p>
           <p>Nombre: {{u.nombre}}</p>
           <p>Apellidos: {{u.apellidos}}</p>
           <p>Fecha de nacimiento: {{u.fecha_nac}}</p>
           <p>Sede: {{u.sede}}</p>
           <p>Carrera: {{u.carrera}}</p>
+          <p>Licencia de conducir: {{u.licencia}}</p>
           <p>Correo: {{u.correo}}</p>
-          <ion-button slot="end" color="warning" (click)="buscar(u.correo)">BUSCAR</ion-button>
-          <ion-button slot="end" color="danger" (click)="eliminar(u.correo)">ELIMINAR</ion-button>
         </ion-list>
+        <ion-button color="warning" (click)="buscar(u.id)">BUSCAR</ion-button>
+        <ion-button color="danger" (click)="eliminar(u.id)">ELIMINAR</ion-button>
       </ion-card-content>
+      <ion-card-header>
+        <ion-label>{{u.tipo_usuario}}</ion-label>
+      </ion-card-header>
     </ion-card>
   </div>
   <!-- ELSEBLOCK -->
   <ng-template #elseBlock>
-    <ion-card>
+    <ion-card style="border-style: outset;">
       <ion-card-content>
         <h1>No hay usuarios</h1>
       </ion-card-content>

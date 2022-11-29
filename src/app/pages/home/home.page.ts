@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras,Router } from '@angular/router';
 import { AlertController, IonModal } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
-import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -21,8 +20,8 @@ export class HomePage implements OnInit{
   KEY_USUARIOS = 'usuarios';
   KEY_VEHICULOS = 'vehiculos';
 
+  v_usuario = false;
   constructor(private router: Router,
-              private storage: StorageService,
               private alertController: AlertController,
               private fireService: FireService) 
                 {
@@ -34,6 +33,7 @@ export class HomePage implements OnInit{
     if (this.viajes != undefined) {
       console.log('Viajes.oninit: '+this.viajes.length);
     }
+    this.v_usuario = true; /* VARIABLE DE PRUEBA */
   }
 
   cargarDatos(){

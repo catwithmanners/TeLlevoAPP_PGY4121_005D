@@ -1,12 +1,28 @@
 @use '../../../global.scss';
 
 ion-content{
+
   ion-card{
+    --background-color: ;
     border-style: ridge;
     border-color: black;
     margin: auto;
     margin-top: 5px;
     text-align: center;
+    ion-card-header{
+      --background: #ffe95a;
+      ion-label{
+          font-size: large;
+          color: #03153e;
+          text-transform: uppercase;
+          letter-spacing: 4px;
+          text-decoration: none;
+          font-size: 24px;
+          overflow: hidden;
+          transition: 0.2s;
+          font-family: consolas;
+      }
+  }
     ion-card-content{
 
         p{

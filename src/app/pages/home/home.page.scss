@@ -7,13 +7,13 @@ ion-content{
   ion-card {
     --background: linear-gradient(#4c57d0, rgb(63, 141, 180), rgb(106, 147, 168));
     margin: 0 auto;
-    top: 5vh;
     height: auto;
     width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    border-style: double;
     ion-button{
       color: black;
       margin: 10px;
@@ -27,6 +27,10 @@ ion-content{
       font-size: x-large;
       color: #ffffff;
     }
+    .p1{
+      font-size: large;
+      color: #ffffff;
+    }
     #ulike{
       font-size: large;
       color: #ffffff;
@@ -34,7 +38,7 @@ ion-content{
 }
 .img_logo {
   text-align: center;
-  width: 60%;
+  width: 17%;
 }
 .img_perfil {
   text-align: center;
