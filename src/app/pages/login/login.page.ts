@@ -60,6 +60,24 @@ export class LoginPage implements OnInit  {
     var usuarioLogin = this.usuarios.find(dato => dato.correo == correoValid && dato.password == passValid)
     //validamos si existe el usuario
     if (usuarioLogin != undefined) {
+      console.log('Valor usuarioLogin.correo: '+usuarioLogin.correo);
+      if (usuarioLogin.correo == 'admin@duocuc.cl') {
+        var navigationExtras: NavigationExtras = {
+          state: {
+            usuario: usuarioLogin
+          }
+        };
+        if (this.recordar_login != true) {
+          this.user.reset();
+          this.fireService.admitir();
+          this.router.navigate(['/admin'], navigationExtras);
+          return;
+        }
+        //redirigimos dependiente del tipo de usuario
+        this.fireService.admitir();
+        this.router.navigate(['/admin'], navigationExtras);
+        return;
+      }
       //AQUI, ANTES DE REDIRECCIONAR HACIA OTRA PÁGINA, PREPARAREMOS LOS DATOS QUE QUEREMOS ENVIAR:
       var navigationExtras: NavigationExtras = {
         state: {

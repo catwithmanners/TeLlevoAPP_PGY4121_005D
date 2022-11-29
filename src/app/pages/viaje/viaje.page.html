@@ -10,29 +10,31 @@
 </ion-header>
 <ion-content>
   <div>
-    <p>Bienvenido sr/a Pasajero!</p>
-    <ion-button expand="small">Agendar horario de búsqueda</ion-button>
-    <ion-item>
-      <ion-label position="floating">Ingresa tu dirección actual</ion-label>
-      <ion-input placeholder="Ingrese dirección"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">¿A dónde vas?</ion-label>
-      <ion-input placeholder="Ingrese dirección"></ion-input>
-    </ion-item>
-    <ion-button expand="block">BUSCAR CONDUCTORES</ion-button>
+    <p>Bienvenido {{ user.nombre+' '+user.apellidos}}</p>
     <ion-card>
       <ion-card-content>
-        <img src=img src="assets/icon/img/map.png" alt="img_map" class="img_map" alt="">
-        <p id="p2">Ubicación aproximada</p>
+        <ion-list *ngFor="let u of viajes">
+          <ion-item-group *ngFor="let x of usuarios">
+              <ion-item style="background-color: white;" *ngIf="x.rut == u.data.rut && u.data.estado == true">
+                
+                <ion-button (click)="regPasajero(u.id, u.data.rut)">
+                  <ion-icon name="play-outline" slot="end"></ion-icon> 
+                </ion-button>
+                <p style="color: black;">
+                  Valor viaje: {{u.data.valViaje}}
+                </p>
+                <br>
+                <p style="color: black;">
+                  RUT: {{u.data.rut}}
+                </p>
+                <p style="color: black;">
+                  Nombre conductor: {{ x.nombre }} {{x.apellidos}}
+                </p>
+              </ion-item>
+          </ion-item-group>
+        </ion-list>
       </ion-card-content>
     </ion-card>
-    <ion-list>
-      <p>Direcciones guardadas</p>
-      <p>Direcciones guardadas</p>
-      <p>Direcciones guardadas</p>
-      <p>Direcciones guardadas</p>
-    </ion-list>
     <img src="assets/icon/img/pnglogoPasj.png" alt="img_logo" class="img_logo"/>
   </div> 
 </ion-content>

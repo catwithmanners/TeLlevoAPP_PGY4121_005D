@@ -85,11 +85,16 @@ const routes: Routes = [
     path: 'info/:id',
     loadChildren: () => import('./pages/info/info.module').then( m => m.InfoPageModule)
   },
+  {
+    path: 'detalle',
+    loadChildren: () => import('./pages/detalle/detalle.module').then( m => m.DetallePageModule)
+  },
   /* SIEMPRE AL FINAL */
   {
     path: '**',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },
+  
 
 
 

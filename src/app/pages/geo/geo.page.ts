@@ -192,6 +192,8 @@ export class GeoPage implements OnInit {
     //this.verificar_checkbox = true;
     var respuesta: boolean = await this.fireService.agregar(this.KEY_VIAJES,this.viajar.value, this.viajar.controls.rut.value);
     if (respuesta) {
+      this.user.carreraActiva = true;
+      this.fireService.actualizar('usuarios',this.user.rut,this.user);
       this.viajar.reset()
       this.presentAlert();
       return;

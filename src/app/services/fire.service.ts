@@ -12,6 +12,8 @@ export class FireService {
 
   usuarios: any[] = [];
   datos: any[] = [];
+  viajes: any;
+  viaje: any;
   //CRUD:
   agregar(coleccion, value, id){
     try {
@@ -61,6 +63,12 @@ export class FireService {
   actualizar(coleccion, id, value){
     this.fire.collection(coleccion).doc(id).set(value);
     return true;
+  }
+
+  regPasajero(coleccion, id, value){
+    //this.viajes = this.getDatos('viajes');
+    //this.viaje = this.viajes.find(dato => dato.rut == rut);
+    this.fire.collection(coleccion).doc(id).set(value);
   }
 
   getDatos(coleccion){
