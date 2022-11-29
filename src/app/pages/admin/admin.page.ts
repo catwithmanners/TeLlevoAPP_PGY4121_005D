@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, IonModal } from '@ionic/angular';
+import { FireService } from 'src/app/services/fire.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ValidacionesService } from 'src/app/services/validaciones.service';
@@ -71,13 +72,13 @@ export class AdminPage implements OnInit {
       nombre: 'Ninguna',
     },
     {
-      nombre: 'Licencia 1',
+      nombre: 'A1',
     },
     {
-      nombre: 'Licencia 2',
+      nombre: 'A2',
     },
     {
-      nombre: 'Licencia 3'
+      nombre: 'A3'
     }
   ]
   usuario = new FormGroup({
@@ -100,9 +101,14 @@ export class AdminPage implements OnInit {
   KEY_USUARIOS = 'usuarios';
   mensaje: string;
 
+  //variable de prueba
+  v_registrar: boolean = false;
 
   verificar_checkbox: boolean = false;
-  constructor(private usuarioService: UsuarioService, private router: Router,private alertController: AlertController, private storage: StorageService, private validaciones: ValidacionesService) { }
+  constructor(private router: Router,
+              private alertController: AlertController, 
+              private validaciones: ValidacionesService,
+              private fireService: FireService) { }
 
   async ngOnInit() {
     await this.cargarDatos();
@@ -187,20 +193,46 @@ export class AdminPage implements OnInit {
     await alert.present();
   }
 
-  async cargarDatos(){
-    this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
+  cargarDatos(){
+    //this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
+    this.fireService.getDatos('usuarios').subscribe(
+      response => {
+        this.usuarios = [];
+        for (let usuario of response){
+          this.usuarios.push(usuario.payload.doc.data());
+        }
+      }
+    );
   }
 
-  async registrar(){
+  registrar(){
+    //Validación del RUT
+    if (!this.validaciones.validarRut(this.usuario.controls.rut.value)) {
+      this.presentAlert5();
+      return;
+    }
+    this.cargarDatos();
+    //Aquí se aplica un filtro para ver si el rut que se está ingresando está dentro de la bd
+    var rutUser = this.usuarios.find(usu => usu.rut == this.usuario.controls.rut.value);
+    //Luegp reviso si tengo algo guardado en la variable rutUser 
+    //después de aplicar el filtro de arriba, si no hay nada guardado quedará con valor "undefined"
+    if (rutUser != undefined) {
+      //Aquí imprimo en la consola los valores que tenga rutUser si es que NO ES "undefined"
+      console.log('Valor de rutUser.rut: '+rutUser.rut);
+      console.log('Valor de rutUser1: '+rutUser);
+    }
+    if (rutUser == undefined) {
+      //Aquí imprimo en la consola el valor de rutUser si es que ES "undefined"
+      console.log('Valor de rutUser2: '+rutUser);
+      //y esto debe entregar como valor "undefined", por lo que entraría dentro del if de abajo
+    }
+    //Aquí si no existe el rut dentro de FireBase, significa que se puede registrar si no
+    //saldrá un mensaje que dice "usuario registrado"
+    if (rutUser == undefined) {
     //Validacion de ESPACIOS BLANCOS
     var respuesta2: boolean = this.validarEspacios();
     if (!respuesta2) {
       this.presentAlert7();
-      return;
-    }
-    //Validación del RUT
-    if (!this.validaciones.validarRut(this.usuario.controls.rut.value)) {
-      this.presentAlert5();
       return;
     }
     //Validación de la EDAD
@@ -218,14 +250,17 @@ export class AdminPage implements OnInit {
       this.presentAlert4();
       return;
     }
-    var respuesta: boolean = await this.storage.agregar(this.KEY_USUARIOS,this.usuario.value);
+    var respuesta: boolean = this.fireService.agregar(this.KEY_USUARIOS,this.usuario.value, this.usuario.controls.rut.value);
     if(respuesta){
+      this.v_registrar = true; /* PRUEBA UNITARIA */
       this.usuario.reset();
       this.verificar_pw = '';
       this.verificar_checkbox = false;
+      this.cargarDatos();
       this.presentAlert();
-      await this.cargarDatos();
+    }
     }else{
+      this.v_registrar = false; /* PRUEBA UNITARIA */
       this.presentAlert2();
     }
 
@@ -277,6 +312,7 @@ export class AdminPage implements OnInit {
     this.usuario.reset();
     this.verificar_pw = '';
     this.verificar_checkbox = false;
+    this.cargarDatos();
     this.router.navigate(['/login']);
   }
 

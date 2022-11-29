@@ -13,6 +13,7 @@
 </ion-header>
 <!-- CONTENIDO -->
 <ion-content>
+  <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
   <ion-card>
     <ion-card-content>
       <div *ngIf="user.tipo_usuario == 'alumno'">
@@ -36,6 +37,6 @@
     </ion-card-content>
     <!-- BOTÓN API -->
     <ion-button size="small" expand="round" routerLink="/api" class="api">API</ion-button>
-    <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
+    <ion-button size="small" expand="round" routerLink="/admin" class="api">ADMIN</ion-button>
   </ion-card>
 </ion-content>
