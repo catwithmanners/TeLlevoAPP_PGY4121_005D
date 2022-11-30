@@ -8,7 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 export class FireService {
 
   isAuthenticated= new BehaviorSubject(false);
-  constructor(private fire: AngularFirestore, private router: Router) { }
+  constructor(
+    private fire: AngularFirestore, 
+    private router: Router) {}
 
   usuarios: any[] = [];
   datos: any[] = [];
@@ -40,9 +42,9 @@ export class FireService {
       console.log(error)
     }
   }
-  cargarDatos(coleccion){
+  async cargarDatos(coleccion){
     //this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
-    this.getDatos(coleccion).subscribe(
+    await this.getDatos(coleccion).subscribe(
       response => {
         this.datos = [];
         for (let usuario of response){
@@ -52,6 +54,7 @@ export class FireService {
       }
     );
   }
+
   eliminar(coleccion, id){
     try {
       this.fire.collection(coleccion).doc(id).delete();
@@ -79,24 +82,45 @@ export class FireService {
     }
   }
 
-  loginUser(user, password){
-    this.getDatos('usuarios').subscribe(
+  getDato(coleccion, id){
+    try{
+      return this.fire.collection(coleccion).doc(id).get();
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async loginUser(user, password){
+    await this.getDatos('usuarios').subscribe(
       response => {
         this.usuarios = [];
         for (let usuario of response){
-          this.usuarios.push(usuario.payload.doc.data());
+          let user = usuario.payload.doc.data();
+          this.usuarios.push(user);
         }
       }
     );
+
     var userLogin = this.usuarios.find(usu => usu.correo == user && usu.password == password);
     if (userLogin != undefined) {
       this.isAuthenticated.next(true);
       return userLogin;
     }
+    
   }
+
+  modificar(coleccion, id, value){
+    try {
+      this.fire.collection(coleccion).doc(id).set(value);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   admitir(){
     this.isAuthenticated.next(true);
   }
+
   logout(){
     this.isAuthenticated.next(false);
     this.router.navigate(['/login']);
@@ -106,15 +130,15 @@ export class FireService {
     return this.isAuthenticated.value;
   }
 
-    /* RECUPERAR */
-    async validarCorreo(correo){
-      this.getDatos('usuarios').subscribe(
-        response => {
-          this.usuarios = [];
-          for (let usuario of response){
-            this.usuarios.push(usuario.payload.doc.data(correo));
-          }
+  /* RECUPERAR */
+  async validarCorreo(correo){
+    this.getDatos('usuarios').subscribe(
+      response => {
+        this.usuarios = [];
+        for (let usuario of response){
+          this.usuarios.push(usuario.payload.doc.data(correo));
         }
-      )
-    }
+      }
+    )
+  }
 }
