@@ -1,10 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { AlertController, IonModal, ToastController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
-import { v4 } from 'uuid';
 import { FireService } from 'src/app/services/fire.service';
 
 @Component({
@@ -32,8 +29,7 @@ export class PerfilPage implements OnInit {
   codigo_qr: any;
 
   verificar_checkbox: boolean = false;
-  constructor(private storage: StorageService,
-              private router: Router,
+  constructor(private router: Router,
               private alertController: AlertController,
               private toastController: ToastController,
               private fireService: FireService) { 

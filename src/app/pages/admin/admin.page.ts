@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, IonModal, ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
 import { ValidacionesService } from 'src/app/services/validaciones.service';
 
@@ -11,7 +11,6 @@ import { ValidacionesService } from 'src/app/services/validaciones.service';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  @ViewChild(IonModal) modal: IonModal;
   sedes: any[] = [
     {
       nombre: 'Sede Alameda',
@@ -96,7 +95,7 @@ export class AdminPage implements OnInit {
     img: new FormControl('default'),
   });
   //Variable para verificar la contraseña:
-  verificar_pw: string;
+  
   usuarios: any[] = [];
   KEY_USUARIOS = 'usuarios';
   mensaje: string;
@@ -104,7 +103,7 @@ export class AdminPage implements OnInit {
   id_modificar: any = '';
   handlerMessage = '';
 
-  usuario2: any;
+
   //variable de prueba
   v_registrar: boolean = false;
 
@@ -202,6 +201,7 @@ export class AdminPage implements OnInit {
         this.usuarios = [];
         for (let usuario of response){
           this.usuarios.push(usuario.payload.doc.data());
+
         }
       }
     );
@@ -242,11 +242,6 @@ export class AdminPage implements OnInit {
       this.presentAlert6();
       return;
     }
-    //Validación de la CONTRASEÑA
-    if (this.usuario.controls.password.value != this.verificar_pw){
-      this.presentAlert3();
-      return;
-    }
     //Validación de TERMINOS Y CONDICIONES
     if(this.verificar_checkbox != true){
       this.presentAlert4();
@@ -256,13 +251,10 @@ export class AdminPage implements OnInit {
     if(respuesta){
       this.v_registrar = true; /* PRUEBA UNITARIA */
       this.usuario.reset();
-      this.verificar_pw = '';
-      this.verificar_checkbox = false;
       this.cargarDatos();
       this.presentAlert();
     }
     }else{
-      this.v_registrar = false; /* PRUEBA UNITARIA */
       this.presentAlert2();
     }
 
@@ -307,12 +299,8 @@ export class AdminPage implements OnInit {
     respuesta = true;
     return respuesta;
   }
-  volver() {
-    this.modal.dismiss(null, 'volver');
-  }
   volverLogin(){
     this.usuario.reset();
-    this.verificar_pw = '';
     this.verificar_checkbox = false;
     this.cargarDatos();
     this.fireService.logout();

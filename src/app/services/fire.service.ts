@@ -16,6 +16,9 @@ export class FireService {
   datos: any[] = [];
   viajes: any;
   viaje: any;
+
+  //variable de prueba
+  v_registrar = false; 
   //CRUD:
   agregar(coleccion, value, id){
     try {

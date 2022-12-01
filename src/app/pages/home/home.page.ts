@@ -23,7 +23,8 @@ export class HomePage implements OnInit{
   v_usuario = false;
   constructor(private router: Router,
               private alertController: AlertController,
-              private fireService: FireService) 
+              private fireService: FireService,
+              ) 
                 {
                 this.user = this.router.getCurrentNavigation().extras.state.usuario;
                 }
