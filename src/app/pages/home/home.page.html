@@ -17,12 +17,12 @@
   <ion-card>
     <ion-card-content>
       <div *ngIf="user.tipo_usuario == 'alumno'">
-        <p>Bienvenido de nuevo</p>
+        <p id="p1" class="p1">Bienvenido de nuevo</p>
         <p>{{ user.nombre + ' ' + user.apellidos }}</p>
         <a (click)="irPerfil()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       </div>
       <div *ngIf="user.tipo_usuario == 'administrador'">
-        <p>Bienvenido de nuevo</p>
+        <p id="p1" class="p1">Bienvenido de nuevo</p>
         <p>{{ user.nombre + ' ' + user.apellidos }}</p>
         <a (click)="irAdmin()"><img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/></a>
       </div>
@@ -37,6 +37,5 @@
     </ion-card-content>
     <!-- BOTÓN API -->
     <ion-button size="small" expand="round" routerLink="/api" class="api">API</ion-button>
-    <ion-button size="small" expand="round" routerLink="/admin" class="api">ADMIN</ion-button>
   </ion-card>
 </ion-content>

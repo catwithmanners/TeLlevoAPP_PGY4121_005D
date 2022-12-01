@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { NavigationExtras,Router } from '@angular/router';
+import { AlertController, IonModal } from '@ionic/angular';
+
 import { FireService } from 'src/app/services/fire.service';
 
 @Component({
@@ -8,6 +11,7 @@ import { FireService } from 'src/app/services/fire.service';
   styleUrls: ['./viaje.page.scss'],
 })
 export class ViajePage implements OnInit {
+
 
   viajes: any[] = [];
   viaje: any;
@@ -20,6 +24,7 @@ export class ViajePage implements OnInit {
   user: any;
 
   constructor(private fireService: FireService,
+              private alertController: AlertController,
               private router: Router) { }
 
   ngOnInit() {

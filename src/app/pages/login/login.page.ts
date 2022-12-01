@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { IonModal } from '@ionic/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { StorageService } from 'src/app/services/storage.service';
 import { FireService } from 'src/app/services/fire.service';
 
 
@@ -27,9 +25,7 @@ export class LoginPage implements OnInit  {
 
   constructor(private toastController: ToastController, 
     private router: Router,
-    private usuarioService: UsuarioService, 
     private loadingCtrl: LoadingController,
-    private storage: StorageService,
     private fireService: FireService,
     private alertController: AlertController) { }
 
