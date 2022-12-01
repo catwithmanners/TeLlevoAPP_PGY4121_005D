@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title slot="start">
-      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+      <a (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></a>
     </ion-title>
     <ion-buttons slot="end">
       <ion-menu-button menu="main"></ion-menu-button>
@@ -75,10 +75,6 @@
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input clearInput type="password" placeholder="Debe contener al menos 6 caracteres" formControlName="password"></ion-input>
           </ion-item>
-          <ion-item style="border-radius: 0px 0px 15px 15px;">
-            <ion-label clearInput position="floating">Ingresa tu contraseña nuevamente</ion-label>
-            <ion-input type="password" placeholder="Ingresa tu contraseña nuevamente" [(ngModel)]="verificar_pw" [ngModelOptions]="{standalone: 'true'}"></ion-input>
-          </ion-item>
           <ion-item>
             <ion-label position="floating">Registre el tipo usuario</ion-label>
             <ion-select placeholder="Selecciona tipo" formControlName="tipo_usuario">
@@ -88,7 +84,7 @@
           </ion-item>
           <br>
           <ion-button type="submit" [disabled]="!usuario.valid">REGISTRAR</ion-button>
-          <ion-button color="secondary" (click)="actualizar()" [disabled]="!usuario.valid">ACTUALIZAR</ion-button>
+          <ion-button color="secondary" (click)="modificar()" [disabled]="!usuario.valid || id_modificar == ''">ACTUALIZAR</ion-button>
           <ion-button expand="round" type="reset" color="terciary">LIMPIAR</ion-button>
         </form>
       </ion-list>
@@ -97,6 +93,7 @@
   <ion-card>
     <ion-card-header>
       <ion-label>LISTA DE USUARIOS</ion-label>
+      <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)"></ion-searchbar>
     </ion-card-header>
   </ion-card>
   <div *ngIf="usuarios.length !=0; else elseBlock">
@@ -111,6 +108,7 @@
           <p>Carrera: {{u.carrera}}</p>
           <p>Licencia de conducir: {{u.licencia}}</p>
           <p>Correo: {{u.correo}}</p>
+          <p>Password: {{u.password}}</p>
         </ion-list>
         <ion-button color="warning" (click)="buscar(u.rut)">BUSCAR</ion-button>
         <ion-button color="danger" (click)="eliminar(u.rut)">ELIMINAR</ion-button>

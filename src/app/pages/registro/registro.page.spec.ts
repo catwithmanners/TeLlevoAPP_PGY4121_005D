@@ -143,7 +143,7 @@ describe('PRUEBAS UNITARIAS: registro', ()=>{
         sede.setValue('Puente Alto');
         carrera.setValue('Ing Informatica');
         correo.setValue('a@duocuc.cl');
-        password.setValue('1');
+        password.setValue('1'); /* CARÁCTER INSUFICIENTE */
         tipo_usuario.setValue('alumno');
         licencia.setValue('Ninguno');
         img.setValue('default');
@@ -151,7 +151,7 @@ describe('PRUEBAS UNITARIAS: registro', ()=>{
         expect(app.usuario.valid).toBeFalse();
     });  
 
-       it('6. Registro de usuario inválido: CAMPO SEDE Y CARRERA', ()=>{
+       it('6. Registro de usuario inválido: CAMPO SEDE', ()=>{
         const fixture = TestBed.createComponent(RegistroPage);
         const app = fixture.componentInstance;
 
@@ -172,6 +172,37 @@ describe('PRUEBAS UNITARIAS: registro', ()=>{
         apellidos.setValue('Zamorano');
         fecha_nac.setValue('1998/06/09');
         sede.setValue('');
+        carrera.setValue('Ing Informatica');
+        correo.setValue('a@duocuc.cl');
+        password.setValue('asdasd123');
+        tipo_usuario.setValue('alumno');
+        licencia.setValue('Ninguno');
+        img.setValue('default');
+
+        expect(app.usuario.valid).toBeFalse();
+    });  
+
+    it('7. Registro de usuario inválido: CAMPO CARRERA', ()=>{
+        const fixture = TestBed.createComponent(RegistroPage);
+        const app = fixture.componentInstance;
+
+        let rut = app.usuario.controls['rut'];
+        let nombre = app.usuario.controls['nombre'];
+        let apellidos = app.usuario.controls['apellidos'];
+        let fecha_nac = app.usuario.controls['fecha_nac'];
+        let sede = app.usuario.controls['sede'];
+        let carrera = app.usuario.controls['carrera'];
+        let correo = app.usuario.controls['correo'];
+        let password = app.usuario.controls['password']; 
+        let tipo_usuario = app.usuario.controls['tipo_usuario']; 
+        let licencia = app.usuario.controls['licencia']; 
+        let img = app.usuario.controls['img']; 
+
+        rut.setValue('19.918.561-6');
+        nombre.setValue('Alan'); 
+        apellidos.setValue('Zamorano');
+        fecha_nac.setValue('1998/06/09');
+        sede.setValue('Puente Alto');
         carrera.setValue('');
         correo.setValue('a@duocuc.cl');
         password.setValue('asdasd123');
@@ -182,7 +213,7 @@ describe('PRUEBAS UNITARIAS: registro', ()=>{
         expect(app.usuario.valid).toBeFalse();
     });  
 
-       it('7. Registro de usuario inválido: CARÁCTERES INVÁLIDOS', ()=>{
+       it('8. Registro de usuario inválido: CARÁCTERES INVÁLIDOS', ()=>{
         const fixture = TestBed.createComponent(RegistroPage);
         const app = fixture.componentInstance;
 
@@ -213,7 +244,7 @@ describe('PRUEBAS UNITARIAS: registro', ()=>{
         expect(app.usuario.valid).toBeFalse();
     });  
 
-        it('8. Registro de usuario botón registrar', ()=>{
+        it('9. Registro de usuario botón registrar', ()=>{
         const fixture = TestBed.createComponent(RegistroPage);
         const app = fixture.componentInstance;
 
@@ -240,6 +271,7 @@ describe('PRUEBAS UNITARIAS: registro', ()=>{
         tipo_usuario.setValue('alumno');
         licencia.setValue('Ninguno');
         img.setValue('default');
+
 
         app.registrar();
         expect(app.v_registrar).toBeTrue;

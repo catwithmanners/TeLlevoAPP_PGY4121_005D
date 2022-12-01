@@ -15,10 +15,10 @@ export class CarreraPage implements OnInit {
   user: any;
   viaje: any;
   vehiculo: any;
-  ubicacionActual =  { lat: 0, lng: 0};
-  ubicacionInicio =  { lat: 0, lng: 0};
+  ubicacionActual:  any;
+  ubicacionInicio: any;
   //ubicacionInicio: any;
-  ubicacionFin =  { lat: 0, lng: 0};
+  ubicacionFin:  any;
   //ubicacionFin: any;
   KEY_VIAJES = 'viajes';
   viajes: any[] = [];
@@ -42,57 +42,65 @@ export class CarreraPage implements OnInit {
                 }
 
 
-  ngOnInit() {
-    //var geo = await this.getUbicacionActual();
-    //this.ubicacionActual.lat = geo.coords.latitude;
-    //this.ubicacionActual.lng = geo.coords.longitude;
-    this.cargarDatos();
-    //this.viaje = this.viajes.find(dato => dato.rut == this.user.rut && dato.estado == true);
-    console.log('Valor this.viaje: '+this.viaje);
-    if (this.viaje != undefined) {
-      console.log('Valor this.viaje.destino: '+this.viaje.destino.lat);
-    }
-    //console.log('Valor this.viaje: '+JSON.parse(JSON.stringify(this.viaje.origen)));
-    //this.ubicacionInicio =JSON.parse(JSON.stringify(this.viaje.origen));
-    //this.ubicacionFin = stringify(this.viaje.destino);
-    //this.ubicacionInicio.lat = this.viaje.origen.lat;
-    //this.ubicacionInicio.lng = this.viaje.origen.lng;
-    //this.ubicacionFin.lat = this.viaje.destino.lat;
-    //this.ubicacionFin.lng = this.viaje.destino.lng;
-    this.dibujarMapa();
+  async ngOnInit() {
+
+    await this.dibujarMapa();
     //console.log(this.viaje.origen);
     console.log(this.user);
     console.log(this.ubicacionInicio);
     console.log(this.ubicacionFin);
-    this.calcularRuta();
-  }
-  cargarDatos(){
+    await this.calcularRuta();
+
+    //this.viaje = this.viajes.find(dato => dato.rut == this.user.rut && dato.estado == true);
+    console.log('Valor this.viaje: '+this.viaje);
+    if (this.viaje != undefined) {
+    
+    }
+
+
     //this.viaje = await this.storage.getViaje(this.KEY_VIAJES, this.user.correo);
-    this.fireService.getDatos('viajes').subscribe(
+    await this.fireService.getDatos('viajes').subscribe(
       response => {
         this.viajes = [];
         for (let usuario of response){
-          this.viajes.push(usuario.payload.doc.data());
+          let user = usuario.payload.doc.data();
+          this.viajes.push(user);
         }
       }
     );
+  
     this.viaje = [];
-    this.viaje.push(this.viajes.push(dato => dato.rut == this.user.rut));
+    await this.viaje.push(this.viajes.push(dato => dato.rut == this.user.rut)).subscribe;
+    console.log(this.viaje);
     this.ubicacionInicio.lat = this.viaje[0].origen.lat;
     this.ubicacionInicio.lng = this.viaje[0].origen.lng;
     this.ubicacionFin.lat = this.viaje[0].destino.lat;
     this.ubicacionFin.lng = this.viaje[0].destino.lng;
+    console.log(this.ubicacionInicio);
+    console.log(this.ubicacionFin);
     //console.log('This.user.rut: '+this.user.rut);
     //console.log('This.viajes.rut: '+this.viajes);
     //this.viaje = this.viajes.find(dato => dato.rut == this.user.rut && dato.estado == true);
+
+
   };
-  terminarViaje(){
-    
+
+
+  async cargarDatos(){
+    await this.fireService.getDatos('viajes').subscribe(
+      response => {
+        this.viajes = [];
+        for (let usuario of response){
+          let user = usuario.payload.doc.data();
+          this.viajes.push(user);
+        }
+      }
+    );
   }
 
-  dibujarMapa(){
+  async dibujarMapa(){
     var map: HTMLElement = document.getElementById('map');
-    this.cargarDatos();
+    await this.cargarDatos();
     this.mapa = new google.maps.Map(map, {
       center: this.ubicacionInicio,
       zoom: 18
@@ -109,7 +117,7 @@ export class CarreraPage implements OnInit {
 
   }
 
-  calcularRuta(){
+  async calcularRuta(){
     console.log('Viaje.origen: '+this.viaje.origen);
     console.log('Viaje.destino: '+this.viaje.destino);
     var request = {
@@ -118,7 +126,7 @@ export class CarreraPage implements OnInit {
       travelMode: google.maps.TravelMode.DRIVING /* se traza el viaje */
     };
 
-    this.directionsService.route(request, (respuesta, status)=> {
+    await this.directionsService.route(request, (respuesta, status)=> {
       this.directionsRenderer.setDirections(respuesta);
     });
 
