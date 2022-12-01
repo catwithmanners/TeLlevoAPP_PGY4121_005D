@@ -31,7 +31,7 @@ export class ViajePage implements OnInit {
     this.user = this.router.getCurrentNavigation().extras.state.usuario6
     console.log('Nombre de usuario: '+this.user.nombre);
     this.cargarDatos();
-
+    console.log(this.viajes);
   }
 
   cargarDatos(){
@@ -85,8 +85,9 @@ export class ViajePage implements OnInit {
       this.user.viajeActivo = true;
       this.fireService.actualizar('usuarios',this.user.rut,this.user)
       var viajeOld = this.viaje[0].data;
-      this.viaje = [];
-      this.viaje.push(viajeOld);
+      this.viaje = viajeOld;
+      console.log(JSON.stringify(this.viaje));
+      //this.viaje.push(viajeOld);
       this.fireService.regPasajero('viajes',id,this.viaje)
       this.router.navigate(['/home']);
       return;
