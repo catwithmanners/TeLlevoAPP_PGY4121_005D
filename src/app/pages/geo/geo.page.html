@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title slot="start">
-      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+      <a (click)="volverHome()"><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
     </ion-title>
     <ion-buttons slot="end">
       <ion-menu-button menu="main"></ion-menu-button>
@@ -34,7 +34,7 @@
     </ion-card-content>
     <ion-card *ngIf="ubicacionDestino != ''" [disabled]="!viajar.valid">
       <ion-card-content>
-        <ion-button (click)="crearViaje()">CREAR VIAJE</ion-button>
+        <ion-button *ngIf="verificar_checkbox == true" (click)="crearViaje()">CREAR VIAJE</ion-button>
         <ion-button (click)="cancelarViaje()">CANCELAR</ion-button>
       </ion-card-content>
     </ion-card>
