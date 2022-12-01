@@ -1,4 +1,4 @@
-import { TestBed } from "@angular/core/testing";
+/* import { TestBed } from "@angular/core/testing";
 import { AngularFireModule } from "@angular/fire/compat";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { environment } from "src/environments/environment";
@@ -18,13 +18,4 @@ describe('PRUEBAS UNITARIAS: geo', ()=>{
         }).compileComponents();
     })
 
-/*     it('1. Levantar la página geo', ()=>{
-        const fixture = TestBed.createComponent(GeoPage);
-        const app = fixture.componentInstance;
-        
-        let google = app.
-        expect(app).toBeTruthy();
-      });   */
-
-
-});
+}); */

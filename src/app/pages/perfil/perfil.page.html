@@ -11,7 +11,7 @@
 <ion-content>
   <div class="fondo">
     <br>
-    <img src="assets/icon/img/perfilBlack.png" alt="img_perfil" class="img_perfil"/>
+    <img [src]='user/imgPerfil' getDownloadURL alt="img_perfil" class="img_perfil"/>
 <!--     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
       <ion-fab-button>
         <ion-icon name="camera"></ion-icon>
@@ -35,7 +35,7 @@
         <p>Carrera: {{user.carrera}}</p>
         <p>Correo: {{user.correo}}</p>
         <p>Licencia: {{user.licencia}}</p>
-        <ion-button color="tertiary" size="small">Cambiar foto de perfil</ion-button>
+        <p><input type="file" (change)="subirFoto($event)"></p>
         <br>
         <br>
         <!-- INFO VEHÍCULO -->

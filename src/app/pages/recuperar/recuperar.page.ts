@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from 'src/app/services/storage.service';
 import { ToastController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
 
@@ -14,7 +13,9 @@ export class RecuperarPage implements OnInit {
   //variable
   correo: string = '';
   
-  constructor(private fireService: FireService, private router: Router,
+  constructor(
+    private fireService: FireService, 
+    private router: Router,
     private toastController: ToastController) { }
 
   ngOnInit() {

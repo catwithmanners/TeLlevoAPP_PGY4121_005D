@@ -57,7 +57,7 @@ export class LoginPage implements OnInit  {
     //validamos si existe el usuario
     if (usuarioLogin != undefined) {
       console.log('Valor usuarioLogin.correo: '+usuarioLogin.correo);
-      if (usuarioLogin.correo == 'admin@duocuc.cl') {
+      if (usuarioLogin.tipo_usuario == 'administrador') {
         var navigationExtras: NavigationExtras = {
           state: {
             usuario: usuarioLogin
