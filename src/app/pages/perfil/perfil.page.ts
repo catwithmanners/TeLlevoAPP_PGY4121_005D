@@ -78,7 +78,8 @@ export class PerfilPage implements OnInit {
     });
 
     await alert.present();
-  }
+  } 
+  
   async presentAlert4() {
     const alert = await this.alertController.create({
       header: '¡Atención!',

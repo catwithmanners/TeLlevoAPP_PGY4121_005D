@@ -76,12 +76,12 @@ export class CarreraPage implements OnInit {
         }
       }
     );
-    this.viaje = [];
-    this.viaje.push(this.viajes.push(dato => dato.rut == this.user.rut));
-    this.ubicacionInicio.lat = this.viaje[0].origen.lat;
-    this.ubicacionInicio.lng = this.viaje[0].origen.lng;
-    this.ubicacionFin.lat = this.viaje[0].destino.lat;
-    this.ubicacionFin.lng = this.viaje[0].destino.lng;
+    //this.viaje = [];
+    //this.viaje.push(this.viajes.push(dato => dato.rut == this.user.rut));
+    this.ubicacionInicio.lat = this.viaje.origen.lat;
+    this.ubicacionInicio.lng = this.viaje.origen.lng;
+    this.ubicacionFin.lat = this.viaje.destino.lat;
+    this.ubicacionFin.lng = this.viaje.destino.lng;
     //console.log('This.user.rut: '+this.user.rut);
     //console.log('This.viajes.rut: '+this.viajes);
     //this.viaje = this.viajes.find(dato => dato.rut == this.user.rut && dato.estado == true);

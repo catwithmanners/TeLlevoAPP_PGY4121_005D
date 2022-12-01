@@ -47,7 +47,7 @@ export class FireService {
         this.datos = [];
         for (let usuario of response){
           this.datos.push(usuario.payload.doc.data());
-          console.log('Cargar Datos: '+this.datos)
+          //console.log('Cargar Datos: '+this.datos)
         }
       }
     );
