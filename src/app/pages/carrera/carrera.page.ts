@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { FireService } from 'src/app/services/fire.service';
 
 
@@ -14,12 +15,11 @@ export class CarreraPage implements OnInit {
 
   user: any;
   viaje: any;
+  id_viaje: any;
   vehiculo: any;
   ubicacionActual:  any;
-  ubicacionInicio: any;
-  //ubicacionInicio: any;
-  ubicacionFin:  any;
-  //ubicacionFin: any;
+  ubicacionInicio = { lat: 0, lng: 0};
+  ubicacionFin = { lat: 0, lng: 0};
   KEY_VIAJES = 'viajes';
   viajes: any[] = [];
 
@@ -35,15 +35,21 @@ export class CarreraPage implements OnInit {
 
 
   constructor(private router: Router,
-              private fireService: FireService) 
+              private fireService: FireService,
+              private alertController: AlertController) 
                 {
                   this.user = this.router.getCurrentNavigation().extras.state.usuario;
                   this.viaje = this.router.getCurrentNavigation().extras.state.viaje;
+                  this.id_viaje = this.router.getCurrentNavigation().extras.state.id_viaje;
                 }
 
 
   async ngOnInit() {
-
+    console.log(this.viaje);
+    this.ubicacionInicio.lat = this.viaje.origen.lat;
+    this.ubicacionInicio.lng = this.viaje.origen.lng;
+    this.ubicacionFin.lat = this.viaje.destino.lat;
+    this.ubicacionFin.lng = this.viaje.destino.lng;
     await this.dibujarMapa();
     //console.log(this.viaje.origen);
     console.log(this.user);
@@ -71,16 +77,39 @@ export class CarreraPage implements OnInit {
 
     //this.viaje = [];
     //this.viaje.push(this.viajes.push(dato => dato.rut == this.user.rut));
-    this.ubicacionInicio.lat = this.viaje.origen.lat;
-    this.ubicacionInicio.lng = this.viaje.origen.lng;
-    this.ubicacionFin.lat = this.viaje.destino.lat;
-    this.ubicacionFin.lng = this.viaje.destino.lng;
     //console.log('This.user.rut: '+this.user.rut);
     //console.log('This.viajes.rut: '+this.viajes);
     //this.viaje = this.viajes.find(dato => dato.rut == this.user.rut && dato.estado == true);
 
 
   };
+
+  async terminarViaje(){
+    await this.presentAlert();
+  }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '¡Atención!',
+      message: '¿Seguro que quieres terminar el viaje?',
+      buttons: [{
+        text: 'Sí, estoy seguro',
+        handler: () => {
+          this.cargarDatos();
+          this.viaje.estado = false;
+          this.user.carreraActiva = false;
+          this.user.carreraActiva = false;
+          this.fireService.actualizar('viajes',this.id_viaje, this.viaje)
+          this.fireService.actualizar('usuarios',this.user.rut, this.user)
+          this.router.navigate(['/home']);
+        } 
+      },{
+        text: 'Volver'
+      }],
+    });
+
+    await alert.present();
+
+  }
 
 
   async cargarDatos(){
@@ -97,7 +126,7 @@ export class CarreraPage implements OnInit {
 
   async dibujarMapa(){
     var map: HTMLElement = document.getElementById('map');
-    await this.cargarDatos();
+    //await this.cargarDatos();
     this.mapa = new google.maps.Map(map, {
       center: this.ubicacionInicio,
       zoom: 18

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { resolve } from 'dns';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { FieldValue } from "Firebase/firestore";
+import { arrayUnion } from '@angular/fire/firestore'
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,7 @@ export class FireService {
   constructor(
     private fire: AngularFirestore, 
     private router: Router,
-    private storage: AngularFireStorage ) {}
+    private storage: AngularFireStorage, ) {}
 
   usuarios: any[] = [];
   datos: any[] = [];
@@ -23,6 +25,7 @@ export class FireService {
   viaje: any;
   url: String;
   downloadURL: Observable <string>;
+
   //variable de prueba
   v_registrar = false; 
   //CRUD:
@@ -95,6 +98,11 @@ export class FireService {
   actualizar(coleccion, id, value){
     this.fire.collection(coleccion).doc(id).set(value);
     return true;
+  }
+  meterArray(coleccion,id,array){
+    //var hola = arrayUnion(array);
+    this.fire.collection(coleccion).doc(id).update({'pasajeros': arrayUnion.apply(array)})
+    //console.log()
   }
 
   regPasajero(coleccion, id, value){

@@ -17,6 +17,9 @@ export class HomePage implements OnInit{
   vehiculos: any[] = [];
   usuarios: any[] = [];
   viaje: any;
+  viaje2: any;
+  id_viaje: any;
+  id_viaje2: any;
   KEY_VIAJES = 'viajes';
   KEY_USUARIOS = 'usuarios';
   KEY_VEHICULOS = 'vehiculos';
@@ -50,6 +53,9 @@ export class HomePage implements OnInit{
           //console.log(usuario.payload.doc.data())
           this.usuarios.push(usuario.payload.doc.data())
           //console.log(this.usuarios)
+          if (usuario.payload.doc.data()['rut']== this.user.rut) {
+            this.user = usuario.payload.doc.data();
+          }
         }
       }
     )
@@ -58,7 +64,7 @@ export class HomePage implements OnInit{
         this.viajes = [];
         for (let viaje of response){
           //console.log(viaje.payload.doc.data())
-          this.viajes.push(viaje.payload.doc.data())
+          this.viajes.push(viaje.payload.doc.data());
           console.log(this.viajes)
         }
       }
@@ -67,17 +73,47 @@ export class HomePage implements OnInit{
       response => {
         //this.viaje = [];
         for (let viaje of response){
-          //console.log(viaje.payload.doc.data())
+          //console.log(viaje.payload.doc.data()['rut']);
           if (viaje.payload.doc.data()['rut'] == this.user.rut) {
-            console.log('THIS IS IT');
+            //console.log('THIS IS IT');
+            this.id_viaje = viaje.payload.doc.id
             this.viaje = viaje.payload.doc.data();
             console.log(this.viaje);
           }
-          //this.viajes.push(viaje.payload.doc.data())
-          //console.log(this.viajes)
         }
       }
     )
+    this.fireService.getDatos('viajes').subscribe(
+      response => {
+        this.viaje2 = [];
+        for (let viaje of response){
+          //for (const posicion in response) {
+            //var pos = posicion;
+            //console.log('pos: '+pos);
+            //var number = 0;
+            console.log('viajeee: '+JSON.stringify(viaje.payload.doc.data()));
+            console.log(JSON.stringify(viaje.payload.doc.get('pasajeros')));
+            //const viajeMap = JSON.parse(JSON.stringify(viaje.payload.doc.data()['pasajeros']));
+            //const resp = viajeMap.map(x => x.rut);
+            //console.log('resp: '+resp);
+            //number += 1;
+            //if (viaje.payload.doc.data()['pasajeros']['rut'] == this.user.rut) {
+              console.log(viaje.payload.doc.data()['estado']);
+              if (viaje.payload.doc.data()['estado'] == true) {
+                console.log('THIS IS IT');
+                this.id_viaje2 = viaje.payload.doc.id
+                this.viaje2.push(viaje.payload.doc.data());
+                console.log(this.viaje2);
+                
+              }
+            //}
+          //}
+        }
+      }
+    )
+    console.log('viaje222: '+JSON.stringify(this.viaje2));
+    //this.viaje2 = this.viajes.find(dato => dato.estado == true && dato.pasajeros.rut == this.user.rut);
+    //console.log('this.viaje2: '+JSON.stringify(this.viaje2));
     this.fireService.getDatos('vehiculos').subscribe(
       response => {
         //this.vehiculos = [];
@@ -94,7 +130,11 @@ export class HomePage implements OnInit{
     //console.log('this.vehiculos: '+this.vehiculos);
     //console.log(this.usuarios);
   }
-
+  cargarUser(){
+    if (this.router.getCurrentNavigation().extras.state.usuario3 != undefined) {
+      this.user = this.router.getCurrentNavigation().extras.state.usuario3;
+    }
+  }
   cargarViaje(){
     this.viaje = [];
     this.viaje.push(this.viajes.find(dato => dato.rut == this.user.rut));
@@ -104,7 +144,7 @@ export class HomePage implements OnInit{
     this.modal.dismiss(null, 'volver');
   }
   validarVehiculo(){
-    //this.cargarDatos();
+    this.cargarDatos();
     var userVehiculo = this.vehiculos.find(dato => dato.rut == this.user.rut)
     //var respuesta: boolean = await this.storage.verificarVehiculo(this.KEY_USUARIOS,this.KEY_VEHICULOS,this.user.correo);
     if (userVehiculo != undefined) {
@@ -118,6 +158,7 @@ export class HomePage implements OnInit{
           state: {
             usuario: this.user,
             viaje: this.viaje,
+            id_viaje: this.id_viaje,
           }
         };
         this.router.navigate(['/carrera'], navigationExtras);
@@ -129,14 +170,45 @@ export class HomePage implements OnInit{
       this.presentAlert();
     }
   }
-  goPasajero(){
-    if (this.user.viajeActivo) {
+  async presentAlert2(msg) {
+    const alert = await this.alertController.create({
+      header: '¡Atención!',
+      message: msg,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+  async goPasajero(){
+    this.cargarDatos();
+    console.log(JSON.stringify(this.user));
+    //this.cargarUser();
+    if (this.user.carreraActiva) {
+      var msg = '¡Lo sentimos! Estás realizando un viaje, no puedes tomar uno.';
+      await this.presentAlert2(msg);
+      return;
+    }
+    if (this.user.viajeActivo == true && this.viaje2 != undefined) {
+      //this.cargarUser();
+      if (this.viaje2.estado == false && this.user.viajeActivo == true) {
+        this.user.viajeActivo = false;
+        this.fireService.actualizar('usuarios',this.user.rut, this.user);
+        this.cargarDatos();
+        var msg = '¡Lo sentimos! Tu viaje ya ha finalizado.'
+        await this.presentAlert2(msg);
+        return;
+      }
       var navigationExtras6: NavigationExtras = {
         state: {
-          usuario6: this.user
+          usuario6: this.user,
+          viaje: this.viaje2,
+          id_viaje: this.id_viaje2,
         }
       };
-      this.router.navigate(['/detalle'], navigationExtras6)
+      var msg = '¡Lo sentimos! Esta parte no está lista, pero pronto lo estará.';
+      await this.presentAlert2(msg);
+      return;
+      //this.router.navigate(['/detalle'], navigationExtras6)
     }else{
     var navigationExtras6: NavigationExtras = {
       state: {

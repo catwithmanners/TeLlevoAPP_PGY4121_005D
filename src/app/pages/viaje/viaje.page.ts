@@ -71,7 +71,7 @@ export class ViajePage implements OnInit {
     this.viaje = [];
     this.vehiculo = [];
     this.vehiculo.push(this.vehiculos.find(dato => dato.rut == rut2));
-    this.viaje.push(this.viajes.find(dato => dato.data.rut == rut2 ));
+    this.viaje.push(this.viajes.find(dato => dato.data.rut == rut2 && dato.data.estado == true ));
     console.log('viaje: '+ JSON.stringify(this.viaje));
     console.log('Vehiculo: '+ JSON.stringify(this.vehiculo));
     //this.viaje.data.pasajeros = [];
@@ -92,21 +92,32 @@ export class ViajePage implements OnInit {
       this.router.navigate(['/home']);
       return;
     }
-    var viajesOld = this.viaje[0].data.pasajeros;
-    this.viaje[0].data.pasajeros = [];
-    this.viaje[0].data.pasajeros.push(viajesOld)
-    console.log('pasajeros: '+JSON.stringify(this.viaje[0].data.pasajeros));
-    this.viaje[0].data.pasajeros.push({
+    var viajesOld = JSON.parse(JSON.stringify(this.viaje[0].data.pasajeros));
+    console.log('viajesOld: '+JSON.stringify(viajesOld));
+    
+    //this.viaje[0].data.pasajeros = [];
+    //this.viaje[0].data.pasajeros.push(viajesOld);
+    //console.log('pasajeros: '+JSON.stringify(this.viaje[0].data.pasajeros));
+    viajesOld.push({
       rut: this.user.rut, 
       nombre: this.user.nombre, 
       correo: this.user.correo});
+    console.log('viajesOld2: '+JSON.stringify(viajesOld));
+    this.viaje[0].data.pasajeros = viajesOld;
+    console.log('pasajeros2: '+JSON.stringify(this.viaje[0].data.pasajeros));
+    //return;
+    //var datos: any[] = [{rut: this.user.rut, nombre: this.user.name, correo: this.user.correo}];
+    //this.fireService.meterArray('viajes',id, datos);
+    //var viajesOld2 = this.viaje[0].data.pasajeros;
+    //this.viaje[0].data.pasajeros = viajesOld2;
     var viajeOld = this.viaje[0].data;
-    this.viaje = [];
-    this.viaje.push(viajeOld);
+    this.viaje = viajeOld;
+    console.log('Viaje2: '+JSON.stringify(this.viaje));
+    //this.viaje.push(viajeOld);
+    
     this.user.viajeActivo = true;
     this.fireService.regPasajero('viajes',id,this.viaje)
     this.fireService.actualizar('usuarios',this.user.rut,this.user)
-    console.log('Viaje2: '+JSON.stringify(this.viaje));
     this.router.navigate(['/home']);
     //this.viaje[0].data.pasajeros = [];
       
