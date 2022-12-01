@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras,Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { throwIfEmpty } from 'rxjs/operators';
 import { FireService } from 'src/app/services/fire.service';
 
 
@@ -174,6 +175,7 @@ export class GeoPage implements OnInit {
     });
 
     this.marker.setPosition(null);
+    this.verificar_checkbox = true;
 
   }
   async crearViaje(){
@@ -202,7 +204,13 @@ export class GeoPage implements OnInit {
   }
 
   cancelarViaje(){
-    this.viajar.reset()
+    this.viajar.reset();
+    this.verificar_checkbox = false;
+  }
+  volverHome(){
+    this.viajar.reset();
+    this.verificar_checkbox = false;
+    this.router.navigate(['/home']);
   }
 
   async presentAlert() {
