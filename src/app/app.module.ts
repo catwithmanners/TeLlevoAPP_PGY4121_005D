@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat'
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 
 //Import para libreria de las peticiones HTTP:
 import { HttpClientModule } from '@angular/common/http';
@@ -21,8 +22,10 @@ import { HttpClientModule } from '@angular/common/http';
   AppRoutingModule, 
   IonicStorageModule.forRoot(), 
   AngularFireModule.initializeApp(environment.firebaseConfig),
-  HttpClientModule],
+  HttpClientModule,
+  AngularFireStorageModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}

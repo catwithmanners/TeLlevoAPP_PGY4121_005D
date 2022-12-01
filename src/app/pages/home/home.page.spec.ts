@@ -1,6 +1,7 @@
 /* import { TestBed } from "@angular/core/testing";
 import { AngularFireModule } from "@angular/fire/compat";
-import { RouterModule, RouterPreloader } from "@angular/router";
+import { ReactiveFormsModule } from "@angular/forms";
+import { RouterTestingModule } from "@angular/router/testing";
 import { environment } from "src/environments/environment";
 import { HomePage } from "./home.page";
 
@@ -10,8 +11,8 @@ describe('PRUEBAS UNITARIAS: home', ()=> {
         await TestBed.configureTestingModule({
             imports: [
                 AngularFireModule.initializeApp(environment.firebaseConfig),
-                RouterModule,
-                RouterPreloader
+                RouterTestingModule,
+                ReactiveFormsModule
             ],
             declarations:[
                 HomePage

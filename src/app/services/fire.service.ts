@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { resolve } from 'dns';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,13 +14,15 @@ export class FireService {
   isAuthenticated= new BehaviorSubject(false);
   constructor(
     private fire: AngularFirestore, 
-    private router: Router) {}
+    private router: Router,
+    private storage: AngularFireStorage ) {}
 
   usuarios: any[] = [];
   datos: any[] = [];
   viajes: any;
   viaje: any;
-
+  url: String;
+  downloadURL: Observable <string>;
   //variable de prueba
   v_registrar = false; 
   //CRUD:
@@ -45,6 +51,26 @@ export class FireService {
       console.log(error)
     }
   }
+
+  async cargarImg(file: any, path: string, nombre: string): Promise <String> {
+    return new Promise(async() => {
+      const filepath = path + '/' + nombre;
+      console.log(filepath)
+      const ref = await this.storage.ref(filepath);
+      const task = ref.put(file);
+      task.snapshotChanges().pipe(
+        finalize(() => this.downloadURL = ref.getDownloadURL() )
+      )
+    })
+  }
+
+  async obtenerFoto(path, rut){
+    const filepath = path + '/' + rut;  /* nombre de ruta de archivos */
+    const ref = this.storage.ref(filepath);
+    this.downloadURL = ref.getDownloadURL();
+    return this.downloadURL;
+  }
+
   async cargarDatos(coleccion){
     //this.usuarios = await this.storage.getDatos(this.KEY_USUARIOS);
     await this.getDatos(coleccion).subscribe(

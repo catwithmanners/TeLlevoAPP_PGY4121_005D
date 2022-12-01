@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonModal, ToastController } from '@ionic/angular';
-import { StorageService } from 'src/app/services/storage.service';
 import { FireService } from 'src/app/services/fire.service';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs/internal/operators/finalize';
 
 @Component({
   selector: 'app-perfil',
@@ -27,12 +29,17 @@ export class PerfilPage implements OnInit {
   KEY_USUARIOS = 'usuarios';
   KEY_VEHICULOS = 'vehiculos';
   codigo_qr: any;
+  imagen: any;
 
   verificar_checkbox: boolean = false;
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
+
   constructor(private router: Router,
               private alertController: AlertController,
               private toastController: ToastController,
-              private fireService: FireService) { 
+              private fireService: FireService,
+              private storage: AngularFireStorage) { 
                 this.user = this.router.getCurrentNavigation().extras.state.usuario3;
                 this.vehiculos = this.router.getCurrentNavigation().extras.state.vehiculo;
               }
@@ -41,7 +48,34 @@ export class PerfilPage implements OnInit {
     console.log('Valor this.vehiculos: '+this.vehiculos);
     this.cargarDatos();
     
+    this.mostrarImg(); 
+    console.log(this.imagen);
+/*     if (this.imagen != undefined) {
+      
+    } else {
+      
+    } */
   }
+
+  async subirFoto(event){
+    var archivo = event.target.files;
+    var ruta = "fotosPerfil";
+    var id = this.user.rut;
+    archivo = archivo.item(0);
+    const task = this.storage.upload(ruta, archivo);
+    console.log(task);
+    /* const file = subirFoto.item(0); */ /* límite de imagen para subir */
+    /* this.imagen = this.fireService.cargarImg(imgPerfil, id, file); */
+  }
+  
+
+
+  async mostrarImg(){
+    var ruta = "fotosPerfil";
+    var id = this.user.rut;
+    this.imagen = this.fireService.obtenerFoto(id, ruta);
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: '¡Atención!',
