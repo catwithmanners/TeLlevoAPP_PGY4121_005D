@@ -92,7 +92,10 @@ export class ViajePage implements OnInit {
       this.router.navigate(['/home']);
       return;
     }
-    var viajesOld = JSON.parse(JSON.stringify(this.viaje[0].data.pasajeros));
+    var viajesOld = [];
+    var vo = JSON.parse(JSON.stringify(this.viaje[0].data.pasajeros));
+    console.log('vo: '+vo);
+    viajesOld.push(vo);
     console.log('viajesOld: '+JSON.stringify(viajesOld));
     
     //this.viaje[0].data.pasajeros = [];
