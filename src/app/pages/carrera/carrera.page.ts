@@ -12,7 +12,7 @@ declare var google;
   styleUrls: ['./carrera.page.scss'],
 })
 export class CarreraPage implements OnInit {
-
+  usuarios: any[] = [];
   user: any;
   viaje: any;
   id_viaje: any;
@@ -63,17 +63,9 @@ export class CarreraPage implements OnInit {
     
     }
 
-
+    this.cargarDatos();
     //this.viaje = await this.storage.getViaje(this.KEY_VIAJES, this.user.correo);
-    await this.fireService.getDatos('viajes').subscribe(
-      response => {
-        this.viajes = [];
-        for (let usuario of response){
-          let user = usuario.payload.doc.data();
-          this.viajes.push(user);
-        }
-      }
-    );
+    console.log(this.viajes);
 
     //this.viaje = [];
     //this.viaje.push(this.viajes.push(dato => dato.rut == this.user.rut));
@@ -96,6 +88,31 @@ export class CarreraPage implements OnInit {
         handler: () => {
           this.cargarDatos();
           this.viaje.estado = false;
+          if (this.viaje.pasajeros != undefined) {
+            if (this.viaje.pasajeros.rut == undefined ) {
+            for(let viaje2 of this.viaje.pasajeros){
+              var users = this.usuarios.find(data => data.rut == viaje2.rut);
+              users.viajeActivo = false;
+              console.log(JSON.stringify(users));
+              this.fireService.actualizar('usuarios', viaje2.rut, users);
+            }
+          }
+          var users = this.viaje.pasajeros.rut;
+          if (users == '' ) {
+            this.user.carreraActiva = false;
+            this.user.carreraActiva = false;
+            this.fireService.actualizar('viajes',this.id_viaje, this.viaje)
+            this.fireService.actualizar('usuarios',this.user.rut, this.user)
+            this.router.navigate(['/home']);
+            return;
+          }
+          if (users != '') {
+            var users2 = this.usuarios.find(data => data.rut ==this.viaje.pasajeros.rut);
+            users2.viajeActivo = false;
+            this.fireService.actualizar('usuarios', users, users2);
+          }
+          console.log('valor rut: '+users);
+          }
           this.user.carreraActiva = false;
           this.user.carreraActiva = false;
           this.fireService.actualizar('viajes',this.id_viaje, this.viaje)
@@ -113,12 +130,19 @@ export class CarreraPage implements OnInit {
 
 
   async cargarDatos(){
-    await this.fireService.getDatos('viajes').subscribe(
+    this.fireService.getDatos('viajes').subscribe(
       response => {
         this.viajes = [];
         for (let usuario of response){
-          let user = usuario.payload.doc.data();
-          this.viajes.push(user);
+          this.viajes.push(usuario.payload.doc.data());
+        }
+      }
+    );
+    this.fireService.getDatos('usuarios').subscribe(
+      response => {
+        this.usuarios = [];
+        for (let usuario of response){
+          this.usuarios.push(usuario.payload.doc.data());
         }
       }
     );

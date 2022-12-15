@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title slot="start">
       <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
@@ -10,11 +10,14 @@
 </ion-header>
 <ion-content>
   <ion-card>
-    <ion-card-content>
-      <img src="assets/icon/img/carBlack.png" alt="img_check" class="img_check"/>
-      <p>No has realizado ningún viaje.</p>
-      <p>No tienes ningún viaje registrado.</p>
-      <p>¡Viaja ahora!</p>
+    <ion-card-content *ngFor="let u of historial">
+      <ion-item>
+        <ion-label>Destino: {{u.lugar}}</ion-label>
+      </ion-item>
+      <ion-label>Rut del conductor: {{u.rut}}</ion-label>
+      <br>
+      <ion-label>Valor viaje: ${{u.valViaje}}</ion-label>
+      
     </ion-card-content>
   </ion-card>
   <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>
