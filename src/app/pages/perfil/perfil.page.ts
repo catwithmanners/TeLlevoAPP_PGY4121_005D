@@ -29,11 +29,11 @@ export class PerfilPage implements OnInit {
   KEY_USUARIOS = 'usuarios';
   KEY_VEHICULOS = 'vehiculos';
   codigo_qr: any;
-  imagen: any;
+
 
   verificar_checkbox: boolean = false;
-  uploadPercent: Observable<number>;
-  downloadURL: Observable<string>;
+  uploadProgress: Observable<number>;
+  uploadURL: Observable<string>;
 
   constructor(private router: Router,
               private alertController: AlertController,
@@ -47,33 +47,36 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
     console.log('Valor this.vehiculos: '+this.vehiculos);
     this.cargarDatos();
-    
-    this.mostrarImg(); 
-    console.log(this.imagen);
-/*     if (this.imagen != undefined) {
-      
-    } else {
-      
-    } */
+    this.fotoPerfil();
   }
 
-  async subirFoto(event){
-    var archivo = event.target.files;
-    var ruta = "fotosPerfil";
-    var id = this.user.rut;
-    archivo = archivo.item(0);
-    const task = this.storage.upload(ruta, archivo);
-    console.log(task);
-    /* const file = subirFoto.item(0); */ /* límite de imagen para subir */
-    /* this.imagen = this.fireService.cargarImg(imgPerfil, id, file); */
+  upload(event) {
+    // Obtener el archivo a través del input
+    const file = event.target.files[0];
+    console.log(file)
+
+    // Generar un ID aleatorio
+    const randomId = Math.random().toString(36).substring(2);
+    console.log(randomId);
+    const filepath = `perfil/${randomId}`;
+
+    const fileRef = this.storage.ref(filepath);
+    console.log(filepath)
+
+    // Subir imagen
+    const task = this.storage.upload(filepath, file);
+    console.log(task)
+    // Observe percentage changes
+    this.uploadProgress = task.percentageChanges();
+
+    // Get notified when the download URL is available
+    task.snapshotChanges().pipe(
+      finalize(() => this.uploadURL = fileRef.getDownloadURL())
+    ).subscribe();
   }
-  
 
-
-  async mostrarImg(){
-    var ruta = "fotosPerfil";
-    var id = this.user.rut;
-    this.imagen = this.fireService.obtenerFoto(id, ruta);
+  fotoPerfil() {
+    const fileRef = this.storage.ref('perfil');
   }
 
   async presentAlert() {

@@ -10,14 +10,6 @@
 </ion-header>
 <ion-content>
   <div class="fondo">
-    <br>
-    <img [src]='user/imgPerfil' getDownloadURL alt="img_perfil" class="img_perfil"/>
-<!--     <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-      <ion-fab-button>
-        <ion-icon name="camera"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-    <br> -->
   </div>
   <ion-button color="success" style="color: black;" (click)="generarQR()" size="small">GENERAR QR</ion-button>
   <ion-card *ngIf="user.tipo_usuario == 'alumno'">
@@ -35,7 +27,7 @@
         <p>Carrera: {{user.carrera}}</p>
         <p>Correo: {{user.correo}}</p>
         <p>Licencia: {{user.licencia}}</p>
-        <p><input type="file" (change)="subirFoto($event)"></p>
+        <p><input type="file" (change)="upload($event)" accept="image/*"></p>
         <br>
         <br>
         <!-- INFO VEHÍCULO -->
