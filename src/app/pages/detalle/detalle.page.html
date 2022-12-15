@@ -1,9 +1,18 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>detalle</ion-title>
+    <ion-title slot="start">
+      <a routerLink='/home'><ion-icon name="arrow-back-circle-outline"></ion-icon></a>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="main"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <img src="assets/icon/img/pnglogoCond.png" alt="img_logo" class="img_logo"/>
+    <div id="map"></div>
+    <ion-card>
+      <br>
+    </ion-card>
 </ion-content>

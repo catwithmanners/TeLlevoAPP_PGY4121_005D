@@ -37,6 +37,7 @@ export class HomePage implements OnInit{
     this.cargarDatos();
     console.log(this.usuarios);
     console.log(this.viajes);
+    console.log(JSON.stringify(this.viaje2));
     //this.cargarViaje();
     console.log(JSON.stringify(this.viaje));
     console.log(this.user.rut);
@@ -55,17 +56,18 @@ export class HomePage implements OnInit{
           //console.log(this.usuarios)
           if (usuario.payload.doc.data()['rut']== this.user.rut) {
             this.user = usuario.payload.doc.data();
+            //console.log('this.user actualizado: '+this.user);
           }
         }
       }
     )
     this.fireService.getDatos('viajes').subscribe(
       response => {
-        this.viajes = [];
+        //this.viajes = [];
         for (let viaje of response){
           //console.log(viaje.payload.doc.data())
           this.viajes.push(viaje.payload.doc.data());
-          console.log(this.viajes)
+          //console.log(this.viajes)
         }
       }
     )
@@ -78,7 +80,7 @@ export class HomePage implements OnInit{
             //console.log('THIS IS IT');
             this.id_viaje = viaje.payload.doc.id
             this.viaje = viaje.payload.doc.data();
-            console.log(this.viaje);
+            //console.log(this.viaje);
           }
         }
       }
@@ -91,19 +93,28 @@ export class HomePage implements OnInit{
             //var pos = posicion;
             //console.log('pos: '+pos);
             //var number = 0;
-            console.log('viajeee: '+JSON.stringify(viaje.payload.doc.data()));
-            console.log(JSON.stringify(viaje.payload.doc.get('pasajeros')));
+            //console.log('viajeee: '+JSON.stringify(viaje.payload.doc.data()));
+            //console.log(JSON.stringify(viaje.payload.doc.get('pasajeros')));
             //const viajeMap = JSON.parse(JSON.stringify(viaje.payload.doc.data()['pasajeros']));
             //const resp = viajeMap.map(x => x.rut);
             //console.log('resp: '+resp);
             //number += 1;
             //if (viaje.payload.doc.data()['pasajeros']['rut'] == this.user.rut) {
-              console.log(viaje.payload.doc.data()['estado']);
+              //console.log(viaje.payload.doc.data()['estado']);
               if (viaje.payload.doc.data()['estado'] == true) {
-                console.log('THIS IS IT');
-                this.id_viaje2 = viaje.payload.doc.id
-                this.viaje2.push(viaje.payload.doc.data());
-                console.log(this.viaje2);
+                //console.log('THIS IS IT');
+                if (viaje.payload.doc.data()['pasajeros'] != undefined) {
+                  if (viaje.payload.doc.data()['pasajeros']['rut'] == undefined) {
+                    for (let viaje5 of viaje.payload.doc.data()['pasajeros']){
+                      if (viaje5.rut == this.user.rut) {
+                        //console.log('this is the one: '+JSON.stringify(viaje.payload.doc.data()));
+                        this.id_viaje2 = viaje.payload.doc.id
+                        this.viaje2 = viaje.payload.doc.data();
+                      }
+                    }
+                  }
+                }
+                //console.log(this.viaje2);
                 
               }
             //}
@@ -111,7 +122,8 @@ export class HomePage implements OnInit{
         }
       }
     )
-    console.log('viaje222: '+JSON.stringify(this.viaje2));
+
+    //console.log('viaje222: '+JSON.stringify(this.viaje2));
     //this.viaje2 = this.viajes.find(dato => dato.estado == true && dato.pasajeros.rut == this.user.rut);
     //console.log('this.viaje2: '+JSON.stringify(this.viaje2));
     this.fireService.getDatos('vehiculos').subscribe(
@@ -190,7 +202,7 @@ export class HomePage implements OnInit{
     }
     if (this.user.viajeActivo == true && this.viaje2 != undefined) {
       //this.cargarUser();
-      if (this.viaje2.estado == false && this.user.viajeActivo == true) {
+      if (this.viaje2.estado == false) {
         this.user.viajeActivo = false;
         this.fireService.actualizar('usuarios',this.user.rut, this.user);
         this.cargarDatos();
@@ -198,6 +210,8 @@ export class HomePage implements OnInit{
         await this.presentAlert2(msg);
         return;
       }
+      //var viajecito = this.viaje2.find(data => data.pasajeros.rut == this.user.rut);
+
       var navigationExtras6: NavigationExtras = {
         state: {
           usuario6: this.user,
@@ -206,9 +220,10 @@ export class HomePage implements OnInit{
         }
       };
       var msg = '¡Lo sentimos! Esta parte no está lista, pero pronto lo estará.';
-      await this.presentAlert2(msg);
+      //await this.presentAlert2(msg);
+      console.log('this.viaje antes de ir a detalle: '+JSON.stringify(this.viaje2));
+      this.router.navigate(['/detalle'], navigationExtras6);
       return;
-      //this.router.navigate(['/detalle'], navigationExtras6)
     }else{
     var navigationExtras6: NavigationExtras = {
       state: {
