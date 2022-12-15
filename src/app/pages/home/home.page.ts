@@ -35,13 +35,15 @@ export class HomePage implements OnInit{
 
   ngOnInit() {
     this.cargarDatos();
+    console.log('Lista de usuarios: ');
     console.log(this.usuarios);
+    console.log('Lista de viajes: ');
     console.log(this.viajes);
-    console.log(JSON.stringify(this.viaje2));
+    //console.log('Valor de viaje: '+JSON.stringify(this.viaje));
+    //console.log('Valor de viaje2: '+JSON.stringify(this.viaje2));
     //this.cargarViaje();
-    console.log(JSON.stringify(this.viaje));
-    console.log(this.user.rut);
-    console.log(this.viajes);
+    console.log('Rut usuario logeado: '+this.user.rut);
+    //console.log(this.viajes);
     //console.log(this.viajes.find(dato => dato.rut == this.user.rut));
     
   }
@@ -193,7 +195,7 @@ export class HomePage implements OnInit{
   }
   async goPasajero(){
     this.cargarDatos();
-    console.log(JSON.stringify(this.user));
+    //console.log(JSON.stringify(this.user));
     //this.cargarUser();
     if (this.user.carreraActiva) {
       var msg = '¡Lo sentimos! Estás realizando un viaje, no puedes tomar uno.';
@@ -221,7 +223,7 @@ export class HomePage implements OnInit{
       };
       var msg = '¡Lo sentimos! Esta parte no está lista, pero pronto lo estará.';
       //await this.presentAlert2(msg);
-      console.log('this.viaje antes de ir a detalle: '+JSON.stringify(this.viaje2));
+      //console.log('this.viaje antes de ir a detalle: '+JSON.stringify(this.viaje2));
       this.router.navigate(['/detalle'], navigationExtras6);
       return;
     }else{
