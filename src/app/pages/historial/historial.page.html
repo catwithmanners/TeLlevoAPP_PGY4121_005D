@@ -9,15 +9,21 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <img src="assets/icon/img/pnglogoPasj.png" alt="img_logo" class="img_logo"/>
   <ion-card>
+    <ion-card-header>
+      <ion-label>Viajes de {{user.nombre}}</ion-label>
+    </ion-card-header>
     <ion-card-content *ngFor="let u of historial">
       <ion-item>
         <ion-label>Destino: {{u.lugar}}</ion-label>
       </ion-item>
-      <ion-label>Rut del conductor: {{u.rut}}</ion-label>
-      <br>
-      <ion-label>Valor viaje: ${{u.valViaje}}</ion-label>
-      
+      <ion-list>
+        <h5>Información del viaje</h5>
+        <p>Rut del conductor: {{u.rut}}</p>
+        <p>Valor viaje: ${{u.valViaje}}</p>
+      </ion-list>
+    
     </ion-card-content>
   </ion-card>
   <img src="assets/icon/img/pnglogo.png" alt="img_logo" class="img_logo"/>

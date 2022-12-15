@@ -4,6 +4,20 @@ ion-content{
     ion-card{
         border-style: ridge;
         border-color: black;
+        ion-card-header{
+            --background: #ffe95a;
+            ion-label{
+                font-size: large;
+                color: #03153e;
+                text-transform: uppercase;
+                letter-spacing: 4px;
+                text-decoration: none;
+                font-size: 24px;
+                overflow: hidden;
+                transition: 0.2s;
+                font-family: consolas;
+            }
+        }
         ion-card-content{
             .img_check {
                 margin-top: 3%;

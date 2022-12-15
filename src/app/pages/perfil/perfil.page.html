@@ -10,6 +10,7 @@
 </ion-header>
 <ion-content>
   <div class="fondo">
+    <img [src]="uploadURL | async" width="125px" height="125px" style="text-align: center; border-radius: 4px; margin-top: 3px;" alt="">
   </div>
   <ion-button color="success" style="color: black;" (click)="generarQR()" size="small">GENERAR QR</ion-button>
   <ion-card *ngIf="user.tipo_usuario == 'alumno'">
