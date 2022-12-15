@@ -21,6 +21,7 @@ export class GeoPage implements OnInit {
     destino: new FormControl(''),
     valViaje: new FormControl('', [Validators.required, Validators.min(1000)]),
     rut: new FormControl(''),
+    lugar: new FormControl(''),
     estado: new FormControl(false),
     pasajeros: new FormGroup({
       rut: new FormControl(''),
@@ -41,6 +42,7 @@ export class GeoPage implements OnInit {
 
   usuario: any;
   vehiculo: any;
+  lugarTemp: any;
 
   ubicacionInicial: any;
   ubicacionDuoc =  { lat: 0, lng: 0};
@@ -138,7 +140,11 @@ export class GeoPage implements OnInit {
 
     search.addListener('place_changed', function(){
       var places = search.getPlace().geometry.location; /* El formato de "location" es un JSON */
-
+      console.log(search.getPlace())
+      //console.log('Direccion Formated Address: '+search.getPlace().formatted_address)
+      var namae = search.getPlace().name +', '+ search.getPlace().vicinity
+      console.log('namae: '+namae)
+      this.lugarTemp = namae; 
       console.log(places)
       console.log('Direc. destino: ' + typeof places);
 
@@ -180,11 +186,14 @@ export class GeoPage implements OnInit {
   }
   async crearViaje(){
     var places = this.search2.getPlace().geometry.location;
+    var namae = this.search2.getPlace().name +', '+ this.search2.getPlace().vicinity;
     this.ubicacionInicial = this.ubicacionDuoc;
     this.viajar.controls.origen.setValue(this.ubicacionInicial);
     this.ubicacionDestino = JSON.parse(JSON.stringify(places));
     this.viajar.controls.destino.setValue(this.ubicacionDestino);
     this.viajar.controls.estado.setValue(true);
+    console.log('namae2: '+namae);
+    this.viajar.controls.lugar.setValue(namae);
     console.log(this.ubicacionDestino);
     //this.viajar.controls.destino.disable();
     //this.viajar.controls.valViaje.disable();

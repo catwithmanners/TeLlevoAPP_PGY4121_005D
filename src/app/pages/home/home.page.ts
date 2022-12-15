@@ -115,6 +115,10 @@ export class HomePage implements OnInit{
                       }
                     }
                   }
+                  if (viaje.payload.doc.data()['pasajeros']['rut']== this.user.rut) {
+                    this.id_viaje2 = viaje.payload.doc.id
+                    this.viaje2 = viaje.payload.doc.data();
+                  }
                 }
                 //console.log(this.viaje2);
                 
@@ -192,6 +196,14 @@ export class HomePage implements OnInit{
     });
 
     await alert.present();
+  }
+  goHistorial(){
+    var navigationExtras6: NavigationExtras = {
+      state: {
+        usuario6: this.user
+      }
+    };
+    this.router.navigate(['/historial'], navigationExtras6)
   }
   async goPasajero(){
     this.cargarDatos();
