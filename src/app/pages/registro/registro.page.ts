@@ -105,7 +105,9 @@ export class RegistroPage implements OnInit {
   //variable de prueba
   v_registrar: boolean = false;
 
-
+  valida = {
+    standalone: true
+  };
   verificar_checkbox: boolean = false;
   constructor(private router: Router,
               private alertController: AlertController, 

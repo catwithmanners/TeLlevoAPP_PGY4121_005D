@@ -18,7 +18,7 @@
               <ion-input formControlName="password" placeholder="Ingrese contraseña" type="password"></ion-input>
             </ion-item>
             <ion-item lines="none">
-              <ion-checkbox color="warning" slot="start" [(ngModel)]="recordar_login" [ngModelOptions]="{standalone: 'true'}"></ion-checkbox>
+              <ion-checkbox color="warning" slot="start" [(ngModel)]="recordar_login" [ngModelOptions]="valida"></ion-checkbox>
               <ion-label style="font-weight: bold; font-size: small;">Recordar datos</ion-label>
             </ion-item>
             <br>

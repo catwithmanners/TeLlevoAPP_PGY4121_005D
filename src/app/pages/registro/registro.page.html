@@ -56,12 +56,12 @@
         </ion-item>
         <ion-item style="border-radius: 0px 0px 15px 15px;">
           <ion-label clearInput position="floating">Ingresa tu contraseña nuevamente:</ion-label>
-          <ion-input type="password" placeholder="Ingresa tu contraseña nuevamente" [(ngModel)]="verificar_pw" [ngModelOptions]="{standalone: 'true'}"></ion-input>
+          <ion-input type="password" placeholder="Ingresa tu contraseña nuevamente" [(ngModel)]="verificar_pw" [ngModelOptions]="valida"></ion-input>
         </ion-item>
         <br>
         <ion-item-sliding>
           <ion-item style="border-radius: 60px 0px 0px 60px;">
-            <ion-checkbox color="dark" slot="start" [(ngModel)]="verificar_checkbox" [ngModelOptions]="{standalone: 'true'}"></ion-checkbox>
+            <ion-checkbox color="dark" slot="start" [(ngModel)]="verificar_checkbox" [ngModelOptions]="valida"></ion-checkbox>
             <ion-label class="ion-text-wrap">Acepto los terminos y condiciones</ion-label>
             <ion-icon name="caret-back-sharp"></ion-icon>
           </ion-item>

@@ -61,6 +61,9 @@ export class VehiculoPage implements OnInit {
   usuario: any[] = [];
   user: any;
   mensaje: string;
+  valida = {
+    standalone: true
+  };
   KEY_USUARIOS = 'usuarios';
   KEY_VEHICULOS = 'vehiculos';
   verificar_checkbox: boolean = false;

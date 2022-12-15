@@ -22,7 +22,9 @@ export class LoginPage implements OnInit  {
   KEY_USUARIOS = 'usuarios';
   recordar_login: boolean = false;
   usuarios: any[] = [];
-
+  valida = {
+    standalone: true
+  };
   constructor(private toastController: ToastController, 
     private router: Router,
     private loadingCtrl: LoadingController,
